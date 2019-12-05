@@ -1,3 +1,6 @@
 pip install django
+pip install django-crispy-forms
 pip install django-phonenumber-field
 pip install phonenumbers
+python -m pip install pillow --no-cache-dir //pillow didnt install initially
+
