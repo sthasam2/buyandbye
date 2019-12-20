@@ -5,10 +5,15 @@
           <h1 align="center">Profile</h1>
       </div>
     </main>
+
     <div class="content-section">
-        <h2>{{user.username}}</h2>
-        <div class="border-top pt-3">
-            You are logged in.
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
         </div>
+      </div>
+      <!-- FORM HERE -->
     </div>
 {% endblock content %}

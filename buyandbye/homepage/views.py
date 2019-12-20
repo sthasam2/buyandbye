@@ -1,22 +1,23 @@
 from django.shortcuts import render
+from .models import Items
 
-posts=[
-    {
-        'author' : 'Sambeg',
-        'title': 'Blog Post',
-        'content': '1st post content'
-    },
-    {
-        'author': 'Sambeg',
-        'title': 'Blog Post',
-        'content': '2nd post content'
-    }
-
-]
+#posts=[
+#    {
+#        'author' : 'Sambeg',
+#        'title': 'Blog Post',
+#        'content': '1st post content'
+#    },
+# {
+#      'author': 'Sambeg',
+#      'title': 'Blog Post',
+#       'content': '2nd post content'
+#   }
+#
+#]
 
 def home(request):
     context={
-        'displayContent':posts
+        'item': Items.objects.all()
     }
     return render(request, 'homepage/home.html', context)
 
