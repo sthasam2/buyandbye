@@ -1,0 +1,16 @@
+{% extends "homepage/base.html" %}
+{% block content %}
+<div class="content-section" xmlns="http://www.w3.org/1999/html">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Post</legend>
+                <h3>Do you want to detele item post? {{ object.title }}</h3>
+                <div  class = "form-group">
+                    <button class = "btn btn-outline-danger" type="submit">Yes, Delete</button >
+                    <a class = "btn btn-outline-secondary" href="{% url 'item-detail' object.id %}">Cancel</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}

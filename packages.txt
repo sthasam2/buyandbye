@@ -2,5 +2,15 @@ pip install django
 pip install django-crispy-forms
 pip install django-phonenumber-field
 pip install phonenumbers
-python -m pip install pillow --no-cache-dir //pillow didnt install initially
+python -m pip install pillow --no-cache-dir //pillow didnt install initially only after updating
+
+
+
+difference between tutorial and buyandbye
+	blog = homepage
+	post = items
+	
+	<div class> material cards instead of bootstrap article div
+		35 char limit in item preview at homepage
+
 

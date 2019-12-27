@@ -83,4 +83,45 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
+/* material card */
+body {
+ background: #D1D1D1;
+ text-align: center;
+}
+
+
+.card {
+  display: block;
+  background: #FFFFFF;
+  width: 225px;
+  height: 350px;
+  border-radius: 10px;
+  margin: 10px;
+  display: inline-block;
+  align: center;
+  transition: all .25s linear;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
+}
+
+.card:hover{
+  box-shadow: -1px 3px 10px 0px rgba(0,0,0,0.8);
+}
+
+/* material card end */
+
+/* limit characters for post */
+.onefive-chars {
+    width: 15ch;
+    align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.header-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
 
