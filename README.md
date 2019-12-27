@@ -1,5 +1,5 @@
-# buyandbye
+# BuyandBye
 e-commerce
 
-Hamrobazar's superior alternative
+Sell your stuffs here so others can buy them!
 
