@@ -9,20 +9,25 @@ from django.views.generic import (
     DeleteView
 )
 
+
 def home(request):
-    context={
+    context = {
         'item': Items.objects.all()
     }
     return render(request, 'homepage/home.html', context)
 
+
 class ItemListView(ListView):
     model = Items
-    template_name = 'homepage/home.html' #app/model_viewtype.html
+    template_name = 'homepage/home.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
+    paginate_by = 6
+
 
 class ItemDetailView(DetailView):
     model = Items
+
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Items
@@ -31,6 +36,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Items
@@ -46,9 +52,10 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+
 class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Items
-    success_url='/'
+    success_url = '/'
 
     def test_func(self):
         item = self.get_object()
