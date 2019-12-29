@@ -1,16 +1,17 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db import IntegrityError  # for site domain e.g. 127.00:8000
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib import messages
+from django.contrib import messages  # for message tags
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from phonenumber_field.formfields import PhoneNumberField
-from .tokens import account_activation_token
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.http import HttpResponse
+
+from .tokens import account_activation_token  # token variable
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm  # profile forms
 
 
 def register(request):
@@ -18,10 +19,17 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.refresh_from_db
+            user.refresh_from_db()
+            user.profie.first_name = form.cleaned_data.get('first_name')
+            user.profie.middle_name = form.cleaned_data.get('middle_name')
+            user.profie.last_name = form.cleaned_data.get('last_name')
+            user.profie.email = form.cleaned_data.get('email')
+            user.profie.phone = form.cleaned_data.get('phone')
+            # login disabled until confirmation
             user.is_active = False
             user.save()
 
+            current_site = get_current_site(request)
             mail_subject = 'Activate you account.'
             message = render_to_string('account_activation_email.html', {
                 'user': user,
@@ -29,15 +37,14 @@ def register(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-            to_email = form.cleaned_data.get('email')
             email = EmailMessage(
-                mail_subject, message, to=[to_email]
+                mail_subject, message, to=[user.profie.email]
             )
             email.send()
 
             username = form.cleaned_data.get('username')
             messages.success(
-                request, f'Acoount created for {username}! Please check your email to activate your account to login.')
+                request, f'Account created for {username}! Please check your email to activate your account to login.')
             return redirect('login')
         else:
             form = UserRegisterForm()
@@ -54,10 +61,11 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return redirect('home')
+        messages.success(
+            request, f'Congratulations, account for {username} activated! You can now successfully login.')
     else:
-        return HttpResponse('Activation link is invalid!')
+        return render(request, 'users/account_activation_unvalidated.html' )
 
 
 @login_required

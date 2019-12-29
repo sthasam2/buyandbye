@@ -104,8 +104,8 @@ body {
 
 .card:hover {
   box-shadow: -1px 3px 10px 0px rgba(0, 0, 0, 0.8);
-  width: 212px;
-  height: 265px;
+  /* width: 212px;
+  height: 265px; */
 }
 
 /* material card end */
