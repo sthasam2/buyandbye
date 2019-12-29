@@ -1,11 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_countries.fields import CountryField
+from phonenumber_field.formfields import PhoneNumberField
 from PIL import Image
 
 
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE)  # one user one profile
+    first_name = models.CharField(max_length=30)
+    middle_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=150)
+    country = CountryField()
+    address = models.TextField()
+    bio = models.TextField(max_length=200)
     image = models.ImageField(default='default.jpg',
                               upload_to='profile_pics')  # setting image
 
