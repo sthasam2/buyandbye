@@ -1,0 +1,53 @@
+{% extends "homepage/base.html" %}
+{% block content %}
+
+<div>
+  <h3 class="account-heading" style="align-items: center;">
+    <img class="rounded-circle account-img" style="width: 60px; height: 60px;" src="{{ items.author.profile.image.url }}">
+    {{ view.kwargs.username }}
+  </h3>
+</div>
+<h4 style="align-content:center; " class="mb-5">Items ({{ page_obj.paginator.count }})</h4>
+
+
+{% for items in item %}
+<article class="media content-section" style="width: auto;">
+  <div class="article-metadata" style="width: auto;">
+    <!-- <img src="#" style=" border-radius:10px 10px 0px 0px; " height="45%" width="100%" class="card-img-top" alt="..."> -->
+    <div class="article-metadata">
+      <h6><a class="article-title" href="{% url 'item-detail' items.id %}"><b>{{ items.title }}</b></a></h6>
+      <p>{{ items.content }}</p>
+    </div>
+    <div>
+      <img class="header-img" src="{{ items.author.profile.image.url }}">
+      <a class="mr-2" href="{% url 'user-item' items.author.username %}">{{ items.author }}</a><br>
+      <small class="text-muted">{{items.date_posted|date:"F d, Y"}}</small>
+    </div>
+</article>
+{% endfor %}
+
+{% if is_paginated %}
+<div style="margin-top: 4rem;">
+
+  {% if page_obj.has_previous %}
+  <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>
+  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+  {% if page_obj.number == num %}
+  <a class="btn btn-sm btn-info mb-4" href="?page={{num}}">{{num}}</a>
+  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
+  {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+</div>
+{% endif %}
+
+{% endblock content %}
