@@ -104,15 +104,15 @@ body {
 
 .card:hover {
   box-shadow: -1px 3px 10px 0px rgba(0, 0, 0, 0.8);
-  width: 212px;
-  height: 265px;
+  /* width: 212px; */
+  /* height: 265px; */
 }
 
 /* material card end */
+
 /* limit characters for post */
 .onefive-chars {
   width: 15ch;
-  align: center;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
