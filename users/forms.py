@@ -11,7 +11,7 @@ class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(
         max_length=30)
     middle_name = forms.CharField(
-        max_length=30)
+        max_length=30, required=False)
     last_name = forms.CharField(
         max_length=30)
     address = forms.CharField(help_text='Street, District, State')
@@ -28,7 +28,7 @@ class UserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(
         max_length=30)
     middle_name = forms.CharField(
-        max_length=30)
+        max_length=30, required=False)
     last_name = forms.CharField(
         max_length=30)
     address = forms.CharField(help_text='Street, District, State')

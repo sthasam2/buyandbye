@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-class Items(models.Model):
+class Item(models.Model):
     title = models.CharField(max_length=100)
     date_posted = models.DateTimeField(default=timezone.now)
     content = models.TextField()
@@ -14,4 +14,3 @@ class Items(models.Model):
 
     def get_absolute_url(self):
         return reverse('item-detail', kwargs={'pk': self.pk})
-

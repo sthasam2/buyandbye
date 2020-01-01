@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Items
+from .models import Item
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -13,13 +13,13 @@ from django.views.generic import (
 
 def home(request):
     context = {
-        'item': Items.objects.all()
+        'item': Item.objects.all()
     }
     return render(request, 'homepage/home.html', context)
 
 
 class ItemListView(ListView):
-    model = Items
+    model = Item
     template_name = 'homepage/home.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
@@ -28,21 +28,21 @@ class ItemListView(ListView):
 
 # views for posts from  an individual user
 class UserItemListView(ListView):
-    model = Items
+    model = Item
     template_name = 'homepage/user_item.html'  # app/model_viewtype.html
     context_object_name = 'item'
     paginate_by = 6
 
     def get_queryset(self): # filtering based on username
         user = get_object_or_404( User, username=self.kwargs.get('username') )
-        return Items.objects.filter(author=user).order_by('-date_posted')
+        return Item.objects.filter(author=user).order_by('-date_posted')
 
 class ItemDetailView(DetailView):
-    model = Items
+    model = Item
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
-    model = Items
+    model = Item
     fields = ['title', 'content']
 
     def form_valid(self, form):
@@ -51,7 +51,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Items
+    model = Item
     fields = ['title', 'content']
 
     def form_valid(self, form):
@@ -66,7 +66,7 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Items
+    model = Item
     success_url = '/'
 
     def test_func(self):
