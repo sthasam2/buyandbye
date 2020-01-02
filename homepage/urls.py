@@ -7,6 +7,7 @@ from . views import (
     ItemUpdateView,
     ItemDeleteView,
     UserItemListView,
+    SearchItemListView,
 )
 
 urlpatterns = [
@@ -23,6 +24,9 @@ urlpatterns = [
     path('item/<int:pk>/update/', ItemUpdateView.as_view(), name='item-update'),
     # The existing item delete view
     path('item/<int:pk>/delete/', ItemDeleteView.as_view(), name='item-delete'),
+
+    # The search results view
+    path('search/', SearchItemListView.as_view(), name='search_results'),
 
     # The about page view
     path('about/', views.aboutus, name='aboutpage')
