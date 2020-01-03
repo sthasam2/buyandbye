@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.contrib import messages  # for message tags
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db import IntegrityError  # for site domain e.g. 127.00:8000
-from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth import login, authenticate
+from django.contrib.sites.shortcuts import get_current_site # for site domain e.g. 127.00:8000
+from django.core.mail import EmailMessage
+from django.db import IntegrityError
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib import messages  # for message tags
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
 
-from .tokens import account_activation_token  # token variable
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm  # profile forms
+from . tokens import account_activation_token  # token variable
+from . forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm  # profile forms
 
 
 def register(request):
@@ -46,11 +46,11 @@ def register(request):
                 mail_subject, message, to=[to_email])
             activation_email.send()
 
-            return redirect('activation_message_sent')
-            # email send success info message
-            # messages.info(
-            #    request, f'Your account has been created! An email has been sent with instructions, Please verify your email to login.')
-            # return redirect(request, 'login')
+            #return redirect('activation_message_sent')
+             # email send success info message
+            messages.info(
+                 request, f'Your account has been created! An email has been sent with instructions, Please verify your email to login.')
+            return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})

@@ -20,6 +20,19 @@ def home(request):
     return render(request, 'homepage/home.html', context)
 
 
+class ItemCreateView(LoginRequiredMixin, CreateView):
+    model = Item
+    template_name = 'homepage/items_form.html'
+
+    fields = ['title',
+              # 'category',
+              'price', 'content', 'image']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
 class ItemListView(ListView):
     model = Item
     template_name = 'homepage/home.html'  # app/model_viewtype.html
@@ -43,16 +56,6 @@ class UserItemListView(ListView):
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'homepage/items_detail.html'
-
-
-class ItemCreateView(LoginRequiredMixin, CreateView):
-    model = Item
-    template_name = 'homepage/items_form.html'
-    fields = ['title', 'content']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
