@@ -1,4 +1,3 @@
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -9,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l2vk_ekg%-+x*7)n$p@qtogy!4a)5vrk4(#ytvsqq^_s0@in&t'
+SECRET_KEY = '9s_-fhb3u($6ucx(up=sjq9*4w*$esttrjvb7cm$9)8fl-2p#z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -20,20 +19,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
-    'users.apps.UsersConfig',
-    'phonenumber_field',
-    'homepage.apps.HomepageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'homepage.apps.HomepageConfig',
+    'users.apps.UsersConfig',
+    'phonenumber_field',
+    'crispy_forms',
     'djmoney',
-    # 'homepage',
-    # 'users',
-    # 'django-extensions',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -44,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'buyandbye.urls'
@@ -114,6 +112,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT =   os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

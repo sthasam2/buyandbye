@@ -2,7 +2,7 @@
 # from django.dispatch import receiver
 # from django.utils.text import slugify
 # from . models import Item, Category
-# 
+#
 #
 # # / Item slug generator
 # @receiver(pre_save, sender=Item)

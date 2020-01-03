@@ -25,21 +25,21 @@ CATEGORY_CHOICES = (
 )
 
 # SUB_CATEGORY_CHOICES = (
-#     ('Real Estate', 'Real Estate'),
-#     ('Automobiles', 'Automobiles'),
-#     ('Furniture', 'Furniture'),
-#     ('Jobs', 'Jobs'),
-#     ('Computer', 'Computer'),
-#     ('Mobiles', 'Mobiles'),
-#     ('Books', 'Books'),
-#     ('Electronics', 'Electronics'),
-#     ('Cameras', 'Cameras'),
-#     ('Music Instruments', 'Music Instruments'),
-#     ('Pets', 'Pets'),
-#     ('Sports and Fitness', 'Sports and Fitness'),
-#     ('Services', 'Services'),
-#     ('Jobs', 'Jobs'),
-#     ('Clothing', 'Clothing'),
+#      ('Real Estate', 'Real Estate'),
+#      ('Automobiles', 'Automobiles'),
+#      ('Furniture', 'Furniture'),
+#      ('Jobs', 'Jobs'),
+#      ('Computer', 'Computer'),
+#      ('Mobiles', 'Mobiles'),
+#      ('Books', 'Books'),
+#      ('Electronics', 'Electronics'),
+#      ('Cameras', 'Cameras'),
+#      ('Music Instruments', 'Music Instruments'),
+#      ('Pets', 'Pets'),
+#      ('Sports and Fitness', 'Sports and Fitness'),
+#      ('Services', 'Services'),
+#      ('Jobs', 'Jobs'),
+#      ('Clothing', 'Clothing'),
 # )
 
 
@@ -57,22 +57,22 @@ class Category(models.Model):
         return self.name
 
 # sub-category class
- class Sub_Category(models.Model):
-     subname = models.CharField(max_length=100, choices=SUB_CATEGORY_CHOICES)
-     slug = AutoSlugField(populate_from='name')
-
-     class Meta:
-         ordering = ('subname',)
-         verbose_name = 'Sub_Category'
-         verbose_name_plural = 'Sub_Categories'
-
-     def __str__(self):
-         return self.name
+# class Sub_Category(models.Model):
+#     subname = models.CharField(max_length=100, choices=SUB_CATEGORY_CHOICES)
+#     slug = AutoSlugField(populate_from='name')
+#
+#     class Meta:
+#         ordering = ('subname',)
+#         verbose_name = 'Sub_Category'
+#         verbose_name_plural = 'Sub_Categories'
+#
+#     def __str__(self):
+#         return self.name
 
 # item class
 class Item(models.Model):
     #category = models.ForeignKey(Category, required=False, on_delete=models.CASCADE, choices=CATEGORY_CHOICES)
-    sub_category= models.ForeignKey(Sub_Category, on_delete=models.CASCADE, choices=SUB_CATEGORY_CHOICES)
+    # sub_category= models.ForeignKey(Sub_Category, on_delete=models.CASCADE), choices=SUB_CATEGORY_CHOICES)
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, default=None)
     date_posted = models.DateTimeField(default=timezone.now)
