@@ -5,23 +5,24 @@ from django_extensions.db.fields import AutoSlugField
 from django.urls import reverse
 from django.utils import timezone
 from djmoney.models.fields import MoneyField
+from django_extensions.db.fields import AutoSlugField
 from PIL import Image
 
 CATEGORY_CHOICES = (
-    ('realestate', 'Real Estate'),
-    ('automobiles', 'Automobiles'),
-    ('furnitures', 'Furniture'),
-    ('jobs', 'Jobs'),
-    ('computer', 'Computer'),
-    ('mobiles', 'Mobiles'),
-    ('books', 'Books'),
-    ('electronics', 'Electronics'),
-    ('cameras', 'Cameras'),
-    ('music Instruments', 'Music Instruments'),
-    ('pets', 'Pets'),
-    ('sportsandfitness', 'Sports and Fitness'),
-    ('services', 'Services'),
-    ('clothing', 'Clothing'),
+    ('Real Estate', 'Real Estate'),
+    ('Automobiles', 'Automobiles'),
+    ('Furnitures', 'Furnitures'),
+    ('Jobs', 'Jobs'),
+    ('Computers', 'Computers'),
+    ('Mobiles', 'Mobiles'),
+    ('Books', 'Books'),
+    ('Electronics', 'Electronics'),
+    ('Cameras', 'Cameras'),
+    ('Music Instruments', 'Music Instruments'),
+    ('Pets', 'Pets'),
+    ('Sports and Fitness', 'Sports and Fitness'),
+    ('Services', 'Services'),
+    ('Clothing', 'Clothing'),
 )
 
 # SUB_CATEGORY_CHOICES = (
@@ -46,12 +47,15 @@ CATEGORY_CHOICES = (
 # category class
 class Category(models.Model):
     name = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
-    slug = AutoSlugField(populate_from='name')
+    # slug = AutoSlugField(populate_from='name', slugify_function)
 
     class Meta:
         ordering = ('name',)
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+    # def slugify_function(self, content):
+    #     return content. replace('_', '-').lower()
 
     def __str__(self):
         return self.name
@@ -74,10 +78,9 @@ class Item(models.Model):
     #category = models.ForeignKey(Category, required=False, on_delete=models.CASCADE, choices=CATEGORY_CHOICES)
     # sub_category= models.ForeignKey(Sub_Category, on_delete=models.CASCADE), choices=SUB_CATEGORY_CHOICES)
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=200, default=None)
+    # slug = AutoSlugField(populate_from=['title', 'author'])
     date_posted = models.DateTimeField(default=timezone.now)
-    price = MoneyField(decimal_places=2, max_digits=10,
-                       default_currency='NPR')
+    price = MoneyField(decimal_places=2, max_digits=10, default_currency='NPR')
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, upload_to='item_pics/')  # setting image

@@ -26,7 +26,8 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
     fields = ['title',
               # 'category',
-              'price', 'content', 'image']
+              # 'slug',
+              'price', 'content', 'image', ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

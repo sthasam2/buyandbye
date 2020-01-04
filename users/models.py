@@ -5,8 +5,7 @@ from PIL import Image
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE)  # one user one profile
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # one user one profile
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
