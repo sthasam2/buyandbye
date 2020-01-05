@@ -7,21 +7,63 @@
 
 
 <!-- bootstrap styling -->
-<div class="card" style="width:200px; height:275px">
-  <img class="card-img-top" src="{{items.image.url}}" alt="Card image" style="width:100%; height:40%">
-  <div class="card-body" style="border-bottom: 1px solid #e3e3e3">
-    <bs class="card-title"><a href="{% url 'item-detail' items.id %}">{{ items.title }} </a></b>
-      <p style="width: 15ch;  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-        {{ items.content }}
-      </p>
-  </div>
-  <div>
-    <img class="header-img" src="{{ items.author.profile.image.url }}">
-    <a href="{% url 'user-item' items.author.username %}" class="mr-2">{{ items.author }}</a><br>
-    <small class="text-muted">{{items.date_posted|date:"F d, Y"}}</small>
-  </div>
+<div class="d-inline-flex p-2 bd-highlight align-items-baseline">
+     <div class="col3">
+          <div class="card text-center" style="height: 250px; width: 175px;">
+               <!-- border-radius: 10px; border-radius: 10px 10px 0px 0px;-->
+               <!-- {% if items.image.url is not NULL%} -->
+               <img src="{{items.image.url}}" alt="" class="card-img-top" style="object-fit: cover; object-position: 50% 50%; height: 40%; position: relative;">
+               <!-- <span class="badge badge-info" style="display:flex;float: right">wellback</span> -->
+               <!-- {% endif %} -->
+               <div class="card-body">
+                    <a href="{% url 'item-detail' items.id %}">
+                         <p class="card-title text-center text-info text-truncate" style="font-size: 12.5px">
+                              {{ items.title }}
+                         </p>
+                    </a>
+                    <p class="card-subtitle text-success text-center mb-2 text-truncate" style="font-size: 11px"> <b>{{items.price}}</b></p>
+               </div>
+               <div class="card-footer text-muted mt-0">
+                    <img class="circle" style="width:16px; height:16px;" src="{{ items.author.profile.image.url }}">
+                    <a href="{% url 'user-item' items.author.username %}" class="mr-2 text-muted" style="font-size: 10px">
+                         {{ items.author }}
+                    </a><br>
+                    <small class="text-muted" style="font-size: 10px">{{items.date_posted|date:"F d, Y"}}</small>
+               </div>
+          </div>
+     </div>
 </div>
-<!-- / bootstrap stying -->
+
+
+<!-- / bootstrap styling -->
+
+
+<!-- materialize css styling -->
+<!-- <div class="flexbox-container">
+     <div class="col s4">
+          <div class="card hoverable small">
+               {% if items.image.url is not NULL%}
+               <div class="card-image" style="height:45%;">
+                    <img src="{{items.image.url}}" style="object-fit: cover; object-position: 50% 50%;">
+               </div>
+               {% endif %}
+               <div class="card-content" style="border-bottom: 1px solid #e3e3e3" align="center">
+                    <span class="card-title" align="center"><b>
+                              <a href="{% url 'item-detail' items.id %}">{{ items.title }}</a>
+                         </b></span>
+                    <p class="truncate">
+                         {{ items.content }}
+                    </p>
+               </div>
+               <div align="center">
+                    <img class="circle" style="width:32px; height:32px;" src="{{ items.author.profile.image.url }}">
+                    <a href="{% url 'user-item' items.author.username %}" class="mr-2">{{ items.author }}</a><br>
+                    <small class="text-muted">{{items.date_posted|date:"F d, Y"}}</small>
+               </div>
+          </div>
+     </div>
+</div> -->
+<!-- / materialize css -->
 
 <!-- Custom styling -->
 <!-- <div class="card">
@@ -43,30 +85,30 @@
 {% if is_paginated %}
 <div style="margin-top: 4rem;">
 
-  <!-- Paginator check for previous pages availability, eg. if current page = 3, Previous = 2 and First is always = 1 -->
-  {% if page_obj.has_previous %}
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-  {% endif %}
+     <!-- Paginator check for previous pages availability, eg. if current page = 3, Previous = 2 and First is always = 1 -->
+     {% if page_obj.has_previous %}
+     <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>
+     <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+     {% endif %}
 
-  <!-- Paginator check for neighbouring pages availability, eg. if current page = 3, neighbour (-, prev)= 1,2 and (+, next) = 4,5 -->
-  {% for num in page_obj.paginator.page_range %}
-  {% if page_obj.number == num %}
-  <a class="btn btn-sm btn-info mb-4" href="?page={{num}}">{{num}}</a>
-  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
-  {% endif %}
-  {% endfor %}
+     <!-- Paginator check for neighbouring pages availability, eg. if current page = 3, neighbour (-, prev)= 1,2 and (+, next) = 4,5 -->
+     {% for num in page_obj.paginator.page_range %}
+     {% if page_obj.number == num %}
+     <a class="btn btn-sm btn-info mb-4" href="?page={{num}}">{{num}}</a>
+     {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+     <a class="btn btn-sm btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
+     {% endif %}
+     {% endfor %}
 
-  <!-- Paginator check for previous pages availability, eg. if current page = 3, Next = 4 and Last is always = Total pages -->
-  {% if page_obj.has_next %}
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-  {% endif %}
+     <!-- Paginator check for previous pages availability, eg. if current page = 3, Next = 4 and Last is always = Total pages -->
+     {% if page_obj.has_next %}
+     <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+     <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+     {% endif %}
 
 </div>
 {% endif %}
-<!-- Checks if pages available -->
+<!-- /Checks if pages available -->
 
 {% endblock content %}
 <!-- / Home content block -->

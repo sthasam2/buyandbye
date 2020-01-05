@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
+    View,
     ListView,
     DetailView,
     CreateView,
@@ -11,6 +12,7 @@ from django.views.generic import (
     DeleteView
 )
 from . models import Item
+# from . forms import ItemCreateForm
 
 
 def home(request):
@@ -21,17 +23,30 @@ def home(request):
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
+    # form_class = ItemCreateForm
     model = Item
     template_name = 'homepage/items_form.html'
 
-    fields = ['title',
-              # 'category',
-              # 'slug',
-              'price', 'content', 'image', ]
+    fields = ['title', 'category', 'price', 'content', 'image', ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    # def get(self, request, *args, **kwargs):
+    #     form = self.form_class()
+    #     return render(request, self.template_name, {'form': form})
+    #
+    # def upload_file(self, request, *args, **kwargs):
+    #     if request.method == 'POST':
+    #         item_create_form = self.form_class(request.POST, request.FILES)
+    #         if item_create_form.is_valid():
+    #             instance = Item(file_field=request.FILES['file'])
+    #             instance.save()
+    #             messages.success(request, f'Item added successfully')
+    #             return redirect('item/<int:pk>')
+    #     else:
+    #         return render(request, self.template_name, {'form': item_create_form})
 
 
 class ItemListView(ListView):

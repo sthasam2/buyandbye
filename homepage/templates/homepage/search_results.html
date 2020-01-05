@@ -3,7 +3,10 @@
 
 <!-- Check search results is empty or not -->
 {% if page_obj.paginator.count != null %}
-<p align="centre" class="muted">{{ page_obj.paginator.count }} result(s) found for : " <b>{{ request.GET.q }}</b> "</p>
+<div class="col s6">
+  <p align="centre" class="muted">{{ page_obj.paginator.count }} result(s) found for : " <b>{{ request.GET.q }}</b> "</p>
+</div><hr>
+
 
 <!-- Item loop starts -->
 {% for items in search_item %}

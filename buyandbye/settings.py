@@ -28,7 +28,9 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
     'phonenumber_field',
+    # 'materialize',
     'crispy_forms',
+    # 'crispy_forms_materialize',
     'djmoney',
     'django_extensions',
 ]
@@ -119,6 +121,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL = 'login'
