@@ -8,12 +8,12 @@
 
 <!-- bootstrap styling -->
 <div class="d-inline-flex p-2 bd-highlight align-items-baseline">
-     <div class="col3">
-          <div class="card text-center" style="height: 250px; width: 175px;">
+     <div class="col2">
+          <div class="card text-center hover" style="height: 250px; width: 150px;">
                <!-- border-radius: 10px; border-radius: 10px 10px 0px 0px;-->
                <!-- {% if items.image.url is not NULL%} -->
                <img src="{{items.image.url}}" alt="" class="card-img-top" style="object-fit: cover; object-position: 50% 50%; height: 40%; position: relative;">
-               <!-- <span class="badge badge-info" style="display:flex;float: right">wellback</span> -->
+               <span class="badge badge-danger" style="position: absolute;  right: 10px; top: 10px">{{items.category}}</span>
                <!-- {% endif %} -->
                <div class="card-body">
                     <a href="{% url 'item-detail' items.id %}">

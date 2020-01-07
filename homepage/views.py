@@ -2,15 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
-    View,
     ListView,
     DetailView,
     CreateView,
     UpdateView,
     DeleteView
 )
+from django.urls import reverse_lazy
 from . models import Item
 # from . forms import ItemCreateForm
 
@@ -22,16 +23,27 @@ def home(request):
     return render(request, 'homepage/home.html', context)
 
 
-class ItemCreateView(LoginRequiredMixin, CreateView):
-    # form_class = ItemCreateForm
+class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    # form_class = ItemCreateForm #to inherit from form
     model = Item
     template_name = 'homepage/items_form.html'
-
     fields = ['title', 'category', 'price', 'content', 'image', ]
+
+    success_message = f'Item was succesfully created.'
+    # success_url = reverse_lazy('item-detail') #success url not required for CreateView and UpdateView
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    # def image_upload(request):
+    #     context={}
+    #     if request.method == 'POST':
+    #         image= request.FILES('image')
+    #         fs = FileSystemStorage()
+    #         name = fs.save(image.name, image)
+    #         context['url'] = fs.url(name)
+    #     return render(request, 'item-detail', context)
 
     # def get(self, request, *args, **kwargs):
     #     form = self.form_class()
