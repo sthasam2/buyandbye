@@ -1,194 +1,261 @@
 {% load static %}
 <html lang="en">
 
-<head>
-     <meta charset="UTF-8">
-     <!-- CDN -->
-     <!-- Font Awesome -->
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-     <!-- Bootstrap core CSS -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Material Design Bootstrap -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
-     <!-- MATERIALIZE -->
-     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <!-- BOOTSTRAP -->
-     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-     <!-- GOOGLE FONTS -->
-     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+     <head>
+          <meta charset="UTF-8">
+          <!-- CDN -->
+          <!-- Font Awesome -->
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+          <!-- Bootstrap core CSS -->
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+          <!-- Material Design Bootstrap -->
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+          <!-- MATERIALIZE -->
+          <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+          <!-- BOOTSTRAP -->
+          <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+          <!-- GOOGLE FONTS -->
+          <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 
-     <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}">
+          <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}">
 
-     {% if title %}
-     <title>Homepage - {{title}}</title>
-     {% else %}
-     <title>Homepage</title>
-     {% endif %}
-</head>
+          {% if title %}
+               <title>Homepage -
+                    {{title}}</title>
+          {% else %}
+               <title>Homepage</title>
+          {% endif %}
+     </head>
 
-<style>
-     body {
-          font-family: 'Varela Round', sans-serif;
-     }
-</style>
+     <style>
+          body {
+               font-family: 'Varela Round', sans-serif;
+          }
+     </style>
 
-<body>
-     <header class="site-header">
-          <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-               <div class="container">
-                    <a class="navbar-brand mr-4" href="/"> <i class="material-icons md-48">account_circle</i> BuyandBye</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+     <body>
+          <header class="site-header">
+               <!--Navbar-->
+               <nav class="navbar fixed-top navbar-expand-md navbar-dark scrolling-navbar">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" href="/">
+                         <!-- <i class="material-icons">laptop_windows</i> -->
+                         <strong>
+                              BuyandBye
+                         </strong>
+                    </a>
+                    <!-- Collapse button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                          <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarToggle">
-                         <div class="navbar-nav mr-auto">
-                              <a class="nav-item nav-link" href="/">Home</a>
-                              <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
-                         </div>
+                    <!-- Collapsible content -->
+                    <div class="collapse navbar-collapse">
+                         <!-- Links -->
+                         <ul class="navbar-nav mr-auto">
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/">
+                                        Home
+                                   </a>
+                              </li>
+                              <li class="nav-item">
+                                   <a class="nav-link" href="{% url 'about' %}">
+                                        Features
+                                   </a>
+                              </li>
 
-                         <!-- Navbar Right Side -->
-                         <div class="navbar-nav">
+                         </ul>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                         <ul class="navbar-nav ml-auto">
                               {% if user.is_authenticated %}
-                              <a class="nav-item nav-link" href="{% url 'item-create' %}">Post Item</a>
-                              <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                              <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'item-create' %}">
+                                             Post Item
+                                        </a>
+                                   </li>
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'profile' %}">
+                                             Profile
+                                        </a>
+                                   </li>
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'logout' %}">
+                                             Logout
+                                        </a>
+                                   </li>
                               {% else %}
-                              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                   </li>
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                                   </li>
                               {% endif %}
-                              <!-- Search Form -->
-                              <form class="input-field inline" action="{% url 'search_results'%}" method="get">
-                                   <div class="valign-wrapper white-text">
-                                        <div class="input-field">
-                                             <input id="search" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
-                                             <label class="label-icon" for="search"></label>
-                                        </div>
+                              <!-- Dropdown -->
+                              <li class="nav-item dropdown">
+                                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
                                    </div>
-                              </form>
-                              <!-- / Search Form -->
+                              </li>
+                         </ul>
+                    </div>
+                    <!-- Links -->
+                    <div>
+                         <form class="form-inline">
+                              <div class="md-form my-0">
+                                   <div class="form-group">
+                                        <input id="search" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                                        <button class="btn btn-success btn-sm bg-dark" type="submit">
+                                             <i class="material-icons md-18">search</i>
+                                        </button>
+                                   </div>
+                              </div>
+                         </form>
+                    </div>
+               </nav>
+               <div class="view intro-2">
+                    <div class="full-bg-img">
+                         <div class="mask rgba-purple-light flex-center">
+                              <div class="container text-center white-text wow fadeInUp">
+                                   <!-- <h2>This Navbar is fixed and transparent</h2>
+                                   <br>
+                                   <h5>It will always stay visible on the top, even when you scroll down</h5>
+                                   <p>Navbar's background will switch from transparent to solid color while scrolling down</p>
+                                   <br>
+                                   <p>Full page intro with background image will be always displayed in full screen mode, regardless of device
+                                   </p> -->
+                              </div>
                          </div>
                     </div>
                </div>
-          </nav>
-     </header>
+          </header>
 
-     {% if messages %}
-     {% for message in messages %}
-     <div class="container">
-          <div class="d-inline-flex justify-content ">
-               <div class="alert alert-{{message.tags}} alert-dismissible fade">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
+          <!-- INFO MESSAGES -->
+          {% if messages %}
+               {% for message in messages %}
+                    <div class="container">
+                         <div class="d-inline-flex justify-content ">
+                              <div class="alert alert-{{message.tags}} alert-dismissible fade">
+                                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                   {{ message }}
+                              </div>
+                         </div>
+                    </div>
+               {% endfor %}
+          {% endif %}
+          <!-- / INFO MESSAGE -->
+
+          <main role="main" class="container">
+               <div class="row mt-4 mx-auto">
+                    <div class="col-sm-2.5">
+                         <div class="content-section">
+                              <h3>Categories</h3>
+                              <p class='text-muted'>Browse through our categories.
+                                   <ul class="list-group">
+                                        <li class="list-group-item list-group-item-light">Real Estate</li>
+                                        <li class="list-group-item list-group-item-light">Computers</li>
+                                        <li class="list-group-item list-group-item-light">Vehicles</li>
+                                        <li class="list-group-item list-group-item-light">Furniture</li>
+                                   </ul>
+                              </p>
+                         </div>
+                    </div>
+
+                    <div class="col-sm-8 ">
+                         <h1>Latest Items</h1>
+                         {% block content %}{% endblock %}
+                    </div>
+               </div>
+          </main>
+
+          <!-- Site Navigation / Breadcrumb -->
+          <div class="container">
+               <div class="dark-font my-3 justify-content-center">
+                    <mdb-breadcrumb customclass="purple lighten-4">
+                         <mdb-breadcrumb-item fontweight="light">Home</mdb-breadcrumb-item>
+                         <mdb-breadcrumb-item fontweight="normal">Library</mdb-breadcrumb-item>
+                         <mdb-breadcrumb-item fontweight="bold" class="active">Data</mdb-breadcrumb-item>
+                    </mdb-breadcrumb>
                </div>
           </div>
-     </div>
-     {% endfor %}
-     {% endif %}
+          <!-- / Site Navigation / Breadcrumb -->
 
-     <main role="main" class="container">
-          <div class="row">
+          <!-- Footer -->
+          <footer class="page-footer font-small blue pt-4">
+               <div class="container-fluid text-center text-md-left my-auto">
+                    <div class="row">
+                         <div class="col-md-6 mt-md-0 mt-3">
+                              <h5 class="text-uppercase">Footer Content</h5>
+                              <p>Here you can use rows and columns to organize your footer content.</p>
+                         </div>
 
-               <div class="col-sm-2.5" style="position: sticky">
+                         <hr class="clearfix w-100 d-md-none pb-3">
 
-                    <div class="content-section">
-                         <h3>Categories</h3>
-                         <p class='text-muted'>Browse through our categories.
-                              <ul class="list-group">
-                                   <li class="list-group-item list-group-item-light">Real Estate</li>
-                                   <li class="list-group-item list-group-item-light">Computers</li>
-                                   <li class="list-group-item list-group-item-light">Vehicles</li>
-                                   <li class="list-group-item list-group-item-light">Furniture</li>
+                         <div class="col-md-3 mb-md-0 mb-3">
+                              <h5 class="text-uppercase">Links</h5>
+                              <ul class="list-unstyled">
+                                   <li>
+                                        <a href="#!">Link 1</a>
+                                   </li>
+                                   <li>
+                                        <a href="#!">Link 2</a>
+                                   </li>
+                                   <li>
+                                        <a href="#!">Link 3</a>
+                                   </li>
+                                   <li>
+                                        <a href="#!">Link 4</a>
+                                   </li>
                               </ul>
-                         </p>
-                    </div>
+                         </div>
 
-               </div>
-
-
-               <div class="col-md-8">
-                    {% block content %}
-                    {% endblock %}
-               </div>
-          </div>
-     </main>
-
-
-     <!-- Footer -->
-
-     <footer class="page-footer font-small blue pt-4">
-          <div class="container-fluid text-center text-md-left">
-               <div class="row">
-                    <div class="col-md-6 mt-md-0 mt-3">
-                         <h5 class="text-uppercase">Footer Content</h5>
-                         <p>Here you can use rows and columns to organize your footer content.</p>
-                    </div>
-
-                    <hr class="clearfix w-100 d-md-none pb-3">
-
-                    <div class="col-md-3 mb-md-0 mb-3">
-                         <h5 class="text-uppercase">Links</h5>
-                         <ul class="list-unstyled">
-                              <li>
-                                   <a href="#!">Link 1</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 2</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 3</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 4</a>
-                              </li>
-                         </ul>
-                    </div>
-
-                    <div class="col-md-3 mb-md-0 mb-3">
-                         <h5 class="text-uppercase">Links</h5>
-                         <ul class="list-unstyled">
-                              <li>
-                                   <a href="#!">Link 1</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 2</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 3</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 4</a>
-                              </li>
-                         </ul>
+                         <div class="col-md-3 mb-md-0 mb-3">
+                              <h5 class="text-uppercase">Links</h5>
+                              <ul class="list-unstyled">
+                                   <li>
+                                        <a href="#!">Link 1</a>
+                                   </li>
+                                   <li>
+                                        <a href="#!">Link 2</a>
+                                   </li>
+                                   <li>
+                                        <a href="#!">Link 3</a>
+                                   </li>
+                                   <li>
+                                        <a href="#!">Link 4</a>
+                                   </li>
+                              </ul>
+                         </div>
                     </div>
                </div>
-          </div>
 
+               <!-- Copyright -->
+               <div class="footer-copyright text-center py-3">© 2020 Copyright:
+               </div>
+               <!-- Copyright -->
 
-          <!-- Copyright -->
-          <div class="footer-copyright text-center py-3">© 2020 Copyright:
-          </div>
-          <!-- Copyright -->
+          </footer>
+          <!-- / Footer -->
 
-     </footer>
-     <!-- / Footer -->
+          <!-- cdns for removing alerts -->
+          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+          <!-- / cdns for removing alerts -->
 
+          <!-- JQuery -->
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <!-- Bootstrap tooltips -->
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+          <!-- Bootstrap core JavaScript -->
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+          <!-- MDB core JavaScript -->
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 
-     <!-- cdns for removing alerts -->
-     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-     <!-- / cdns for removing alerts -->
-
-     <!-- JQuery -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-     <!-- Bootstrap tooltips -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-     <!-- Bootstrap core JavaScript -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-     <!-- MDB core JavaScript -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
-
-</body>
+     </body>
 
 </html>
