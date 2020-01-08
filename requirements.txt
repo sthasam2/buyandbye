@@ -10,5 +10,8 @@ pip install django-money (v.1.0) //installs py-moneyed (v.0.8.0) #add project.s
 pip install --upgrade autopep8 (v.1.4.4) //installs pycodestyle (v.2.5.0)
 pip install django-extensions (v.2.2.5) #INSTALLED_APPS ='django_extensions',]
 pip install bootstrap4 (v.0.1.0)
-pip install django-materialize-css (v.0.0.1)
- pip install crispy-forms-materialize(v.0.2) #INSTALLED_APPS = (...'materialize','crispy_forms','crispy_forms_materialize', ...) # Default layout to use with "crispy_forms" CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
+
+//pip install django-materialize-css (v.0.0.1)
+// pip install crispy-forms-materialize(v.0.2) #INSTALLED_APPS = (...'materialize','crispy_forms','crispy_forms_materialize', ...) # Default layout to use with "crispy_forms" //CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
+
+pip install django-markdownx==3.0.1 //INSTALLED_APPS= [... markdownx, ...] # installed Markdown-3.1.1 django-markdownx-3.0.1
