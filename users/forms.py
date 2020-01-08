@@ -29,7 +29,7 @@ class UserRegisterForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, widget=forms.TextInput(
         attrs={'placeholder': 'Given name'}))
-    middle_name = forms.CharField(max_length=30, widget=forms.TextInput(
+    middle_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Middle name'}))
     last_name = forms.CharField(
         max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Surname'}))
