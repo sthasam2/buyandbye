@@ -1,7 +1,8 @@
 body {
-     background: #ffffff;
+     background: #cccccc;
      color: #333333;
      margin-top: 6rem;
+     text-align: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -84,31 +85,42 @@ a.article-title:hover {
 }
 
 /* material card */
-body {
-     background: #D1D1D1;
-     text-align: center;
-}
-
 .card {
-  /* display: block; */
-  /* background: #FFFFFF;
-  width: 175px;
-  height: 250px;
-  border-radius: 10px;
-  margin: 10px;
-  display: inline-block;
-  align: center; */
-  transition: all .25s linear;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
-}
-.card: hover{
+     display: block;
+     margin: 4px;
+     /* display: inline-block; */
+     /* border-radius: 10px; */
+     /* align: center; */
+     /* background: #f2f2f2; */
+     height: 200px !important;
+     width: 150px !important;
+     z-index: 0;
      transition: all .25s linear;
-     box-shadow: -1px 3px 10px 0px rgba(0, 0, 0, 0.8);
+     border-color: rgba(0, 0, 0, 1);
+     /* box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4); */
 }
 
+.card:hover {
+     z-index: 1;
+     transform: scale(1.1);
+     transition: all .25s ease-out;
+     /* background: rgb(255,128,0,0.5); */
+     /* background-image: linear-gradient(0deg, #87b5eb 1%, #87feeb 50%); */
+     box-shadow: -1px 3px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+.card-img-top {
+     object-fit: cover !important;
+     object-position: 50% 50% !important;
+     height: 40% !important;
+     position: relative !important;
+}
+
+/* .card-image-top:hover img{
+     transform: scale(5);
+     transition: all .25s ease-out;
+} */
 /* material card end */
-
-
 .header-img {
      width: 20px;
      height: 20px;
@@ -125,5 +137,10 @@ body {
 main {
      flex: 1 0 auto;
 }
+
+.page-link {
+     font-size: 18px !important;
+}
+
 
 /* / sticky footer css */
