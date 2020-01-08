@@ -8,7 +8,7 @@ from . models import Profile
 class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, widget=forms.TextInput(
         attrs={'placeholder': 'Given name'}))
-    middle_name = forms.CharField(max_length=30, widget=forms.TextInput(
+    middle_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Middle name'}))
     last_name = forms.CharField(
         max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Surname'}))
@@ -39,13 +39,16 @@ class UserUpdateForm(forms.ModelForm):
         attrs={'placeholder': 'Street, District'}))
     address2 = forms.CharField(max_length=100, widget=forms.TextInput(
         attrs={'placeholder': 'State'}))
-    phone = PhoneNumberField(required=False)
+    phone = PhoneNumberField(required=False, widget=forms.TextInput(
+        attrs={'placeholder': 'e.g. +97798XXYYZZSS'}))
 
     class Meta:
         model = User
         fields = ['first_name', 'middle_name', 'last_name', 'username',
                   'email', 'phone', 'address1', 'address2']
-
+        widget={
+            User.username: forms.TextInput(attrs={'placeholder': 'Enter desired username.'}),
+        }
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
