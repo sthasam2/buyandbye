@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # 'crispy_forms_materialize',
     'djmoney',
     'django_extensions',
+    'markdownx'
 ]
 
 MIDDLEWARE = [
@@ -43,7 +44,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'buyandbye.urls'
