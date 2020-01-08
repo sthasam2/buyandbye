@@ -66,7 +66,7 @@ class ItemListView(ListView):
     template_name = 'homepage/home.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
-    paginate_by = 6
+    paginate_by = 8
 
 
 # views for posts from  an individual user
