@@ -1,8 +1,8 @@
 body {
-     background: #cccccc;
-     color: #333333;
-     margin-top: 6rem;
-     text-align: center;
+     /* background: #cccccc; */
+     /* color: #333333; */
+     /* margin-top: 10rem; */
+     /* text-align: center; */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -128,7 +128,7 @@ a.article-title:hover {
 }
 
 /* sticky footer css */
-body {
+/* body {
      display: flex;
      min-height: 100vh;
      flex-direction: column;
@@ -136,11 +136,35 @@ body {
 
 main {
      flex: 1 0 auto;
-}
+} */
 
 .page-link {
      font-size: 18px !important;
 }
 
-
 /* / sticky footer css */
+/* nav bar */
+.intro-2 {
+     background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
+     background-size: cover;
+}
+
+.navbar {
+     background-color: transparent;
+}
+
+.top-nav-collapse {
+     background-color: #4285F4;
+}
+
+@media only screen and (max-width: 200px) {
+     .navbar {
+          background-color: #4285F4;
+     }
+}
+
+.view {
+     height: 45%;
+}
+
+/* / nav bar */
