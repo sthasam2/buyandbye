@@ -4,7 +4,9 @@ from django.db.models.signals import pre_save
 from django.urls import reverse
 from django.utils import timezone
 from djmoney.models.fields import MoneyField
+from markdownx.models import MarkdownxField
 from PIL import Image
+
 from . utils import create_slug
 from . options import CATEGORY_CHOICES, SUB_CATEGORY_CHOICES
 
@@ -48,7 +50,7 @@ class Item(models.Model):
 
     title = models.CharField(max_length=100)
     price = MoneyField(decimal_places=2, max_digits=10, default_currency='NPR')
-    content = models.TextField()
+    content = MarkdownxField()
     image = models.ImageField(null=True, blank=True,
                               upload_to='item_pics/')  # setting image
 
