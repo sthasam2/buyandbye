@@ -16,6 +16,9 @@ urlpatterns = [
 
     # users
     path('', include('users.urls')),
+
+    #markdownx requirement
+    path('markdownx/', include('markdownx.urls')),
 ]
 
 
