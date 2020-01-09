@@ -15,10 +15,24 @@ from django.urls import reverse_lazy
 from . models import Item
 # from . forms import ItemCreateForm
 
+"""
+    # pagination logic
+    from django.core.paginator import Paginator
+
+    def listing(request):
+    contact_list = Contact.objects.all()
+    paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'list.html', {'page_obj': page_obj})
+"""
+
 
 def home(request):
     context = {
-        'item': Item.objects.all()
+        'item': Item.objects.all(),
+        'title': 'Homepage',
     }
     return render(request, 'homepage/home.html', context)
 
@@ -120,16 +134,21 @@ class SearchItemListView(ListView):
     context_object_name = 'search_item'
     paginate_by = 5
 
-    def get_queryset(self):  # filtering based on username
+    def get_queryset(self):  # queryset using Q object
         query = self.request.GET.get('q')
         object_list = Item.objects.filter(
-            Q(title__icontains=query)
-        )
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(author__first_name__icontains=query) |
+            Q(author__last_name__icontains=query) |
+            Q(author__username__icontains=query)
+        ).distinct()
         return object_list.order_by('-date_posted')
-
-    #object = get_object_or_404(Item, searchkey=self.kwargs.get('title'))
-    # return Item.objects.filter(author=user).
 
 
 def aboutus(request):
     return render(request, 'homepage/about.html', {'title': 'About'})
+
+
+def privacy_policy(request):
+    return render(request, 'homepage/privacypolicy.html', {'title': 'Privacy Policy'})
