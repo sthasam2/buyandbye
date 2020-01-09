@@ -21,10 +21,10 @@
           <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}">
 
           {% if title %}
-               <title>Homepage -
+               <title>BuyandBye -
                     {{title}}</title>
           {% else %}
-               <title>Homepage</title>
+               <title>BuyandBye</title>
           {% endif %}
      </head>
 
@@ -60,7 +60,7 @@
                               </li>
                               <li class="nav-item">
                                    <a class="nav-link" href="{% url 'about' %}">
-                                        Features
+                                        About
                                    </a>
                               </li>
 
@@ -105,29 +105,26 @@
                     </div>
                     <!-- Links -->
                     <div>
-                         <form class="form-inline">
+                         <!-- search form -->
+                         <form class="form-inline" action="{% url 'search_results'%}" method="get">
                               <div class="md-form my-0">
                                    <div class="form-group">
-                                        <input id="search" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                                        <input type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
                                         <button class="btn btn-success btn-sm bg-dark" type="submit">
                                              <i class="material-icons md-18">search</i>
                                         </button>
                                    </div>
                               </div>
                          </form>
+                         <!-- / search form -->
                     </div>
                </nav>
                <div class="view intro-2">
                     <div class="full-bg-img">
                          <div class="mask rgba-purple-light flex-center">
                               <div class="container text-center white-text wow fadeInUp">
-                                   <!-- <h2>This Navbar is fixed and transparent</h2>
-                                   <br>
-                                   <h5>It will always stay visible on the top, even when you scroll down</h5>
-                                   <p>Navbar's background will switch from transparent to solid color while scrolling down</p>
-                                   <br>
-                                   <p>Full page intro with background image will be always displayed in full screen mode, regardless of device
-                                   </p> -->
+                                   <!-- <h2>This Navbar is fixed and transparent</h2> <br> <h5>It will always stay visible on the top, even when you scroll down</h5> <p>Navbar's background will switch from transparent to solid color while scrolling down</p> <br> <p>Full page intro
+                                   with background image will be always displayed in full screen mode, regardless of device </p> -->
                               </div>
                          </div>
                     </div>
@@ -166,7 +163,6 @@
                     </div>
 
                     <div class="col-sm-8 ">
-                         <h1>Latest Items</h1>
                          {% block content %}{% endblock %}
                     </div>
                </div>
@@ -174,12 +170,20 @@
 
           <!-- Site Navigation / Breadcrumb -->
           <div class="container">
-               <div class="dark-font my-3 justify-content-center">
-                    <mdb-breadcrumb customclass="purple lighten-4">
-                         <mdb-breadcrumb-item fontweight="light">Home</mdb-breadcrumb-item>
-                         <mdb-breadcrumb-item fontweight="normal">Library</mdb-breadcrumb-item>
-                         <mdb-breadcrumb-item fontweight="bold" class="active">Data</mdb-breadcrumb-item>
-                    </mdb-breadcrumb>
+               <div class="bc-icons-2">
+                    <nav aria-label="breadcrumb">
+                         <ol class="breadcrumb indigo lighten-4">
+                              <li class="breadcrumb-item">
+                                   <a class="black-text" href="#">Home</a>
+                                   <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
+                              </li>
+                              <li class="breadcrumb-item">
+                                   <a class="black-text" href="#">Library</a>
+                                   <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
+                              </li>
+                              <li class="breadcrumb-item active">Data</li>
+                         </ol>
+                    </nav>
                </div>
           </div>
           <!-- / Site Navigation / Breadcrumb -->
@@ -189,8 +193,8 @@
                <div class="container-fluid text-center text-md-left my-auto">
                     <div class="row">
                          <div class="col-md-6 mt-md-0 mt-3">
-                              <h5 class="text-uppercase">Footer Content</h5>
-                              <p>Here you can use rows and columns to organize your footer content.</p>
+                              <h5 class="text-uppercase">BuyandBye</h5>
+                              <p>Your online solution for buying and selling goods and services.</p>
                          </div>
 
                          <hr class="clearfix w-100 d-md-none pb-3">
@@ -199,10 +203,10 @@
                               <h5 class="text-uppercase">Links</h5>
                               <ul class="list-unstyled">
                                    <li>
-                                        <a href="#!">Link 1</a>
+                                        <a href="{% url 'about' %}">About us</a>
                                    </li>
                                    <li>
-                                        <a href="#!">Link 2</a>
+                                        <a href="{% url 'privacy-policy' %}">Privacy Policy</a>
                                    </li>
                                    <li>
                                         <a href="#!">Link 3</a>
