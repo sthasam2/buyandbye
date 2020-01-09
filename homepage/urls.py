@@ -29,5 +29,7 @@ urlpatterns = [
     path('search/', SearchItemListView.as_view(), name='search_results'),
 
     # The about page view
-    path('about/', views.aboutus, name='about')
+    path('about/', views.aboutus, name='about'),
+    # The Privacy policy page
+    path('privacy_policy/', views.privacy_policy, name='privacy-policy')
 ]
