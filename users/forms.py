@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
 from phonenumber_field.formfields import PhoneNumberField
-from homepage.options import STATE_CHOICES
+
+from . options import STATE_CHOICES
 from . models import Profile
 
 
