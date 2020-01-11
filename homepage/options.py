@@ -1,8 +1,8 @@
 # Options file ('',''),
 CONDITION_CHOICES = (
-    ('Brand-New', 'Brand New'),
-    ('Used-Like-New', 'Used (Like New)'),
-    ('Used-Worn-Out', 'Used (Worn Out)'),
+    ('Brand New', 'Brand New'),
+    ('Used (Like New)', 'Used (Like New)'),
+    ('Used (Worn Out)', 'Used (Worn Out)'),
     ('Defective', 'Defective'),
 )
 

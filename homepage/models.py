@@ -32,13 +32,12 @@ class Category(models.Model):
 
 # sub - category class
 class SubCategory(models.Model):
+    parent_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subname = models.CharField(max_length=100, choices=SUB_CATEGORY_CHOICES)
     slug = models.SlugField(max_length=100)
-    parent_category = models.ForeignKey(
-        Category, on_delete=django.db.models.deletion.CASCADE)
 
     class Meta:
-        ordering = ('subname',)
+        # ordering = ('subname',)
         verbose_name = 'Sub_Category'
         verbose_name_plural = 'Sub_Categories'
 
@@ -56,7 +55,7 @@ class Item(models.Model):
                      default_currency='NPR')
     content = MarkdownxField()
     image = models.ImageField(upload_to='item_pics/')  # setting image
-    condition = models.CharField(max_length=100, choices=CONDITION_CHOICES)
+    condition = models.CharField(max_length=100, null=True, blank=True, choices=CONDITION_CHOICES)
 
     slug=models.SlugField(max_length=100)
     author=models.ForeignKey(User, on_delete=models.CASCADE)
