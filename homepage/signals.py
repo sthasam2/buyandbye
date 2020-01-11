@@ -1,8 +1,8 @@
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
-from . models import Item, Category #, SubCategory
 
+from . models import Item, Category, SubCategory
 
 
 # / Item slug generator
@@ -38,14 +38,14 @@ pre_save.connect(item_receiver, sender=Category)
 
 
 # # SubCategory slug generator
-# @receiver(pre_save, sender=SubCategory)
-# def item_receiver(sender, instance, *args, **kwargs):
-#     slug = slugify(instance.subname)
-#     exists = SubCategory.objects.filter(slug=slug).exists()
-#     if exists:
-#         slug = "%s-%s" % (slug, instance.id)
-#     instance.slug = slug
-#
-#
-# pre_save.connect(item_receiver, sender=SubCategory)
+@receiver(pre_save, sender=SubCategory)
+def item_receiver(sender, instance, *args, **kwargs):
+    slug = slugify(instance.subname)
+    exists = SubCategory.objects.filter(slug=slug).exists()
+    if exists:
+        slug = "%s-%s" % (slug, instance.id)
+    instance.slug = slug
+
+
+pre_save.connect(item_receiver, sender=SubCategory)
 # # / SubCategory slug generator

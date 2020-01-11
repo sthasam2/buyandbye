@@ -1,5 +1,6 @@
 from django.contrib import admin
-from . models import Item, Category #, SubCategory
+
+from . models import Item, Category, SubCategory
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_posted', 'price', 'author',)
@@ -11,12 +12,12 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('name',)
     prepopulated_fields = {"slug": ("name",)}
 
-# class SubCategoryAdmin(admin.ModelAdmin):
-#     list_display = ('subname',)
-#     list_filter = ('subname',)
-#     prepopulated_fields = {"slug": ("subname",)}
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ('subname',)
+    list_filter = ('subname',)
+    prepopulated_fields = {"slug": ("subname",)}
 
 
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Category, CategoryAdmin)
-# admin.site.register(SubCategory, SubCategoryAdmin)
+admin.site.register(SubCategory, SubCategoryAdmin)

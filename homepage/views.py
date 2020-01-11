@@ -12,6 +12,7 @@ from django.views.generic import (
     DeleteView
 )
 from django.urls import reverse_lazy
+
 from . models import Item
 # from . forms import ItemCreateForm
 
@@ -41,7 +42,7 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     # form_class = ItemCreateForm #to inherit from form
     model = Item
     template_name = 'homepage/items_form.html'
-    fields = ['title', 'category', 'price', 'content', 'image', ]
+    fields = ['title', 'category', 'sub_category', 'price', 'condition', 'content', 'image', ]
 
     success_message = f'Item was succesfully created.'
     # success_url = reverse_lazy('item-detail') #success url not required for CreateView and UpdateView
@@ -103,7 +104,7 @@ class ItemDetailView(DetailView):
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
     template_name = 'homepage/items_form.html'
-    fields = ['title', 'content']
+    fields = ['title', 'category', 'sub_category', 'price', 'content',]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
