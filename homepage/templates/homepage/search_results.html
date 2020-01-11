@@ -3,11 +3,10 @@
 
 <!-- Check search results is empty or not -->
 {% if page_obj.paginator.count != null %}
-<div class="col s6">
-     <p align="centre" class="muted">{{ page_obj.paginator.count }}
-          result(s) found for : "
-          <b>{{ request.GET.q }}</b>
-          "</p>
+<div class="row justify-content-center bg-light">
+     <p align="center">
+          <strong>{{ page_obj.paginator.count }}</strong> result(s) found for : "<b>{{ request.GET.q }}</b>"
+     </p>
 </div>
 <hr>
 
@@ -30,14 +29,14 @@
                     </a>
                     <p class="card-subtitle text-success text-center text-truncate" style="font-size: 11px"> <b>{{items.price}}</b></p>
                </div>
-               <!-- <div class="text-muted">
-                              <hr>
-                              <img class="circle" style="width:16px; height:16px;" src="{{ items.author.profile.image.url }}">
-                              <a href="{% url 'user-item' items.author.username %}" class="mr-2 text-muted" style="font-size: 10px">
-                                   {{ items.author }}
-                              </a><br>
-                              <small class="text-muted" style="font-size: 10px">{{items.date_posted|date:"F d, Y"}}</small>
-                         </div> -->
+               <div class="text-muted">
+                    <hr>
+                    <img class="circle" style="width:16px; height:16px;" src="{{ items.author.profile.image.url }}">
+                    <a href="{% url 'user-item' items.author.username %}" class="mr-2 text-muted" style="font-size: 10px">
+                         {{ items.author }}
+                    </a><br>
+                    <small class="text-muted" style="font-size: 10px">{{items.date_posted|date:"F d, Y"}}</small>
+               </div>
           </div>
      </div>
 </div>

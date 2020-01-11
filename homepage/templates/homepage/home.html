@@ -3,33 +3,39 @@
 {% block content %}
 
 <!-- header for latest items -->
-<div class="row">
-     <legend>
-          Latest Items
-     </legend>
+<div class="container bg-light">
+     <div class="row justify-content-center">
+          <div class="col-md-auto bg-success">
+               <legend>
+                    Latest Items
+               </legend>
+          </div>
+     </div>
 </div>
-
-
 <!-- Block for loop listing the items  -->
 {% for items in item %}
 
-
 <!-- bootstrap styling -->
-<div class="d-inline-flex p-2 bd-highlight align-items-center">
+<div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
      <div class="col2 align-intems-start">
-          <div class="card">
+          <div class="card card-item-grid text-center">
                <!-- border-radius: 10px; border-radius: 10px 10px 0px 0px;-->
                <!-- {% if items.image.url is not NULL%} -->
-               <img src="{{items.image.url}}" alt="" class="card-img-top" style="object-fit: cover; object-position: 50% 50%; height: 40%; position: relative;">
-               <span class="badge badge-danger" style="position: absolute;  right: 10px; top: 10px">{{items.category}}</span>
+               <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
                <!-- {% endif %} -->
                <div class="card-body">
-                    <a href="{% url 'item-detail' items.id %}">
-                         <p class="card-title text-center text-info" style="font-size: 12.5px">
+                    <a href="{% url 'item-detail' items.id %}" title="{{ items.title }}">
+                         <p class="card-title text-primary">
                               {{ items.title }}
                          </p>
                     </a>
-                    <p class="card-subtitle text-success text-center text-truncate" style="font-size: 11px"> <b>{{items.price}}</b></p>
+                    <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
+                         <b>{{items.price}}</b>
+                    </p>
+                    <br>
+                    <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
+                         {{items.condition}}
+                    </p>
                </div>
                <!-- <div class="text-muted">
                     <hr>
