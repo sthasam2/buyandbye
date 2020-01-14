@@ -8,12 +8,12 @@ class ItemAdmin(admin.ModelAdmin):
     prepopulated_fields ={"slug": ("title",)}
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    list_filter = ('name',)
+    list_display = ('name','slug',)
+    list_filter = ('name', 'slug',)
     prepopulated_fields = {"slug": ("name",)}
 
 class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ('subname',)
+    list_display = ('subname', 'parent_category', 'slug',)
     list_filter = ('subname',)
     prepopulated_fields = {"slug": ("subname",)}
 

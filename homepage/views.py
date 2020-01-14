@@ -13,7 +13,7 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 
-from . models import Item
+from . models import Item, Category, SubCategory
 # from . forms import ItemCreateForm
 
 """
@@ -29,20 +29,33 @@ from . models import Item
     return render(request, 'list.html', {'page_obj': page_obj})
 """
 
+# def base(request):
+#     frontend_stuff = {
+#         'item': Item.objects.all(),
+#         'category': Category.objects.all(),
+#         # 'c_paginator' : Paginator('category', 20),
+#         'sub_category': SubCategory.objects.all(),
+#         # 's_paginator' : Paginator('sub_category', 20),
+#     }
+#     return render(request, 'homepage/base.html', frontend_stuff)
 
 def home(request):
-    context = {
+    frontend_stuff = {
         'item': Item.objects.all(),
-        'title': 'Homepage',
+        'category': Category.objects.all(),
+        'c_paginator' : Paginator('category', 20),
+        'sub_category': SubCategory.objects.all(),
+        's_paginator' : Paginator('sub_category', 20),
     }
-    return render(request, 'homepage/home.html', context)
+    return render(request, 'homepage/home.html', frontend_stuff)
 
 
 class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     # form_class = ItemCreateForm #to inherit from form
     model = Item
     template_name = 'homepage/items_form.html'
-    fields = ['title', 'category', 'sub_category', 'price', 'condition', 'content', 'image', ]
+    fields = ['title', 'category', 'sub_category',
+              'price', 'condition', 'content', 'image', ]
 
     success_message = f'Item was succesfully created.'
     # success_url = reverse_lazy('item-detail') #success url not required for CreateView and UpdateView
@@ -96,6 +109,13 @@ class UserItemListView(ListView):
         return Item.objects.filter(author=user).order_by('-date_posted')
 
 
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'homepage/base.html'  # app/model_viewtype.html
+    context_object_name = 'categorylist'
+    ordering = ['name']
+
+
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'homepage/items_detail.html'
@@ -104,7 +124,7 @@ class ItemDetailView(DetailView):
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
     template_name = 'homepage/items_form.html'
-    fields = ['title', 'category', 'sub_category', 'price', 'content',]
+    fields = ['title', 'category', 'sub_category', 'price', 'content', ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

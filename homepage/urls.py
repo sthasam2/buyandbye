@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 from . views import (
+    CategoryListView,
     ItemListView,
     ItemDetailView,
     ItemCreateView,
@@ -11,9 +12,14 @@ from . views import (
     SearchItemListView,
 )
 
+# NOTE: only one views per url
+
 urlpatterns = [
+    # path('', views.base, name='base'),
+
+    path('home/', views.home, name='homepage'),
     # The homepage item view
-    path('', ItemListView.as_view(), name='homepage'),
+    path('item/latest/', ItemListView.as_view(), name='latest-item'),
     # The individual user item view
     path('user/<str:username>', UserItemListView.as_view(), name='user-item'),
     # The individual item's detailed view

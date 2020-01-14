@@ -9,7 +9,8 @@ from . models import Item, Category, SubCategory
 @receiver(pre_save, sender=Item)
 # since method is pre_save it constantly keeps on occuoring for every signal sent by item or something like that
 def item_receiver(sender, instance, *args, **kwargs):
-    slug = slugify(instance.title)  # converts title into slug, e.g. Apple Iphone 7-> apple-iphone-7
+    # converts title into slug, e.g. Apple Iphone 7-> apple-iphone-7
+    slug = slugify(instance.title)
     # checking for multiple instances for same slug using queryset, because sometimes the item id may be same
     exists = Item.objects.filter(slug=slug).exists()
     if exists:
