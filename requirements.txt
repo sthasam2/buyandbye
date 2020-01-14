@@ -15,3 +15,19 @@ pip install bootstrap4 (v.0.1.0)
 // pip install crispy-forms-materialize(v.0.2) #INSTALLED_APPS = (...'materialize','crispy_forms','crispy_forms_materialize', ...) # Default layout to use with "crispy_forms" //CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 pip install django-markdownx==3.0.1 //INSTALLED_APPS= [... markdownx, ...] # installed Markdown-3.1.1 django-markdownx-3.0.1
+
+
+
+
+
+//NOTE: to manual populate objects e.g. Category follow steps:
+1. create a json dictionary in the project directory here e.g. category.json
+2. run manage.py shell
+3. import json
+4. from app.models import object here eg. homepage.models import Category
+5. with open('filename') as f: here eg. filename=category.json
+6. [indent tab] newfile = json.load(f), here eg. newfile can be anything
+7. enter
+8. for new in newfile:, here eg. new can be anything
+9. [indent] new = object(object_var1= new[jsondict_var1], object_var2= new[jsondict_var2], ... )
+10. enter
