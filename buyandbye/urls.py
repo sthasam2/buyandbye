@@ -17,11 +17,14 @@ urlpatterns = [
     # users
     path('', include('users.urls')),
 
-    #markdownx requirement
+    # markdownx requirement
     path('markdownx/', include('markdownx.urls')),
 ]
 
 
 if settings.DEBUG:  # for development stage
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+if settings.DEBUG:  # for development stage
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

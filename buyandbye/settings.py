@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     # 'crispy_forms_materialize',
     'djmoney',
     'django_extensions',
-    'markdownx'
+    'markdownx',
 ]
 
 MIDDLEWARE = [
