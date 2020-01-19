@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'djmoney',
-    'django_extensions',
     'markdownx',
     'hitcount',
 ]
