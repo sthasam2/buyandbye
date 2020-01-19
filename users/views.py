@@ -24,11 +24,11 @@ def register(request):
             user.save()
 
             # save different form data
-            username = form.cleaned_data.get('username')
-            first_name = form.cleaned_data.get('first_name')
-            middle_name = form.cleaned_data.get('middle_name')
-            last_name = form.cleaned_data.get('last_name')
-            phone = form.cleaned_data.get('phone')
+            # username = form.cleaned_data.get('username')
+            # first_name = form.cleaned_data.get('first_name')
+            # middle_name = form.cleaned_data.get('middle_name')
+            # last_name = form.cleaned_data.get('last_name')
+            # phone = form.cleaned_data.get('phone')
             to_email = form.cleaned_data.get('email')
 
             # email info and content generater
@@ -46,10 +46,10 @@ def register(request):
                 mail_subject, message, to=[to_email])
             activation_email.send()
 
-            #return redirect('activation_message_sent')
-             # email send success info message
+            # return redirect('activation_message_sent')
+            # email send success info message
             messages.info(
-                 request, f'Your account has been created! An email has been sent with instructions, Please verify your email to login.')
+                request, f'Your account has been created! An email has been sent with instructions, Please verify your email to login.')
             return redirect('login')
     else:
         form = UserRegisterForm()
