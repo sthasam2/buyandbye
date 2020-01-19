@@ -25,15 +25,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # custom
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
     'phonenumber_field',
-    # 'materialize',
     'crispy_forms',
-    # 'crispy_forms_materialize',
     'djmoney',
     'django_extensions',
     'markdownx',
+    'hitcount',
 ]
 
 MIDDLEWARE = [
