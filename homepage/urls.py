@@ -17,7 +17,7 @@ from . views import (
 urlpatterns = [
     # path('', views.base, name='base'),
 
-    path('home/', views.home, name='homepage'),
+    path('', views.home, name='homepage'),
     # The homepage item view
     path('item/latest/', ItemListView.as_view(), name='latest-item'),
     # The individual user item view

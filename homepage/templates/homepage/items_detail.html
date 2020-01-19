@@ -1,35 +1,48 @@
-{% extends "homepage/base.html" %}
-{% block content %}
+{% extends "homepage/base.html" %} {% load hitcount_tags %} {% block content %}
 
 <article>
-	<div class="card px-2 pt-2">
-		<div class="card-body">
-			<h2 class="card-title"><a>{{ object.title }}</a></h2>
-			<p class="card-text">{{ object.content }}</p>
-		</div>
-		<div class="card-footer justify-content-center">
-			<div class="d-flex justify-content-center">
-				<table>
-					<tr>
-						<th>
-							<img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-						</th>
-						<th>
-							<a class="mr-2" href="#">{{ object.author }}</a>
-							<br>
-							<small class="text-muted">{{object.date_posted|date:"F d, Y"}}</small>
-						</th>
-					</tr>
-				</table>
-			</div>
-			<div class="d-flex justify-content-center">
-				{% if object.author == user %}
-				<a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.id %}">Update Post</a>
-				<a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.id %}">Delete Post</a>
-				{% endif %}
-			</div>
-		</div>
-	</div>
+    <div class="card px-2 pt-2">
+        <div class="card-body">
+            <h2 class="card-title"><a>{{ object.title }}</a></h2>
+            <p class="card-text">Ad views: {% get_hit_count for item_detail %}</p>
+            <p class="card-text">{{ object.content }}</p>
+        </div>
+        <div class="card-footer justify-content-center">
+            <div class="d-flex justify-content-center">
+                <table>
+                    <tr>
+                        <th>
+                            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+                        </th>
+                        <th>
+                            <a class="mr-2" href="#">{{ object.author }}</a>
+                            <br>
+                            <small class="text-muted">{{object.date_posted|date:"F d, Y"}}</small>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                {% if object.author == user %}
+                <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.id %}">Update Post</a>
+                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.id %}">Delete Post</a> {% endif %}
+            </div>
+        </div>
+    </div>
 </article>
+
+<div>
+    <legend class="border-bottom">Popular items</legend>
+
+    {% for pop_item in popular_items %}
+    <div class="card px-2 my-2">
+        <div class="card-body">
+            <h2 class="card-title"><a>{{ pop_item.title }}</a></h2>
+            <p class="card-text">Ad views: {% get_hit_count for pop_item %}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
 
 {% endblock content %}

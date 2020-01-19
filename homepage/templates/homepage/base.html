@@ -2,310 +2,312 @@
 <html lang="en">
 
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-     <!-- CDN -->
-     <!-- Font Awesome -->
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-     <!-- Bootstrap core CSS -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Material Design Bootstrap -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+    <!-- CDN -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 
-     <!-- GOOGLE FONTS -->
-     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
-     <!-- main.css -->
-     <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}">
-
-     {% if title %}
-     <title>BuyandBye -
-          {{title}}</title>
-     {% else %}
-     <title>BuyandBye</title>
-     {% endif %}
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <!-- main.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}"> {% if title %}
+    <title>BuyandBye - {{title}}
+    </title>
+    {% else %}
+    <title>BuyandBye</title>
+    {% endif %}
 </head>
 
 <style>
-     body {
-          font-family: 'Varela Round', sans-serif;
-     }
-
-     div.sticky {
-          position: -webkit-sticky;
-          position: sticky;
-          top: 40px;
-     }
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+    
+    div.sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 40px;
+    }
 </style>
 
 <body>
-     <header class="site-header">
-          <!--Navbar-->
-          <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
-               <!-- Navbar brand -->
-               <a class="navbar-brand" href="/">
-                    <!-- <i class="material-icons">laptop_windows</i> -->
-                    <strong>
-                         BuyandBye
-                    </strong>
-               </a>
-               <!-- Collapse button -->
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-               </button>
-               <!-- Collapsible content -->
-               <div class="collapse navbar-collapse">
-                    <!-- Links -->
-                    <ul class="navbar-nav mr-auto">
-                         <li class="nav-item">
-                              <a class="nav-link" href="/">
-                                   Home
-                              </a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'about' %}">
-                                   About
-                              </a>
-                         </li>
+    <header class="site-header">
+        <!--Navbar-->
+        <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="/">
+                <!-- <i class="material-icons">laptop_windows</i> -->
+                <strong>
+                    BuyandBye
+                </strong>
+            </a>
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse">
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
 
-                    </ul>
-               </div>
-               <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                         {% if user.is_authenticated %}
-                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'item-create' %}">
-                                   Post Item
-                              </a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'profile' %}">
-                                   Profile
-                              </a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'logout' %}">
-                                   Logout
-                              </a>
-                         </li>
-                         {% else %}
-                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'login' %}">Login</a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'register' %}">Register</a>
-                         </li>
-                         {% endif %}
-                         <!-- Dropdown -->
-                         <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                   <a class="dropdown-item" href="#">Action</a>
-                                   <a class="dropdown-item" href="#">Another action</a>
-                                   <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
-               <!-- / Links -->
-               <!-- search form -->
-               <div>
-                    <form class="form-inline" action="{% url 'search_results'%}" method="get">
-                         <div class="md-form my-0">
-                              <div class="form-group">
-                                   <input class="text-light" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
-                                   <!-- <button class="btn btn-success bg-dark" type="submit" >
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'item-create' %}">
+                            Post Item
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">
+                            Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <h6 class="dropdown-header">Explore our Categories</h6>
+                            <div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
+                                <div class="row">
+                                    {% for categorylist in category %}
+                                    <div class="col2">
+                                        <a href="#">{{ categorylist.get_name_display }}</a>
+                                    </div>{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- / Links -->
+            <!-- search form -->
+            <div>
+                <form class="form-inline" action="{% url 'search_results'%}" method="get">
+                    <div class="md-form my-0">
+                        <div class="form-group">
+                            <input class="text-light" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                            <!-- <button class="btn btn-success bg-dark" type="submit" >
                                              Search
                                              <i class="material-icons md-9">search</i>
                                         </button> -->
-                              </div>
-                         </div>
-                    </form>
-               </div>
-               <!-- / search form -->
-          </nav>
-          <div class="view intro-2">
-               <div class="full-bg-img">
-                    <div class="mask rgba-purple-light flex-center">
-                         <div class="container text-center white-text wow fadeInUp">
-                              <!-- <h2>This Navbar is fixed and transparent</h2> <br> <h5>It will always stay visible on the top, even when you scroll down</h5> <p>Navbar's background will switch from transparent to solid color while scrolling down</p> <br> <p>Full page intro
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- / search form -->
+        </nav>
+        <div class="view intro-2">
+            <div class="full-bg-img">
+                <div class="mask rgba-purple-light flex-center">
+                    <div class="container text-center white-text wow fadeInUp">
+                        <!-- <h2>This Navbar is fixed and transparent</h2> <br> <h5>It will always stay visible on the top, even when you scroll down</h5> <p>Navbar's background will switch from transparent to solid color while scrolling down</p> <br> <p>Full page intro
                                    with background image will be always displayed in full screen mode, regardless of device </p> -->
-                         </div>
                     </div>
-               </div>
-          </div>
-     </header>
+                </div>
+            </div>
+        </div>
+    </header>
 
-     <!-- INFO MESSAGES -->
-     {% if messages %}
-     {% for message in messages %}
-     <div class="container bg-secondary">
-          <div class="d-flex justify-content-center">
-               <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                    </button>
-               </div>
-          </div>
-     </div>
-     {% endfor %}
-     {% endif %}
-     <!-- / INFO MESSAGE -->
+    <!-- INFO MESSAGES -->
+    {% if messages %} {% for message in messages %}
+    <div class="container bg-secondary">
+        <div class="d-flex justify-content-center">
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %} {% endif %}
+    <!-- / INFO MESSAGE -->
 
-     <main role="main" class="container">
-          <!-- row for double column -->
-          <div class="row mt-4 mx-auto bg-secondary">
-               <!-- Sidebar-->
-               <div class="col-2.5 mx-2 bg-light">
-                    <!-- <div class="card-sticky"> -->
-                    <div class="card card-sidebar-sticky">
-                         <div class="card-header">
-                              <h3>
-                                   <strong>Categories</strong>
-                              </h3>
-                         </div>
-                         <div class="card-body" style="font-size:10px">
-                              <!-- Category List -->
-                              <ul class="list-group list-group-flush">
-                                   {% for categorylist in category %}
-                                   <!-- category element -->
-                                   <li class="list-group-item">
-                                        <a data-toggle="collapse" href="#colSublist{{categorylist.name}}" aria-expanded="false" aria-controls="colSublist{{categorylist.name}}">
-                                             {{ categorylist.get_name_display }}
-                                             <span class="badge badge-primary badge-pill justify-content-right">{{ categorylist.cpaginator.count }}</span>
-                                        </a>
-                                        <!-- Subcategory List -->
-                                        <div class="collapse" id="colSublist{{categorylist.name}}">
-                                             <ul class="nested">
-                                                  {% for subcatlist in sub_category %}
-                                                  {% if subcatlist.parent_category == categorylist %}
-                                                  <!-- subcategory element -->
-                                                  <li class="list-group-item">
-                                                       <a href="#">
-                                                            {{ subcatlist.get_subname_display }}
-                                                            <span class="badge badge-primary">{{ page_obj.cpaginator.count }}</span>
-                                                       </a>
-                                                  </li>
-                                                  <!-- / subcategory element -->
-                                                  {% endif %}
-                                                  {% endfor %}
-                                             </ul>
-                                        </div>
-                                        <!-- / Subcategory List -->
-                                   </li>
-                                   <!-- / category element -->
-                                   {% endfor %}
-                              </ul>
-                              <!-- / Category List -->
-                         </div>
+    <main role="main" class="container">
+        <!-- row for double column -->
+        <div class="row mt-4 mx-auto bg-secondary">
+            <!-- Sidebar-->
+            <div class="col-2.5 mx-2 bg-light">
+                <!-- <div class="card-sticky"> -->
+                <div class="card card-sidebar-sticky">
+                    <div class="card-header">
+                        <h3>
+                            <strong>Categories</strong>
+                        </h3>
                     </div>
-                    <!-- </div> -->
-               </div>
-               <!-- / Sidebar-->
-
-               <!-- Content section -->
-               <div class="col-8 mx-auto bg-primary">
-                    {% block content %}
-                    {% endblock %}
-               </div>
-               <!-- / content section -->
-
-          </div>
-          <!-- / row for double column -->
-          <!-- </div> -->
-     </main>
-
-     <!-- Site Navigation / Breadcrumb -->
-     <div class="container">
-          <div class="bc-icons-2">
-               <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb indigo lighten-4">
-                         <li class="breadcrumb-item">
-                              <a class="black-text" href="#">Home</a>
-                              <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
-                         </li>
-                         <li class="breadcrumb-item">
-                              <a class="black-text" href="#">Library</a>
-                              <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
-                         </li>
-                         <li class="breadcrumb-item active">Data</li>
-                    </ol>
-               </nav>
-          </div>
-     </div>
-     <!-- / Site Navigation / Breadcrumb -->
-
-     <!-- Footer -->
-     <footer class="page-footer font-small blue pt-4" id="footer">
-          <div class="container-fluid text-center text-md-left my-auto">
-               <div class="row">
-                    <div class="col-md-6 mt-md-0 mt-3">
-                         <h5 class="text-uppercase">BuyandBye</h5>
-                         <p>Your online solution for buying and selling goods and services.</p>
+                    <div class="card-body" style="font-size:10px">
+                        <!-- Category List -->
+                        <ul class="list-group list-group-flush">
+                            {% for categorylist in category %}
+                            <!-- category element -->
+                            <li class="list-group-item">
+                                <a data-toggle="collapse" href="#colSublist{{categorylist.name}}" aria-expanded="false" aria-controls="colSublist{{categorylist.name}}">
+                                    {{ categorylist.get_name_display }}
+                                    <span
+                                        class="badge badge-primary badge-pill justify-content-right">{{ categorylist.cpaginator.count }}</span>
+                                </a>
+                                <!-- Subcategory List -->
+                                <div class="collapse" id="colSublist{{categorylist.name}}">
+                                    <ul class="nested">
+                                        {% for subcatlist in sub_category %} {% if subcatlist.parent_category == categorylist %}
+                                        <!-- subcategory element -->
+                                        <li class="list-group-item">
+                                            <a href="#">
+                                                {{ subcatlist.get_subname_display }}
+                                                <span class="badge badge-primary">{{ page_obj.cpaginator.count }}</span>
+                                            </a>
+                                        </li>
+                                        <!-- / subcategory element -->
+                                        {% endif %} {% endfor %}
+                                    </ul>
+                                </div>
+                                <!-- / Subcategory List -->
+                            </li>
+                            <!-- / category element -->
+                            {% endfor %}
+                        </ul>
+                        <!-- / Category List -->
                     </div>
+                </div>
+                <!-- </div> -->
+            </div>
+            <!-- / Sidebar-->
 
-                    <hr class="clearfix w-100 d-md-none pb-3">
+            <!-- Content section -->
+            <div class="col-8 mx-auto bg-primary">
+                {% block content %} {% endblock %}
+            </div>
+            <!-- / content section -->
 
-                    <div class="col-md-3 mb-md-0 mb-3">
-                         <h5 class="text-uppercase">Links</h5>
-                         <ul class="list-unstyled">
-                              <li>
-                                   <a href="{% url 'about' %}">About us</a>
-                              </li>
-                              <li>
-                                   <a href="{% url 'privacy-policy' %}">Privacy Policy</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 3</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 4</a>
-                              </li>
-                         </ul>
-                    </div>
+        </div>
+        <!-- / row for double column -->
+        <!-- </div> -->
+    </main>
 
-                    <div class="col-md-3 mb-md-0 mb-3">
-                         <h5 class="text-uppercase">Links</h5>
-                         <ul class="list-unstyled">
-                              <li>
-                                   <a href="#!">Link 1</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 2</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 3</a>
-                              </li>
-                              <li>
-                                   <a href="#!">Link 4</a>
-                              </li>
-                         </ul>
-                    </div>
-               </div>
-          </div>
+    <!-- Site Navigation / Breadcrumb -->
+    <div class="container">
+        <div class="bc-icons-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb indigo lighten-4">
+                    <li class="breadcrumb-item">
+                        <a class="black-text" href="#">Home</a>
+                        <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="black-text" href="#">Library</a>
+                        <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- / Site Navigation / Breadcrumb -->
 
-          <!-- Copyright -->
-          <div class="footer-copyright text-center py-3">© 2020 Copyright:
-          </div>
-          <!-- Copyright -->
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4" id="footer">
+        <div class="container-fluid text-center text-md-left my-auto">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">BuyandBye</h5>
+                    <p>Your online solution for buying and selling goods and services.</p>
+                </div>
 
-     </footer>
-     <!-- / Footer -->
+                <hr class="clearfix w-100 d-md-none pb-3">
 
-     <!-- collapse for categorylist -->
-     <!-- <script type="text/javascript">
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{% url 'about' %}">About us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'privacy-policy' %}">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- / Footer -->
+
+    <!-- collapse for categorylist -->
+    <!-- <script type="text/javascript">
           $('.collapse').collapse()
      </script> -->
 
 
-     <!-- JQuery -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-     <!-- Bootstrap tooltips -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-     <!-- Bootstrap core JavaScript -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-     <!-- MDB core JavaScript -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js">
+    </script>
 
 </body>
 

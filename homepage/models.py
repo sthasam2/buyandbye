@@ -1,10 +1,13 @@
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models.signals import pre_save
 from django.urls import reverse
 from django.utils import timezone
+      # for hit count
 
 from djmoney.models.fields import MoneyField
+from hitcount.models import HitCountMixin, HitCount
 from markdownx.models import MarkdownxField
 from PIL import Image
 
@@ -52,23 +55,26 @@ class Item(models.Model):
 
     title = models.CharField(max_length=100)
     price = MoneyField(decimal_places=2, max_digits=10,
-                     default_currency='NPR')
+                       default_currency='NPR')
     content = MarkdownxField()
     image = models.ImageField(upload_to='item_pics/')  # setting image
-    condition = models.CharField(max_length=100, null=True, blank=True, choices=CONDITION_CHOICES)
+    condition = models.CharField(
+        max_length=100, null=True, blank=True, choices=CONDITION_CHOICES)
 
-    slug=models.SlugField(max_length=100)
-    author=models.ForeignKey(User, on_delete=models.CASCADE)
-    date_posted=models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(max_length=100)
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
+                                        related_query_name='hit_count_generic_relation')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     if image:
         def save(self, *args, **kwargs):
             # accessing parent class save function
             super(Item, self).save(*args, **kwargs)
 
-            img=Image.open(self.image.path)
+            img = Image.open(self.image.path)
             if img.height > 300 or img.width > 300:
-                output_size=(300, 300)
+                output_size = (300, 300)
                 img.thumbnail(output_size)
                 img.save(self.image.path)  # overriding previous image
 

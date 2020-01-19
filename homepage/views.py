@@ -13,6 +13,8 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 
+from hitcount.views import HitCountDetailView
+
 from . models import Item, Category, SubCategory
 # from . forms import ItemCreateForm
 
@@ -29,23 +31,15 @@ from . models import Item, Category, SubCategory
     return render(request, 'list.html', {'page_obj': page_obj})
 """
 
-# def base(request):
-#     frontend_stuff = {
-#         'item': Item.objects.all(),
-#         'category': Category.objects.all(),
-#         # 'c_paginator' : Paginator('category', 20),
-#         'sub_category': SubCategory.objects.all(),
-#         # 's_paginator' : Paginator('sub_category', 20),
-#     }
-#     return render(request, 'homepage/base.html', frontend_stuff)
 
 def home(request):
     frontend_stuff = {
-        'item': Item.objects.all(),
+        'item': Item.objects.all().order_by('-date_posted')[:10],
         'category': Category.objects.all(),
-        'c_paginator' : Paginator('category', 20),
+        # 'c_paginator': Paginator('category', 20),
         'sub_category': SubCategory.objects.all(),
-        's_paginator' : Paginator('sub_category', 20),
+        # 's_paginator': Paginator('sub_category', 20),
+        'popular_items': Item.objects.all().order_by('-hit_count_generic__hits')[:10],
     }
     return render(request, 'homepage/home.html', frontend_stuff)
 
@@ -116,9 +110,19 @@ class CategoryListView(ListView):
     ordering = ['name']
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(HitCountDetailView):
     model = Item
     template_name = 'homepage/items_detail.html'
+    # hit count when set to true
+    context_object_name = 'item_detail'
+    count_hit = True
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        context.update({
+            'popular_items': Item.objects.order_by('-hit_count_generic__hits')[:5],
+        })
+        return context
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
