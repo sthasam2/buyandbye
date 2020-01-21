@@ -1,0 +1,40 @@
+{% extends "homepage/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-section">
+     <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+               <legend class="border-bottom mb-4">
+                    Post Item
+               </legend>
+               {{form|crispy}}
+
+               <!-- <div>
+                    {{ form.title| as_crispy_field}}
+               </div>
+               <div>
+                    {{ form.category| as_crispy_field}}
+               </div>
+               <div>
+                    {{ form.price| as_crispy_field}}
+               </div>
+               <div>
+                    {{ form.content| as_crispy_field}}
+               </div>
+               <div>
+                    {{ form.image| as_crispy_field}}
+               </div> -->
+
+
+               <div class="form-group">
+                    <button class="btn btn-info" type="submit">
+                         Post
+                    </button>
+               </div>
+          </fieldset>
+     </form>
+</div>
+
+{% endblock content %}
