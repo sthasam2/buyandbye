@@ -15,7 +15,8 @@ pip install bootstrap4 (v.0.1.0)
 // pip install crispy-forms-materialize(v.0.2) #INSTALLED_APPS = (...'materialize','crispy_forms','crispy_forms_materialize', ...) # Default layout to use with "crispy_forms" //CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 pip install django-markdownx==3.0.1 //INSTALLED_APPS= [... markdownx, ...] # installed Markdown-3.1.1 django-markdownx-3.0.1
-
+hitcount
+allauth
 
 
 
