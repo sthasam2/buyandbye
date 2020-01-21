@@ -1,5 +1,7 @@
 from django.urls import path
 
+from hitcount.views import HitCountDetailView
+
 from . import views
 from . views import (
     CategoryListView,
@@ -22,11 +24,13 @@ urlpatterns = [
     path('item/latest/', ItemListView.as_view(), name='latest-item'),
     # The individual user item view
     path('user/<str:username>', UserItemListView.as_view(), name='user-item'),
+
+        # The new item post creation view
+    path('item/new', ItemCreateView.as_view(), name='item-create'),
     # The individual item's detailed view
     path('item/<int:pk>', ItemDetailView.as_view(), name='item-detail'),
 
-    # The new item post creation view
-    path('item/new', ItemCreateView.as_view(), name='item-create'),
+
     # The existing item update view
     path('item/<int:pk>/update', ItemUpdateView.as_view(), name='item-update'),
     # The existing item delete view

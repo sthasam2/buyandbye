@@ -1,9 +1,11 @@
 from django.utils.text import slugify
+from homepage.models import Item
 
 # recursive function for slug creation because repitition  of same title can happen
 def create_slug(instance, new_slug=None):
         # converts title into slug, e.g. Apple Iphone 7-> apple-iphone-7
-    slug = slugify()
+    
+    slug = slugify(instance.title)
     if new_slug is not None:
         slug = new_slug
     # checking for multiple instances for same slug using queryset, because sometimes the item id may be same

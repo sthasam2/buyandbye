@@ -12,10 +12,12 @@ from django.views.generic import (
     DeleteView
 )
 from django.urls import reverse_lazy
-
+# from django.utils.text import slugify
+# local
 from hitcount.views import HitCountDetailView
 
 from . models import Item, Category, SubCategory
+from . utils import create_slug
 # from . forms import ItemCreateForm
 
 """
