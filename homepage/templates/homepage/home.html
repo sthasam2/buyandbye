@@ -136,29 +136,29 @@
             < page_obj.number|add: '3' %} <li class="page-item"><a class="page-link" href="?page={{num}}">
                     {{num}}
                 </a></li>
-                {% endif %} {% endfor %}
+            {% endif %} {% endfor %}
 
-                <!-- Paginator check for previous pages availability, eg. if current page = 3, Next = 4 and Last is always = Total pages -->
-                {% if page_obj.has_next %}
-                <li class="page-item ">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                        <i class="material-icons md-18">navigate_next</i>
-                    </a>
-                </li>
-                <li class="page-item "><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+            <!-- Paginator check for previous pages availability, eg. if current page = 3, Next = 4 and Last is always = Total pages -->
+            {% if page_obj.has_next %}
+            <li class="page-item ">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <i class="material-icons md-18">navigate_next</i>
+                </a>
+            </li>
+            <li class="page-item "><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
                     Last
                 </a></li>
 
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">
-                        <i class="material-icons md-18">navigate_next</i>
-                    </a>
-                </li>
-                <li class="page-item disabled"><a class="page-link" href="#">
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <i class="material-icons md-18">navigate_next</i>
+                </a>
+            </li>
+            <li class="page-item disabled"><a class="page-link" href="#">
                     Last
                 </a></li>
-                {% endif %}
+            {% endif %}
 
         </ul>
     </nav>

@@ -179,3 +179,7 @@ def aboutus(request):
 
 def privacy_policy(request):
     return render(request, 'homepage/privacypolicy.html', {'title': 'Privacy Policy'})
+
+
+def terms_and_conditions(request):
+    return render(request, 'homepage/terms_conditions.html', {'title': 'Terms and Conditions'})

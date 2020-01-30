@@ -15,8 +15,7 @@
                             <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
                         </th>
                         <th>
-                            <a class="mr-2" href="#">{{ object.author }}</a>
-                            <br>
+                            <a class="mr-2" href="{% url 'user-item' object.author.username %}">{{ object.author }}</a>
                             <small class="text-muted">{{object.date_posted|date:"F d, Y"}}</small>
                         </th>
                     </tr>
