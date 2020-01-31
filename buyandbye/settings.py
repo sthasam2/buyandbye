@@ -33,9 +33,10 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'djmoney',
-    'markdownx',
+    # 'markdownx',
     'hitcount',
-    'pagedown.apps.PagedownConfig',
+    # 'pagedown.apps.PagedownConfig',
+    # 'disqus',
 
     'allauth',
     'allauth.account',
@@ -74,8 +75,6 @@ TEMPLATES = [
 
                 # `allauth` needs this from django
                 'django.template.context_processors.request',
-                # 'social.apps.django_app.context_processors.backends',
-                # 'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -184,3 +183,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+# DISQUS_API_KEY = '4cu64qSPV9ivd422UNKNG8RsHthZ6mSh0ps0FBhjdqWgFefTuZTGb5BAhhOhHQZM'
+# DISQUS_WEBSITE_SHORTNAME = 'http://127.0.0.1:8000/'

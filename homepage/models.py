@@ -8,7 +8,7 @@ from django.utils import timezone
 
 from djmoney.models.fields import MoneyField
 from hitcount.models import HitCountMixin, HitCount
-from markdownx.models import MarkdownxField
+# from markdownx.models import MarkdownxField
 from PIL import Image
 
 from . options import CATEGORY_CHOICES, SUB_CATEGORY_CHOICES, CONDITION_CHOICES
@@ -54,7 +54,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = MoneyField(decimal_places=2, max_digits=10,
                        default_currency='NPR')
-    content = MarkdownxField()
+    content = models.TextField()
     image = models.ImageField(upload_to='item_pics/')  # setting image
     condition = models.CharField(
         max_length=100, null=True, blank=True, choices=CONDITION_CHOICES)

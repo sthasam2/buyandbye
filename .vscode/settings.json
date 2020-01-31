@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "xsrc\\Scripts\\python.exe"
+    "python.pythonPath": "xsrc\\Scripts\\python.exe",
+    "prettier.tabWidth": 5
 }

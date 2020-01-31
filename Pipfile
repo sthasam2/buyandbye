@@ -6,7 +6,16 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django-disqus = "*"
+django = "*"
+django-phonenumber-field = "*"
+django-crispy-forms = "*"
+django-money = "*"
+django-hitcount = "*"
+six = "*"
+pagedown = "*"
+pillow = "*"
+django-allauth = "*"
+phonenumbers = "*"
 
 [requires]
 python_version = "3.8"

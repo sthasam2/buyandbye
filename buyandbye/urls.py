@@ -18,7 +18,7 @@ urlpatterns = [
     path('', include('users.urls')),
 
     # markdownx requirement
-    path('markdownx/', include('markdownx.urls')),
+    # path('markdownx/', include('markdownx.urls')),
 
     # hit count requirement 
     path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')), # django 3.0 doesnt support python_2_unicode so remove import and decorator from hitcount source file model

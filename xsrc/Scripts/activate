@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Project\Python\New folder\xsrc"
+VIRTUAL_ENV="D:\Project\Python\TESTS\buyandbye\xsrc"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
