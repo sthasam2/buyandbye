@@ -16,6 +16,7 @@ pagedown = "*"
 pillow = "*"
 django-allauth = "*"
 phonenumbers = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.8"
