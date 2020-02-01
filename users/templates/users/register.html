@@ -1,5 +1,5 @@
 {% extends "homepage/base.html" %}{% load socialaccount %} {% load crispy_forms_tags %} {% block content %}
-<div class="content-section">
+<div class="card px-5 py-3">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -36,50 +36,58 @@
                 </div>
             </div>
             <div class="form-row justify-content-center">
-                <button class="btn btn-info" type="submit">
+                <button class="btn btn-info" type="submit" style="width: 60%;">
                     Sign Up
                 </button>
             </div>
         </fieldset>
     </form>
 
-    <div class=" container col-md-6 justify-content-center bg-danger">
-        <ul class="list-unstyled">
-            <div class="my-3">
-                <li>
+    <div class=" container col-md-8 border-top">
+        <div class="py-4">
+            <table>
+                <tr>
                     <div class="d-flex justify-content-center">
                         <small class="text-muted">
                             Or signup using socail accounts:
                         </small>
                     </div>
-                </li>
-                <li>
+                </tr>
+                <tr>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-sm btn-social" href="{% provider_login_url "twitter" %}"
-                            style="background: #00acee;">Twitter</a>
+                        <a class="btn btn-md btn-social" href="{% provider_login_url "twitter" %}"
+                            style="background: #00acee;"><span><i class="fab fa-twitter fa-lg"
+                                    style="margin-right: 25px;"></i></span>Twitter</a>
                     </div>
-                </li>
-                <li>
+                </tr>
+                <tr>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-sm btn-social" href="{% provider_login_url "facebook" %}"
-                            style="background: #3b5998;">Facebook</a>
+                        <a class="btn btn-md btn-social" href="{% provider_login_url "facebook" %}"
+                            style="background: #3b5998;"><span><i class="fab fa-facebook-f fa-lg"
+                                    style="margin-right: 25px;"></i></span>Facebook</a>
                     </div>
-                </li>
-                <li>
+                </tr>
+                <tr>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-sm btn-social" href="{% provider_login_url "google" %}"
-                            style="background: #3cba54;">Google</a>
+                        <a class="btn btn-md btn-social" href="{% provider_login_url "google" %}"
+                            style="background: #DB4437;"><span><i class="fab fa-google fa-lg"
+                                    style="margin-right: 25px;"></i></span>Google</a>
                     </div>
-                </li>
-            </div>
-        </ul>
-        <div class="border-top pt-3 justify-content-center">
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-top">
+        <div class="d-flex justify-content-center mt-3">
             <small class="text-muted">
                 Already have an Account?
-                <a href="{% url 'login' %}" class="ml-2">
+                <a href="{% url 'login' %}">
                     Sign In
                 </a>
             </small>
         </div>
     </div>
+
+</div>
     {% endblock content %}
