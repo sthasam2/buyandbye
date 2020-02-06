@@ -1,4 +1,5 @@
-# Options file ('',''),
+""" Options tuple file ('',''), """
+
 CONDITION_CHOICES = (
     ('Brand New', 'Brand New'),
     ('Used (Like New)', 'Used (Like New)'),
@@ -8,24 +9,24 @@ CONDITION_CHOICES = (
 
 
 CATEGORY_CHOICES = (
-    ('Apparel-Accessories', 'Apparel and Accessories'),
+    ('Apparel and Accessories', 'Apparel and Accessories'),
     ('Automobiles', 'Automobiles'),
-    ('Beauty-Health', 'Beauty and Health'),
+    ('Beauty and Health', 'Beauty and Health'),
     ('Books', 'Books'),
-    ('Business-Industry', 'Business and Industry'),
-    ('Computers-Peripherals', 'Computers and Peripherals'),
+    ('Business and Industry', 'Business and Industry'),
+    ('Computers and Peripherals', 'Computers and Peripherals'),
     ('Electronics', 'Electronics'),
-    ('Events-Happenings', 'Events and Happenings'),
-    ('Home-Furnishing-Appliances', 'Home, Furnishing and Appliances'),
+    ('Events and Happenings', 'Events and Happenings'),
+    ('Home, Furnishing and Appliances', 'Home, Furnishing and Appliances'),
     ('Jobs', 'Jobs'),
-    ('Mobiles-Accessories', 'Mobiles and Accesories'),
-    ('Music-Instruments', 'Music Instruments'),
-    ('Pet-PetCare', 'Pet and Pet Care'),
-    ('Real-Estate', 'Real Estate'),
-    ('Sports-Fitness', 'Sports and Fitness'),
+    ('Mobiles and Accessories', 'Mobiles and Accesories'),
+    ('Music Instruments', 'Music Instruments'),
+    ('Pet and PetCare', 'Pet and Pet Care'),
+    ('Real Estate', 'Real Estate'),
+    ('Sports and Fitness', 'Sports and Fitness'),
     ('Services', 'Services'),
-    ('Toys-Video-Games', 'Toys and Video Games'),
-    ('Torism-Tours', 'Tourism and Tours'),
+    ('Toys and Video Games', 'Toys and Video Games'),
+    ('Torism and Tours', 'Tourism and Tours'),
     ('Others', 'Others'),
 )
 

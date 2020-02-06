@@ -1,11 +1,10 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
 
-from . options import STATE_CHOICES
-from . models import Profile
+from .models import Profile
+from .options import STATE_CHOICES
 
 
 class UserRegisterForm(UserCreationForm):
@@ -28,6 +27,9 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['first_name', 'middle_name', 'last_name', 'username',
                   'email', 'phone', 'password1', 'password2', 'address1', 'address2']
+        # widget={
+        #     'username': forms.TextInput(attrs={'placeholder': 'Enter desired username.'}),
+        # }
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -60,9 +62,15 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, widget=forms.TextInput(
+        attrs={'placeholder': 'Given name'}))
+    middle_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(
+        attrs={'placeholder': 'Middle name'}))
+    last_name = forms.CharField(
+        max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Surname'}))
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['first_name', 'middle_name', 'last_name','image']
         # wigets = {
         #  image: form.TextInput(attrs={'placeholder': 'Choose an image for the item'})
         # }

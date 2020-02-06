@@ -112,25 +112,25 @@
                             </div>
                         </div>
                     </li>
-                </ul>
-            </div>
-            <!-- / Links -->
-            <!-- search form -->
-            <div>
-                <form class="form-inline" action="{% url 'search_results'%}" method="get">
-                    <div class="md-form my-0">
-                        <div class="form-group">
-                            <input class="text-light" type="search" placeholder="Search" name="q"
-                                value="{{ request.GET.q }}">
-                            <!-- <button class="btn btn-success bg-dark" type="submit" >
+                    <!-- search form -->
+                    <li>
+                        <form class="form-inline" action="{% url 'search_results'%}" method="get">
+                            <div class="md-form my-0">
+                                <div class="form-group">
+                                    <input class="text-light" type="search" placeholder="Search" name="q"
+                                        value="{{ request.GET.q }}">
+                                    <!-- <button class="btn btn-success bg-dark" type="submit" >
                                              Search
                                              <i class="material-icons md-9">search</i>
                                         </button> -->
-                        </div>
-                    </div>
-                </form>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    <!-- / search form -->
+                </ul>
             </div>
-            <!-- / search form -->
+            <!-- / Links -->
         </nav>
         <div class="view intro-2">
             <div class="full-bg-img">
@@ -166,7 +166,16 @@
 
             <!-- Content section -->
             <div class="col-8 mx-auto bg-primary">
-                {% block content %} {% endblock %}
+                {% block content %}
+                {% block featured %}
+                {% endblock featured %}
+
+                {% block popular%}
+                {% endblock popular %}
+
+                {% block recent %}
+                {% endblock recent %}
+                {% endblock content %}
             </div>
             <!-- / content section -->
 

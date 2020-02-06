@@ -1,17 +1,20 @@
 from django.contrib import messages  # for message tags
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site # for site domain e.g. 127.00:8000
+# for site domain e.g. 127.00:8000
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.db import IntegrityError
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
+                              redirect, render)
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from . tokens import account_activation_token  # token variable
-from . forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm  # profile forms
+from .forms import (ProfileUpdateForm, UserRegisterForm,  # profile forms
+                    UserUpdateForm)
+from .tokens import account_activation_token  # token variable
 
 
 def register(request):
@@ -69,9 +72,10 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        username = user.username
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         messages.success(
-            request, f'Your email has been validated! Now, you can login.')
+            request, f'{username}, Your email has been validated! Now you can login.')
         return redirect('login')
     else:
         return render(request, 'users/account_activation_unvalidated.html')

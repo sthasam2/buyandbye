@@ -1,36 +1,42 @@
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
-from django.contrib.auth.models import User
-from django.core.paginator import Paginator
-from django.contrib.messages.views import SuccessMessageMixin
+""" VIEWS for product """
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import (
-    ListView,
-    DetailView,
-    CreateView,
-    UpdateView,
-    DeleteView
-)
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, ListView, UpdateView)
 # from django.utils.text import slugify
 # local
 from hitcount.views import HitCountDetailView
 
-from . models import Item, Category, SubCategory
-from . utils import create_slug
-# from . forms import ItemCreateForm
+from .forms import ItemCreateForm
+from .models import Category, Item, SubCategory
+
+# from .forms import ItemCreateForm
 
 """
     # pagination logic
-    from django.core.paginator import Paginator
+    item = Item.objects.all().order_by('-date_posted')[:10]
+    category = Category.objects.all(),
+    sub_category = SubCategory.objects.all(),
+    popular_items = Item.objects.all().order_by(
+        '-hit_count_generic__hits')[:10],
 
-    def listing(request):
-    contact_list = Contact.objects.all()
-    paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
-
+    paginator = Paginator(item, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'list.html', {'page_obj': page_obj})
+
+    frontend_stuff = {
+        'item': item,
+        'category': category,
+        'sub_category': sub_category,
+        'popular_items': popular_items,
+        # 'page_obj': page_obj
+    }
 """
 
 
@@ -47,11 +53,12 @@ def home(request):
 
 
 class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    # form_class = ItemCreateForm #to inherit from form
+    """ Django's create view for creating Item"""
     model = Item
+    form_class = ItemCreateForm
     template_name = 'homepage/items_form.html'
-    fields = ['title', 'category', 'sub_category',
-              'price', 'condition', 'content', 'image', ]
+    # fields = ['title', 'category', 'sub_category',
+    #           'price', 'condition', 'content', 'image', ]
 
     success_message = f'Item was succesfully created.'
     # success_url = reverse_lazy('item-detail') #success url not required for CreateView and UpdateView
@@ -84,6 +91,8 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     #     else:
     #         return render(request, self.template_name, {'form': item_create_form})
 
+# Item CRUD
+
 
 class ItemListView(ListView):
     model = Item
@@ -91,25 +100,6 @@ class ItemListView(ListView):
     context_object_name = 'item'
     ordering = ['-date_posted']
     paginate_by = 8
-
-
-# views for posts from  an individual user
-class UserItemListView(ListView):
-    model = Item
-    template_name = 'homepage/user_item.html'  # app/model_viewtype.html
-    context_object_name = 'user_item'
-    paginate_by = 6
-
-    def get_queryset(self):  # filtering based on username
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Item.objects.filter(author=user).order_by('-date_posted')
-
-
-class CategoryListView(ListView):
-    model = Category
-    template_name = 'homepage/base.html'  # app/model_viewtype.html
-    context_object_name = 'categorylist'
-    ordering = ['name']
 
 
 class ItemDetailView(HitCountDetailView):
@@ -129,8 +119,10 @@ class ItemDetailView(HitCountDetailView):
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
+    form_class = ItemCreateForm
     template_name = 'homepage/items_form.html'
-    fields = ['title', 'category', 'sub_category', 'price', 'content', ]
+    # fields = ['title', 'category', 'sub_category',
+    #           'price', 'condition', 'content', 'image', ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -154,8 +146,32 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+# / Item CRUD
+
+
+# views for posts from  an individual user
+class UserItemListView(ListView):
+    model = Item
+    template_name = 'homepage/user_item.html'  # app/model_viewtype.html
+    context_object_name = 'user_item'
+    paginate_by = 6
+
+    def get_queryset(self):  # filtering based on username
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Item.objects.filter(author=user).order_by('-date_posted')
+
+
+# CATEGORY R
+class CategoryListView(ListView):
+    """ Listing for Category """
+    model = Category
+    template_name = 'homepage/base.html'  # app/model_viewtype.html
+    context_object_name = 'categorylist'
+    ordering = ['name']
+
 
 class SearchItemListView(ListView):
+    """ LIst view for listing search item"""
     model = Item
     template_name = 'homepage/search_results.html'  # app/model_viewtype.html
     context_object_name = 'search_item'
@@ -173,13 +189,26 @@ class SearchItemListView(ListView):
         return object_list.order_by('-date_posted')
 
 
+def load_subCat(request):
+    """views for loading subcategory depending on the category in itemcreate form"""
+    category_id = request.GET.get('category')
+    sub_categories = SubCategory.objects.filter(
+        parent_category_id=category_id).order_by('subname')
+    return render(request, 'homepage/subCat_dropdown_list_options.html', {
+        'sub_categories': sub_categories
+    })
+
+
 def aboutus(request):
+    """ About page """
     return render(request, 'homepage/about.html', {'title': 'About'})
 
 
 def privacy_policy(request):
+    """ PRIVACY POLICY page """
     return render(request, 'homepage/privacypolicy.html', {'title': 'Privacy Policy'})
 
 
 def terms_and_conditions(request):
+    """ TERMS AND CONDITION page """
     return render(request, 'homepage/terms_conditions.html', {'title': 'Terms and Conditions'})

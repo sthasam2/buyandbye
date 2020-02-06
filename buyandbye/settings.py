@@ -30,16 +30,14 @@ INSTALLED_APPS = [
     # custom
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'django_extensions',
     'phonenumber_field',
     'crispy_forms',
     'djmoney',
-    # 'markdownx',
     'hitcount',
-    # 'pagedown.apps.PagedownConfig',
-    # 'disqus',
 
     'allauth',
-    'allauth.account',
+    # 'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',

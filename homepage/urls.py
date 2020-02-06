@@ -1,18 +1,10 @@
 from django.urls import path
-
 from hitcount.views import HitCountDetailView
 
-from . import views
-from . views import (
-    CategoryListView,
-    ItemListView,
-    ItemDetailView,
-    ItemCreateView,
-    ItemUpdateView,
-    ItemDeleteView,
-    UserItemListView,
-    SearchItemListView,
-)
+from .import views
+from .views import (CategoryListView, ItemCreateView, ItemDeleteView,
+                    ItemDetailView, ItemListView, ItemUpdateView,
+                    SearchItemListView, UserItemListView)
 
 # NOTE: only one views per url
 
@@ -28,13 +20,13 @@ urlpatterns = [
         # The new item post creation view
     path('item/new', ItemCreateView.as_view(), name='item-create'),
     # The individual item's detailed view
-    path('item/<int:pk>', ItemDetailView.as_view(), name='item-detail'),
+    path('item/<slug:slug>', ItemDetailView.as_view(), name='item-detail'),
 
 
     # The existing item update view
-    path('item/<int:pk>/update', ItemUpdateView.as_view(), name='item-update'),
+    path('item/<slug:slug>/update', ItemUpdateView.as_view(), name='item-update'),
     # The existing item delete view
-    path('item/<int:pk>/delete', ItemDeleteView.as_view(), name='item-delete'),
+    path('item/<slug:slug>/delete', ItemDeleteView.as_view(), name='item-delete'),
 
     # The search results view
     path('search/', SearchItemListView.as_view(), name='search_results'),
@@ -45,4 +37,7 @@ urlpatterns = [
     path('privacy_policy/', views.privacy_policy, name='privacy-policy'),
     # terms and conditions
     path('terms_and_conditions/', views.terms_and_conditions, name='terms-and-conditions'),
+
+
+    path('ajax/load_subcategory/', views.load_subCat, name='ajax-load-subcategory'),
 ]

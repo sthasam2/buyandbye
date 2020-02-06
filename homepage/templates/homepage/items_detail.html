@@ -23,8 +23,8 @@
             </div>
             <div class="d-flex justify-content-center">
                 {% if object.author == user %}
-                <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.id %}">Update Post</a>
-                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.id %}">Delete Post</a>
+                <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.slug %}">Update Post</a>
+                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a>
                 {% endif %}
             </div>
         </div>

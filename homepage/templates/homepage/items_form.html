@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="content-section">
-     <form method="POST" enctype="multipart/form-data">
+     <form method="POST" id="itemForm" data-subcategory-url="{% url 'ajax-load-subcategory' %}" novalidate enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
                <legend class="border-bottom mb-4">
@@ -37,4 +37,24 @@
      </form>
 </div>
 
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_category").change(function () {
+      var url = $("#itemForm").attr("data-subcategory-url");  // get the url of the `load_cities` view
+      var categoryId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'category': categoryId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_sub_category").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
 {% endblock content %}
+
