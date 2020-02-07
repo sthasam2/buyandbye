@@ -1,4 +1,3 @@
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -9,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l2vk_ekg%-+x*7)n$p@qtogy!4a)5vrk4(#ytvsqq^_s0@in&t'
+SECRET_KEY = '9s_-fhb3u($6ucx(up=sjq9*4w*$esttrjvb7cm$9)8fl-2p#z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -20,17 +19,33 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
-    'users.apps.UsersConfig',
-    'homepage.apps.HomepageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_countries',
-    
+    'django.contrib.sites',
+
+    # custom
+    'homepage.apps.HomepageConfig',
+    'users.apps.UsersConfig',
+    'phonenumber_field',
+    'crispy_forms',
+    'djmoney',
+    'newsletters',
+    # 'markdownx',
+    'hitcount',
+    # 'pagedown.apps.PagedownConfig',
+    # 'disqus',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.microsoft',
+    'allauth.socialaccount.providers.twitter',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +63,9 @@ ROOT_URLCONF = 'buyandbye.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # os.path.join(BASE_DIR, 'templates'), 
+            os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,6 +73,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -73,6 +93,18 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+# Authentication backend
+# https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#specifying-authentication-backends
+
+AUTHENTICATION_BACKENDS = [
+     # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 
 # Password validation
@@ -111,12 +143,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL = 'login'
@@ -127,5 +164,26 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER') # loads saved variable from environment variables
+# loads saved variable from environment variables
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+
+
+SITE_ID = 1
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+
+# DISQUS_API_KEY = '4cu64qSPV9ivd422UNKNG8RsHthZ6mSh0ps0FBhjdqWgFefTuZTGb5BAhhOhHQZM'
+# DISQUS_WEBSITE_SHORTNAME = 'http://127.0.0.1:8000/'

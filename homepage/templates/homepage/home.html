@@ -1,9 +1,89 @@
 {% extends "homepage/base.html" %}
-{% block content %}
+<!-- Home content block -->
+{% load hitcount_tags %} {% block content %}
 
-{% for items in item%}
+<!-- header for latest items -->
+<div class="container bg-light">
+    <div class="row justify-content-center">
+        <div class="col-md-auto bg-success">
+            <legend>
+                Latest Items
+            </legend>
+        </div>
+    </div>
+</div>
 
-<div class="card">
+
+<!-- Block for loop listing the items  -->
+{% for items in item %}
+
+<!-- bootstrap styling -->
+<div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
+    <div class="col2 align-intems-start">
+        <div class="card card-item-grid text-center">
+            <!-- border-radius: 10px; border-radius: 10px 10px 0px 0px;-->
+            <!-- {% if items.image.url is not NULL%} -->
+            <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
+            <!-- {% endif %} -->
+            <div class="card-body">
+                <a href="{% url 'item-detail' items.id %}" title="{{ items.title }}">
+                    <p class="card-title text-primary">
+                        {{ items.title }}
+                    </p>
+                </a>
+                <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
+                    <b>{{items.price}}</b>
+                </p>
+                <br>
+                <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
+                    {{items.condition}}
+                </p>
+            </div>
+            <!-- <div class="text-muted">
+                    <hr>
+                    <img class="circle" style="width:16px; height:16px;" src="{{ items.author.profile.image.url }}">
+                    <a href="{% url 'user-item' items.author.username %}" class="mr-2 text-muted" style="font-size: 10px">
+                         {{ items.author }}
+                    </a><br>
+                    <small class="text-muted" style="font-size: 10px">{{items.date_posted|date:"F d, Y"}}</small>
+               </div> -->
+        </div>
+    </div>
+</div>
+
+
+<!-- / bootstrap styling -->
+
+
+<!-- materialize css styling -->
+<!-- <div class="flexbox-container">
+     <div class="col s4">
+          <div class="card hoverable small">
+               {% if items.image.url is not NULL%}
+               <div class="card-image" style="height:45%;">
+                    <img src="{{items.image.url}}" style="object-fit: cover; object-position: 50% 50%;">
+               </div>
+               {% endif %}
+               <div class="card-content" style="border-bottom: 1px solid #e3e3e3" align="center">
+                    <span class="card-title" align="center"><b>
+                              <a href="{% url 'item-detail' items.id %}">{{ items.title }}</a>
+                         </b></span>
+                    <p class="truncate">
+                         {{ items.content }}
+                    </p>
+               </div>
+               <div align="center">
+                    <img class="circle" style="width:32px; height:32px;" src="{{ items.author.profile.image.url }}">
+                    <a href="{% url 'user-item' items.author.username %}" class="mr-2">{{ items.author }}</a><br>
+                    <small class="text-muted">{{items.date_posted|date:"F d, Y"}}</small>
+               </div>
+          </div>
+     </div>
+</div> -->
+<!-- / materialize css -->
+
+<!-- Custom styling -->
+<!-- <div class="card">
   <img src="{{ user.profile.image.url }}" style=" border-radius:10px 10px 0px 0px; " height="45%" width="100%" class="card-img-top" alt="...">
   <div class="article-metadata">
     <h6><a class="article-title" href="{% url 'item-detail' items.id %}"><b>{{ items.title }}</b></a></h6>
@@ -12,32 +92,130 @@
   <img class="header-img" src="{{ items.author.profile.image.url }}">
   <a class="mr-2" href="{% url 'user-item' items.author.username %}">{{ items.author }}</a><br>
   <small class="text-muted">{{items.date_posted|date:"F d, Y"}}</small>
-</div>
+</div> -->
+<!-- / custom styling -->
 
 {% endfor %}
+<!-- / Block for loop listing the items  -->
 
+<!-- Checks if pages available -->
 {% if is_paginated %}
-<div style="margin-top: 4rem;">
+<div class="my-3 mx-auto">
 
-  {% if page_obj.has_previous %}
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-  {% endif %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pg-blue justify-content-center ">
 
-  {% for num in page_obj.paginator.page_range %}
-  {% if page_obj.number == num %}
-  <a class="btn btn-sm btn-info mb-4" href="?page={{num}}">{{num}}</a>
-  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
-  {% endif %}
-  {% endfor %}
+            <!-- Paginator check for previous pages availability, eg. if current page = 3, Previous = 2 and First is always = 1 -->
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">
+                    First
+                </a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i
+                        class="material-icons md-18">
+                        navigate_before</i>
+                </a></li>
 
-  {% if page_obj.has_next %}
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-  <a class="btn btn-sm btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-  {% endif %}
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">
+                    First
+                </a></li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <i class="material-icons md-18">navigate_before</i>
+                </a>
+            </li>
+            {% endif %}
 
+
+            <!-- Paginator check for neighbouring pages availability, eg. if current page = 3, neighbour (-, prev)= 1,2 and (+, next) = 4,5 -->
+            {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
+            <li class="page-item active"><a class="page-link" href="?page={{num}}">
+                    {{num}}<span class="sr-only">(current)</span>
+                </a></li>
+            {% elif num > page_obj.number|add:'-3' and num
+            < page_obj.number|add: '3' %} <li class="page-item"><a class="page-link" href="?page={{num}}">
+                    {{num}}
+                </a></li>
+            {% endif %} {% endfor %}
+
+            <!-- Paginator check for previous pages availability, eg. if current page = 3, Next = 4 and Last is always = Total pages -->
+            {% if page_obj.has_next %}
+            <li class="page-item ">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <i class="material-icons md-18">navigate_next</i>
+                </a>
+            </li>
+            <li class="page-item "><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                    Last
+                </a></li>
+
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <i class="material-icons md-18">navigate_next</i>
+                </a>
+            </li>
+            <li class="page-item disabled"><a class="page-link" href="#">
+                    Last
+                </a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
 </div>
 {% endif %}
+<!-- /Checks if pages available -->
+
+
+<!-- for pagination logic of active and passive, already fulfilled by if logic -->
+<!-- <script>
+     $('li').click(function() {
+          $(this).addClass('active').siblings().removeClass('active');
+     });
+</script> -->
+
+
+<!-- popular items  -->
+<div class="container bg-light mt-5" id="Popular Items">
+    <div class="row justify-content-center">
+        <div class="col-md-auto bg-success">
+            <legend>
+                Popular Items
+            </legend>
+        </div>
+    </div>
+</div>
+
+{% for pop_item in popular_items %}
+<div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
+    <div class="col2 align-intems-start">
+        <div class="card card-item-grid text-center">
+            <!-- border-radius: 10px; border-radius: 10px 10px 0px 0px;-->
+            <!-- {% if items.image.url is not NULL%} -->
+            <img src="{{pop_item.image.url}}" alt="" class="card-img-top img-item-grid-cover">
+            <!-- {% endif %} -->
+            <div class="card-body">
+                <a href="{% url 'item-detail' pop_item.id %}" title="{{ pop_item.title }}">
+                    <p class="card-title text-primary">
+                        {{ pop_item.title }}
+                    </p>
+                </a>
+                <p class="card-subtitle card-subtitle-price" title="{{ pop_item.price }}">
+                    <b>{{pop_item.price}}</b>
+                </p>
+                <br>
+                <p class="card-subtitle card-subtitle-condition" title="{{ pop_item.condition }}">
+                    {{pop_item.condition}}
+                </p>
+                <p class="card-subtitle card-subtitle-condition" title="Ad views: {% get_hit_count for pop_item %}">
+                    Ad views: {% get_hit_count for pop_item %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- / popular item -->
 
 {% endblock content %}
+<!-- / Home content block -->

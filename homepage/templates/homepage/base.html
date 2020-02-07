@@ -2,86 +2,311 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="{% static 'homepage/bootstrap.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}">
+    <meta charset="UTF-8">
 
-  {% if title %}
-  <title>Homepage - {{title}}</title>
-  {% else %}
-  <title>Homepage</title>
-  {% endif %}
+    <!-- CDN -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Place your kit's code here -->
+    <script src="https://kit.fontawesome.com/70eb7c5131.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <!-- main.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}"> {% if title %}
+    <title>BuyandBye - {{title}}
+    </title>
+    {% else %}
+    <title>BuyandBye</title>
+    {% endif %}
 </head>
 
+<style>
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    div.sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 40px;
+    }
+</style>
+
 <body>
-  <header class="site-header">
-    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-      <div class="container">
-        <a class="navbar-brand mr-4" href="/">BuyandBye</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="/">Home</a>
-            <a class="nav-item nav-link" href="/about">About</a>
-          </div>
+    <header class="site-header">
+        <!--Navbar-->
+        <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="/">
+                <!-- <i class="material-icons">laptop_windows</i> -->
+                <strong>
+                    BuyandBye
+                </strong>
+            </a>
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse">
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
 
-          <!-- Navbar Right Side -->
-          <div class="navbar-nav">
-            {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'item-create' %}">Post Item</a>
-            <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-            {% else %}
-            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-            {% endif %}
-            <div>
-              <form class="form-inline">
-                <input class="form-control-sm ml-2 mr-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success btn-sm" type="submit">Search</button>
-              </form>
+                </ul>
             </div>
-          </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'item-create' %}">
+                            Post Item
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">
+                            Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <h6 class="dropdown-header">Explore our Categories</h6>
+                            <div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
+                                <div class="row">
+                                    {% for categorylist in category %}
+                                        <div class="col2">
+                                            <a href="#">{{ categorylist.get_name_display }}</a>
+                                        </div
+                                    >{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- / Links -->
+            <!-- search form -->
+            <div>
+                <form class="form-inline" action="{% url 'search_results'%}" method="get">
+                    <div class="md-form my-0">
+                        <div class="form-group">
+                            <input class="text-light" type="search" placeholder="Search" name="q"
+                                value="{{ request.GET.q }}">
+                            <!-- <button class="btn btn-success bg-dark" type="submit" >
+                                             Search
+                                             <i class="material-icons md-9">search</i>
+                                        </button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- / search form -->
+        </nav>
+        <div class="view intro-2">
+            <div class="full-bg-img">
+                <div class="mask rgba-purple-light flex-center">
+                    <div class="container text-center white-text wow fadeInUp">
+                        <!-- <h2>This Navbar is fixed and transparent</h2> <br> <h5>It will always stay visible on the top, even when you scroll down</h5> <p>Navbar's background will switch from transparent to solid color while scrolling down</p> <br> <p>Full page intro
+                                   with background image will be always displayed in full screen mode, regardless of device </p> -->
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </nav>
-  </header>
+    </header>
 
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-{{messages.tags}}">
-    {{ message }}
-  </div>
-  {% endfor %}
-  {% endif %}
-
-  <main role="main" class="container">
-    <div class="row">
-      <div class="col-md-2.5">
-        <div class="content-section">
-          <h3>Categories</h3>
-          <p class='text-muted'>Browse through our categories.
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Real Estate</li>
-              <li class="list-group-item list-group-item-light">Computers</li>
-              <li class="list-group-item list-group-item-light">Vehicles</li>
-              <li class="list-group-item list-group-item-light">Furniture</li>
-            </ul>
-          </p>
+    <!-- INFO MESSAGES -->
+    {% if messages %} {% for message in messages %}
+    <div class="container bg-secondary">
+        <div class="d-flex justify-content-center">
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
-      </div>
-
-      <div class="col-md-8">
-        {% block content %}{% endblock %}
-      </div>
     </div>
-  </main>
+    {% endfor %} {% endif %}
+    <!-- / INFO MESSAGE -->
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <main role="main" class="container">
+        <!-- row for double column -->
+        <div class="row mt-4 mx-auto bg-secondary">
+            {% block sidebar %} {% endblock %}
+
+            <!-- Content section -->
+            <div class="col-8 mx-auto bg-primary">
+                {% block content %} {% endblock %}
+            </div>
+            <!-- / content section -->
+
+        </div>
+        <!-- / row for double column -->
+        <!-- </div> -->
+    </main>
+
+    <!-- Site Navigation / Breadcrumb -->
+    <div class="container">
+        <div class="bc-icons-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb indigo lighten-4">
+                    <li class="breadcrumb-item">
+                        <a class="black-text" href="#">Home</a>
+                        <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="black-text" href="#">Library</a>
+                        <i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- / Site Navigation / Breadcrumb -->
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4" id="footer">
+        <div class="container-fluid text-center text-md-left my-auto">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">BuyandBye</h5>
+                    <p>Your online solution for buying and selling goods and services.</p>
+                </div>
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{% url 'about' %}">About us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'privacy-policy' %}">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'terms-and-conditions' %}">Terms and Conditions</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- / Footer -->
+
+    <!-- collapse for categorylist -->
+    <!-- <script type="text/javascript">
+          $('.collapse').collapse()
+     </script> -->
+
+
+    <!-- facebook login  -->
+
+    <!-- NOTE: onlogin button -->
+    <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button> -->
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '{your-app-id}',
+                cookie: true,
+                xfbml: true,
+                version: '{api-version}'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // check login state 
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js">
+    </script>
+
 </body>
 
 </html>
