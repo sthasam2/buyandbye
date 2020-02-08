@@ -21,11 +21,12 @@ def newsletter_signup(request):
             subject = "Thank you for joining our Newsletter"
             from_email = settings.EMAIL_HOST_USER
             to_email = [instance.email]
-            with open(settings.BASE_DIR + "/templates/newsletters/subscribe_email.txt") as f:
-                signup_messege = f.read()
-            message = EmailMultiAlternatives(subject=subject, body= signup_messege, from_email=from_email, to=to_email)
+            with open(settings.BASE_DIR + "/templates/newsletters/subscribe_email.txt") as f:           
+                signup_message = f.read()
+            message = EmailMultiAlternatives(subject=subject, body= signup_message, from_email=from_email, to = to_email)
             html_template = get_template("newsletters/subscribe_email.html").render()
             message.attach_alternative(html_template, "text/html")
+            message.send()
     context = {
         "form" : form,
     }    
