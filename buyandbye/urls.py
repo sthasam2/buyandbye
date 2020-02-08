@@ -27,7 +27,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     # newsletter
-    path('newsletter/', include('newsletters.urls')),
+    path('newsletter/', include(('newsletters.urls','newsletters'), namespace='newsletter')),
 ]
 
 

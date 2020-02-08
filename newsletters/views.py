@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import render
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from .models import NewsletterUser
 from .forms import NewsletterSignUpForm
 from django.conf import settings
+from django.template.loader import get_template
 # Create your views here.
 
 
@@ -20,8 +21,11 @@ def newsletter_signup(request):
             subject = "Thank you for joining our Newsletter"
             from_email = settings.EMAIL_HOST_USER
             to_email = [instance.email]
-            signup_message = "Welcome to Master Code Online Newsletter. If you would like to unsubscribe visit http://127.0.0.1:8000/newsletter/unsubscribe/"
-            send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=signup_message, fail_silently=False)
+            with open(settings.BASE_DIR + "/templates/newsletters/subscribe_email.txt") as f:
+                signup_messege = f.read()
+            message = EmailMultiAlternatives(subject=subject, body= signup_messege, from_email=from_email, to=to_email)
+            html_template = get_template("newsletters/subscribe_email.html").render()
+            message.attach_alternative(html_template, "text/html")
     context = {
         "form" : form,
     }    
