@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render
 from django.core.mail import send_mail, EmailMultiAlternatives
-from .models import NewsletterUser
-from .forms import NewsletterSignUpForm
+from .models import NewsletterUser, NewsLetter
+from .forms import NewsletterSignUpForm, NewsletterCreationForm
 from django.conf import settings
 from django.template.loader import get_template
 # Create your views here.
@@ -62,3 +62,26 @@ def newsletter_unsubscribe(request):
     template = "newsletters/unsubscribe.html"
     return render(request, template, context)
 
+
+def control_newsletter(request):
+    form = NewsletterCreationForm(request.POST or None)
+
+
+    if form.is_valid():
+        instance = form.save()
+        newsletter = NewsLetter.objects.get(id=instance.id)
+        if newsletter.status == "Published":
+            subject = newsletter.subject
+            body = newsletter.body
+            from_email = settings.EMAIL_HOST_USER
+            for email in newsletter.email.all():
+                print(email)
+                send_mail(subject=subject, from_email=from_email, recipient_list=[email.email], message=body, fail_silently=True)
+
+    context = {
+        'form': form,
+    }
+
+
+    template = "newsletters/control_newsletter.html"
+    return render(request, template, context) 
