@@ -7,6 +7,8 @@
     <!-- CDN -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Place your kit's code here -->
+    <script src="https://kit.fontawesome.com/70eb7c5131.js" crossorigin="anonymous"></script>
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
@@ -15,29 +17,29 @@
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
     <!-- main.css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}"> {% if title %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
+
+    {% if title %}
     <title>BuyandBye - {{title}}
     </title>
     {% else %}
     <title>BuyandBye</title>
     {% endif %}
+
 </head>
 
 <style>
     body {
         font-family: 'Varela Round', sans-serif;
     }
-    
-    div.sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 40px;
-    }
 </style>
 
 <body>
+
     <header class="site-header">
         <!--Navbar-->
+
+        {% block navbar %}
         <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
             <!-- Navbar brand -->
             <a class="navbar-brand" href="/">
@@ -47,7 +49,8 @@
                 </strong>
             </a>
             <!-- Collapse button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Collapsible content -->
@@ -59,43 +62,10 @@
                             Home
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'about' %}">
-                            About
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'item-create' %}">
-                            Post Item
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">
-                            Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">
-                            Logout
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                    {% endif %}
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Categories</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <h6 class="dropdown-header">Explore our Categories</h6>
                             <div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
@@ -108,15 +78,17 @@
                             </div>
                         </div>
                     </li>
+                    <!-- / Dropdown -->
                 </ul>
             </div>
-            <!-- / Links -->
-            <!-- search form -->
-            <div>
+
+            <div class="collapsenavbar-collapse">
+                <!-- search form -->
                 <form class="form-inline" action="{% url 'search_results'%}" method="get">
                     <div class="md-form my-0">
                         <div class="form-group">
-                            <input class="text-light" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                            <input class="text-light" type="search" placeholder="Search" name="q"
+                                value="{{ request.GET.q }}">
                             <!-- <button class="btn btn-success bg-dark" type="submit" >
                                              Search
                                              <i class="material-icons md-9">search</i>
@@ -124,8 +96,44 @@
                         </div>
                     </div>
                 </form>
+                <!-- / search form -->
             </div>
-            <!-- / search form -->
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'item-create' %}">
+                            Post Item
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><img class="account-img-sm"
+                                src="{{ user.profile.image.url }}">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a href="{% url 'profile' %}">
+                                View Profile
+                            </a>
+                            <a href="{% url 'logout' %}">
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- / Links -->
         </nav>
         <div class="view intro-2">
             <div class="full-bg-img">
@@ -137,76 +145,49 @@
                 </div>
             </div>
         </div>
+        {% endblock navbar %}
+        <!-- / Navbar-->
     </header>
 
     <!-- INFO MESSAGES -->
-    {% if messages %} {% for message in messages %}
-    <div class="container bg-secondary">
-        <div class="d-flex justify-content-center">
-            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    {% block info_messages %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
-    {% endfor %} {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endblock info_messages %}
     <!-- / INFO MESSAGE -->
 
     <main role="main" class="container">
         <!-- row for double column -->
-        <div class="row mt-4 mx-auto bg-secondary">
-            <!-- Sidebar-->
-            <div class="col-2.5 mx-2 bg-light">
-                <!-- <div class="card-sticky"> -->
-                <div class="card card-sidebar-sticky">
-                    <div class="card-header">
-                        <h3>
-                            <strong>Categories</strong>
-                        </h3>
-                    </div>
-                    <div class="card-body" style="font-size:10px">
-                        <!-- Category List -->
-                        <ul class="list-group list-group-flush">
-                            {% for categorylist in category %}
-                            <!-- category element -->
-                            <li class="list-group-item">
-                                <a data-toggle="collapse" href="#colSublist{{categorylist.name}}" aria-expanded="false" aria-controls="colSublist{{categorylist.name}}">
-                                    {{ categorylist.get_name_display }}
-                                    <span
-                                        class="badge badge-primary badge-pill justify-content-right">{{ categorylist.cpaginator.count }}</span>
-                                </a>
-                                <!-- Subcategory List -->
-                                <div class="collapse" id="colSublist{{categorylist.name}}">
-                                    <ul class="nested">
-                                        {% for subcatlist in sub_category %} {% if subcatlist.parent_category == categorylist %}
-                                        <!-- subcategory element -->
-                                        <li class="list-group-item">
-                                            <a href="#">
-                                                {{ subcatlist.get_subname_display }}
-                                                <span class="badge badge-primary">{{ page_obj.cpaginator.count }}</span>
-                                            </a>
-                                        </li>
-                                        <!-- / subcategory element -->
-                                        {% endif %} {% endfor %}
-                                    </ul>
-                                </div>
-                                <!-- / Subcategory List -->
-                            </li>
-                            <!-- / category element -->
-                            {% endfor %}
-                        </ul>
-                        <!-- / Category List -->
-                    </div>
-                </div>
-                <!-- </div> -->
-            </div>
-            <!-- / Sidebar-->
+        <div class="row mt-4 mx-auto bg-">
+            {% block sidebar %}
+            {% endblock %}
 
             <!-- Content section -->
-            <div class="col-8 mx-auto bg-primary">
-                {% block content %} {% endblock %}
+            <div class="col-8 mx-auto bg-">
+                {% block content %}
+                <div class="my-5" id="featured">
+                    {% block featured %}
+                    {% endblock featured %}
+                </div>
+                <div class="my-5" id="popular">
+                    {% block popular%}
+                    {% endblock popular %}
+                </div>
+                <div class="my-5" id="recent">
+                    {% block recent %}
+                    {% endblock recent %}
+                </div>
+                {% endblock content %}
             </div>
             <!-- / content section -->
 
@@ -216,6 +197,7 @@
     </main>
 
     <!-- Site Navigation / Breadcrumb -->
+    {% comment %}
     <div class="container">
         <div class="bc-icons-2">
             <nav aria-label="breadcrumb">
@@ -232,8 +214,9 @@
                 </ol>
             </nav>
         </div>
-    </div>
+    </div> {% endcomment %}
     <!-- / Site Navigation / Breadcrumb -->
+
 
     <!-- Footer -->
     <footer class="page-footer font-small blue pt-4" id="footer">
@@ -256,7 +239,7 @@
                             <a href="{% url 'privacy-policy' %}">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="#!">Link 3</a>
+                            <a href="{% url 'terms-and-conditions' %}">Terms and Conditions</a>
                         </li>
                         <li>
                             <a href="#!">Link 4</a>
@@ -304,44 +287,15 @@
     <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
     </fb:login-button> -->
 
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '{your-app-id}',
-                cookie: true,
-                xfbml: true,
-                version: '{api-version}'
-            });
 
-            FB.AppEvents.logPageView();
-
-        };
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        // check login state 
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-        }
-    </script>
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
     </script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js">
     </script>

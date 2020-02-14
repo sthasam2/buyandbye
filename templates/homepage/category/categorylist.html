@@ -1,0 +1,20 @@
+<!-- Dropdown -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Categories</a>
+    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+        <h6 class="dropdown-header">Explore our Categories</h6>
+        <div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
+            <div class="row">
+                <div class="d-inline-flex">
+                    {% for categorylist in category %}
+                    <div class="col">
+                        <a href="#">{{ categorylist.get_name_display }}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<!-- / Dropdown -->
