@@ -43,10 +43,6 @@ from .models import Category, Item, SubCategory
 def home(request):
     frontend_stuff = {
         'item': Item.objects.all().order_by('-date_posted')[:15],
-        'category': Category.objects.all(),
-        # 'c_paginator': Paginator('category', 20),
-        'sub_category': SubCategory.objects.all(),
-        # 's_paginator': Paginator('sub_category', 20),
         'popular_items': Item.objects.all().order_by('-hit_count_generic__hits')[:10],
     }
     return render(request, 'homepage/home.html', frontend_stuff)
