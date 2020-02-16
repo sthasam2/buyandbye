@@ -1,0 +1,52 @@
+{% extends "homepage/base.html" %}
+
+{% block sidebar %}
+<!-- Sidebar-->
+<div class="col-2.5 mx-2 bg-light">
+    <!-- <div class="card-sticky"> -->
+    <div class="card card-sidebar-sticky">
+        <div class="card-header">
+            <h3>
+                <strong>Categories</strong>
+            </h3>
+        </div>
+        <div class="card-body" style="font-size:10px">
+            <!-- Category List -->
+            <ul class="list-group list-group-flush">
+                {% for categorylist in category %}
+                <!-- category element -->
+                <li class="list-group-item">
+                    <a data-toggle="collapse" href="#colSublist{{categorylist.name}}" aria-expanded="false"
+                        aria-controls="colSublist{{categorylist.name}}">
+                        {{ categorylist.get_name_display }}
+                        <span
+                            class="badge badge-primary badge-pill justify-content-right">{{ categorylist.cpaginator.count }}</span>
+                    </a>
+                    <!-- Subcategory List -->
+                    <div class="collapse" id="colSublist{{categorylist.name}}">
+                        <ul class="nested">
+                            {% for subcatlist in sub_category %}
+                            {% if subcatlist.parent_category == categorylist %}
+                            <!-- subcategory element -->
+                            <li class="list-group-item">
+                                <a href="#">
+                                    {{ subcatlist.get_subname_display }}
+                                    <span class="badge badge-primary">{{ page_obj.cpaginator.count }}</span>
+                                </a>
+                            </li>
+                            <!-- / subcategory element -->
+                            {% endif %} {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- / Subcategory List -->
+                </li>
+                <!-- / category element -->
+                {% endfor %}
+            </ul>
+            <!-- / Category List -->
+        </div>
+    </div>
+    <!-- </div> -->
+</div>
+<!-- / Sidebar-->
+{% endblock %}

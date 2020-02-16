@@ -4,8 +4,8 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from djmoney.models.fields import MoneyField
 from django_extensions.db.fields import AutoSlugField
+from djmoney.models.fields import MoneyField
 from hitcount.models import HitCount
 from PIL import Image
 

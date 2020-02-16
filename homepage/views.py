@@ -42,11 +42,7 @@ from .models import Category, Item, SubCategory
 
 def home(request):
     frontend_stuff = {
-        'item': Item.objects.all().order_by('-date_posted')[:10],
-        'category': Category.objects.all(),
-        # 'c_paginator': Paginator('category', 20),
-        'sub_category': SubCategory.objects.all(),
-        # 's_paginator': Paginator('sub_category', 20),
+        'item': Item.objects.all().order_by('-date_posted')[:15],
         'popular_items': Item.objects.all().order_by('-hit_count_generic__hits')[:10],
     }
     return render(request, 'homepage/home.html', frontend_stuff)
@@ -56,7 +52,7 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """ Django's create view for creating Item"""
     model = Item
     form_class = ItemCreateForm
-    template_name = 'homepage/items_form.html'
+    template_name = 'homepage/items/items_form.html'
     # fields = ['title', 'category', 'sub_category',
     #           'price', 'condition', 'content', 'image', ]
 
@@ -104,7 +100,7 @@ class ItemListView(ListView):
 
 class ItemDetailView(HitCountDetailView):
     model = Item
-    template_name = 'homepage/items_detail.html'
+    template_name = 'homepage/items/items_detail.html'
     # hit count when set to true
     context_object_name = 'item_detail'
     count_hit = True
@@ -120,7 +116,7 @@ class ItemDetailView(HitCountDetailView):
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
     form_class = ItemCreateForm
-    template_name = 'homepage/items_form.html'
+    template_name = 'homepage/items/items_form.html'
     # fields = ['title', 'category', 'sub_category',
     #           'price', 'condition', 'content', 'image', ]
 
@@ -137,7 +133,7 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Item
-    template_name = 'homepage/items_confirm_delete.html'
+    template_name = 'homepage/items/items_confirm_delete.html'
     success_url = '/'
 
     def test_func(self):
@@ -152,7 +148,7 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # views for posts from  an individual user
 class UserItemListView(ListView):
     model = Item
-    template_name = 'homepage/user_item.html'  # app/model_viewtype.html
+    template_name = 'homepage/items/user_item.html'  # app/model_viewtype.html
     context_object_name = 'user_item'
     paginate_by = 6
 
@@ -173,7 +169,7 @@ class CategoryListView(ListView):
 class SearchItemListView(ListView):
     """ LIst view for listing search item"""
     model = Item
-    template_name = 'homepage/search_results.html'  # app/model_viewtype.html
+    template_name = 'homepage/search/search_results.html'  # app/model_viewtype.html
     context_object_name = 'search_item'
     paginate_by = 5
 
@@ -194,7 +190,7 @@ def load_subCat(request):
     category_id = request.GET.get('category')
     sub_categories = SubCategory.objects.filter(
         parent_category_id=category_id).order_by('subname')
-    return render(request, 'homepage/subCat_dropdown_list_options.html', {
+    return render(request, 'homepage/category/subCat_dropdown_list_options.html', {
         'sub_categories': sub_categories
     })
 

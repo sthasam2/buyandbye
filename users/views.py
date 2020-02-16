@@ -56,11 +56,11 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/register/register.html', {'form': form})
 
 
 def activation_message_sent_view(request):
-    return render(request, 'users/account_activate_message.html', {'title': 'Activate email'})
+    return render(request, 'users/register/account_activate_message.html', {'title': 'Activate email'})
 
 
 def activate(request, uidb64, token):
@@ -78,12 +78,12 @@ def activate(request, uidb64, token):
             request, f'{username}, Your email has been validated! Now you can login.')
         return redirect('login')
     else:
-        return render(request, 'users/account_activation_unvalidated.html')
+        return render(request, 'users/register/account_activation_unvalidated.html')
 
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    return render(request, 'users/profile/profile.html')
 
 
 @login_required
@@ -108,4 +108,4 @@ def profile_update(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render(request, 'users/profile_update.html', context)
+    return render(request, 'users/profile/profile_update.html', context)
