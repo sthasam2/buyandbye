@@ -61,11 +61,12 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # os.path.join(BASE_DIR, 'templates'), 
+            os.path.join(BASE_DIR, 'templates'), 
             os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'buyandbye.processors.category',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -140,23 +141,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    ]
 
 
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Media files (Third Party Images)
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+# Crispy forms template
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-# CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
+
+# Login 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL = 'login'
 
 
-# for sending emails to reset password
+# SMTP Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -170,17 +175,17 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 SITE_ID = 1
 
 # Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'offline',
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'offline',
+#         }
+#     }
+# }
 
 # DISQUS_API_KEY = '4cu64qSPV9ivd422UNKNG8RsHthZ6mSh0ps0FBhjdqWgFefTuZTGb5BAhhOhHQZM'
 # DISQUS_WEBSITE_SHORTNAME = 'http://127.0.0.1:8000/'
