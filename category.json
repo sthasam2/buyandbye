@@ -1,58 +1,77 @@
 [{
-        "name": "Apparel and Accessories"
+        "name": "Apparel and Accessories",
+        "slug": "apparel-accessories"
     },
     {
-        "name": "Automobiles"
+        "name": "Automobiles",
+        "slug": "automobiles"
     },
     {
-        "name": "Beauty and Health"
+        "name": "Beauty and Health",
+        "slug": "beauty-health"
     },
     {
-        "name": "Books"
+        "name": "Books",
+        "slug": "books"
     },
     {
-        "name": "Business and Industry"
+        "name": "Business and Industry",
+        "slug": "business-industry"
     },
     {
-        "name": "Computers and Peripherals"
+        "name": "Computers and Peripherals",
+        "slug": "computers-peripherals"
     },
     {
-        "name": "Electronics"
+        "name": "Electronics",
+        "slug": "electronics"
     },
     {
-        "name": "Events and Happenings"
+        "name": "Events and Happenings",
+        "slug": "events-happenings"
     },
     {
-        "name": "Home, Furnishing and Appliances"
+        "name": "Home, Furnishing and Appliances",
+        "slug": "home-furnishing-appliances"
     },
     {
-        "name": "Jobs"
+        "name": "Jobs",
+        "slug": "jobs"
     },
     {
-        "name": "Mobiles and Accessories"
+        "name": "Mobiles and Accessories",
+        "slug": "mobiles-accessories"
     },
     {
-        "name": "Music Instruments"
+        "name": "Music Instruments",
+        "slug": "music-instruments"
     },
     {
-        "name": "Pet and PetCare"
+        "name": "Pet and PetCare",
+        "slug": "pet-petcare"
     },
     {
-        "name": "Real Estate"
+        "name": "Real Estate",
+        "slug": "real-estate"
     },
     {
-        "name": "Sports and Fitness"
+        "name": "Sports and Fitness",
+        "slug": "sports"
     },
     {
-        "name": "Services"
+        "name": "Services",
+        "slug": "services"
     },
     {
-        "name": "Toys and Video Games"
+        "name": "Toys and Video Games",
+        "slug": "toys-video-games"
     },
     {
-        "name": "Torism and Tours"
+        "name": "Torism and Tours",
+        "slug": "tourism-tours"
     },
     {
-        "name": "Others"
+        "name": "Others",
+        "slug": "others"
     }
 ]

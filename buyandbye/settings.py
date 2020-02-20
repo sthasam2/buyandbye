@@ -26,22 +26,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
     # custom
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'newsletters.apps.NewslettersConfig',
+    # pypi
     'django_extensions',
     'phonenumber_field',
     'crispy_forms',
     'djmoney',
     'hitcount',
-
     'allauth',
-    # 'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.microsoft',
     'allauth.socialaccount.providers.twitter',
 ]
 
@@ -72,9 +70,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                # `allauth` needs this from django
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -100,7 +95,6 @@ DATABASES = {
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]

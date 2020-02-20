@@ -3,7 +3,7 @@ from hitcount.views import HitCountDetailView
 
 from .import views
 from .views import (CategoryListView, ItemCreateView, ItemDeleteView,
-                    ItemDetailView, ItemListView, ItemUpdateView,
+                    ItemDetailView, RecentItemListView, PopularItemListView, ItemUpdateView,
                     SearchItemListView, UserItemListView)
 
 # NOTE: only one views per url
@@ -13,11 +13,13 @@ urlpatterns = [
 
     path('', views.home, name='homepage'),
     # The homepage item view
-    path('item/latest/', ItemListView.as_view(), name='latest-item'),
+    path('recent/', RecentItemListView.as_view(), name='recent-items'),
+    path('popular/', PopularItemListView.as_view(), name='popular-items'),
+    path('featured/', PopularItemListView.as_view(), name='featured-items'),
     # The individual user item view
     path('user/<str:username>', UserItemListView.as_view(), name='user-item'),
     # category page
-    path('category', CategoryListView.as_view(), name='category'),
+    path('category/', CategoryListView.as_view(), name='category'),
     # The new item post creation view
     path('item/new', ItemCreateView.as_view(), name='item-create'),
     # The individual item's detailed view

@@ -9,35 +9,11 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView)
-# from django.utils.text import slugify
 # local
 from hitcount.views import HitCountDetailView
 
 from .forms import ItemCreateForm
 from .models import Category, Item, SubCategory
-
-# from .forms import ItemCreateForm
-
-"""
-    # pagination logic
-    item = Item.objects.all().order_by('-date_posted')[:10]
-    category = Category.objects.all(),
-    sub_category = SubCategory.objects.all(),
-    popular_items = Item.objects.all().order_by(
-        '-hit_count_generic__hits')[:10],
-
-    paginator = Paginator(item, 8)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    frontend_stuff = {
-        'item': item,
-        'category': category,
-        'sub_category': sub_category,
-        'popular_items': popular_items,
-        # 'page_obj': page_obj
-    }
-"""
 
 
 def home(request):
@@ -59,39 +35,35 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-    # def image_upload(request):
-    #     context={}
-    #     if request.method == 'POST':
-    #         image= request.FILES('image')
-    #         fs = FileSystemStorage()
-    #         name = fs.save(image.name, image)
-    #         context['url'] = fs.url(name)
-    #     return render(request, 'item-detail', context)
 
-    # def get(self, request, *args, **kwargs):
-    #     form = self.form_class()
-    #     return render(request, self.template_name, {'form': form})
-    #
-    # def upload_file(self, request, *args, **kwargs):
-    #     if request.method == 'POST':
-    #         item_create_form = self.form_class(request.POST, request.FILES)
-    #         if item_create_form.is_valid():
-    #             instance = Item(file_field=request.FILES['file'])
-    #             instance.save()
-    #             messages.success(request, f'Item added successfully')
-    #             return redirect('item/<int:pk>')
-    #     else:
-    #         return render(request, self.template_name, {'form': item_create_form})
-
-# Item CRUD
-
-
-class ItemListView(ListView):
+class RecentItemListView(ListView):
     model = Item
-    template_name = 'homepage/home.html'  # app/model_viewtype.html
+    template_name = 'homepage/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
-    paginate_by = 8
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        context = super(RecentItemListView, self).get_context_data(**kwargs)
+        context.update({
+            'title': 'Recent Items'
+        })
+        return context
+
+
+class PopularItemListView(ListView):
+    model = Item
+    template_name = 'homepage/list_view/item_list.html'  # app/model_viewtype.html
+    context_object_name = 'item'
+    ordering = ['-hit_count_generic__hits']
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        context = super(PopularItemListView, self).get_context_data(**kwargs)
+        context.update({
+            'title': 'Popular Items'
+        })
+        return context
 
 
 class ItemDetailView(HitCountDetailView):

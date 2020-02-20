@@ -16,11 +16,13 @@ urlpatterns = [
     # users
     path('', include('users.urls')),
 
-    # markdownx requirement
-    # path('markdownx/', include('markdownx.urls')),
+    # newsletter
+    path('newsletter/', include(('newsletters.urls',
+                                 'newsletters'), namespace='newsletter')),
 
-    # hit count requirement 
-    path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')), # django 3.0 doesnt support python_2_unicode so remove import and decorator from hitcount source file model
+    # hit count requirement
+    # django 3.0 doesnt support python_2_unicode so remove import and decorator from hitcount source file model
+    path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
 
     # all auth requirement
     path('accounts/', include('allauth.urls')),
@@ -28,8 +30,5 @@ urlpatterns = [
 
 
 if settings.DEBUG:  # for development stage
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-if settings.DEBUG:  # for development stage
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
