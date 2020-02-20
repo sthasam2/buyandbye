@@ -41,11 +41,7 @@ from .models import Category, Item, SubCategory
 
 
 def home(request):
-    frontend_stuff = {
-        'item': Item.objects.all().order_by('-date_posted')[:15],
-        'popular_items': Item.objects.all().order_by('-hit_count_generic__hits')[:10],
-    }
-    return render(request, 'homepage/home.html', frontend_stuff)
+    return render(request, 'homepage/home.html')
 
 
 class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -161,7 +157,7 @@ class UserItemListView(ListView):
 class CategoryListView(ListView):
     """ Listing for Category """
     model = Category
-    template_name = 'homepage/base.html'  # app/model_viewtype.html
+    template_name = 'homepage/category/category_page.html'  # app/model_viewtype.html
     context_object_name = 'categorylist'
     ordering = ['name']
 

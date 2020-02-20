@@ -61,12 +61,13 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'), 
+            os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'buyandbye.processors.category',
+                'buyandbye.processors.category_template',
+                'buyandbye.processors.items_template',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -97,7 +98,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#specifying-authentication-backends
 
 AUTHENTICATION_BACKENDS = [
-     # Needed to login by username in Django admin, regardless of `allauth`
+    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
@@ -144,7 +145,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    ]
+]
 
 
 # Media files (Third Party Images)
@@ -156,7 +157,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-# Login 
+# Login
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL = 'login'
 
@@ -169,7 +170,6 @@ EMAIL_USE_TLS = True
 # loads saved variable from environment variables
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
-
 
 
 SITE_ID = 1
