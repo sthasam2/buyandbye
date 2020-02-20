@@ -69,7 +69,7 @@
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">Categories</a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <h6 class="dropdown-header">Explore our Categories</h6>
+                                <h6 class="dropdown-header"><a href={% url 'category' %}>Explore our Categories</a></h6>
                                 <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
                                     <div class="row">
                                         {% for categorylist in category %}

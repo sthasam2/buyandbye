@@ -16,8 +16,9 @@ urlpatterns = [
     path('item/latest/', ItemListView.as_view(), name='latest-item'),
     # The individual user item view
     path('user/<str:username>', UserItemListView.as_view(), name='user-item'),
-
-        # The new item post creation view
+    # category page
+    path('category', CategoryListView.as_view(), name='category'),
+    # The new item post creation view
     path('item/new', ItemCreateView.as_view(), name='item-create'),
     # The individual item's detailed view
     path('item/<slug:slug>', ItemDetailView.as_view(), name='item-detail'),
@@ -36,8 +37,10 @@ urlpatterns = [
     # The Privacy policy page
     path('privacy_policy/', views.privacy_policy, name='privacy-policy'),
     # terms and conditions
-    path('terms_and_conditions/', views.terms_and_conditions, name='terms-and-conditions'),
+    path('terms_and_conditions/', views.terms_and_conditions,
+         name='terms-and-conditions'),
 
 
-    path('ajax/load_subcategory/', views.load_subCat, name='ajax-load-subcategory'),
+    path('ajax/load_subcategory/', views.load_subCat,
+         name='ajax-load-subcategory'),
 ]
