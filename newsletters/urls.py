@@ -1,6 +1,6 @@
-from django.urls import path, include
-from .views import newsletter_signup, newsletter_unsubscribe
+from django.urls import include, path
 
+from .views import newsletter_signup, newsletter_unsubscribe
 
 urlpatterns = [
     path('subscribe/', newsletter_signup, name="newsletter_signup"),

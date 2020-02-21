@@ -1,10 +1,12 @@
 from django.urls import path
 from hitcount.views import HitCountDetailView
 
-from .import views
-from .views import (CategoryListView, ItemCreateView, ItemDeleteView,
-                    ItemDetailView, RecentItemListView, PopularItemListView, ItemUpdateView,
-                    SearchItemListView, UserItemListView)
+from .views import views, category_views
+from .views.category_views import CategoryListView, CategoryDetailView, load_subCat
+from .views.item_views import(ItemCreateView, ItemDeleteView,
+                              ItemDetailView, RecentItemListView, PopularItemListView, ItemUpdateView,
+                              UserItemListView)
+from .views.search_views import SearchItemListView
 
 # NOTE: only one views per url
 
@@ -25,7 +27,7 @@ urlpatterns = [
     # The individual item's detailed view
     path('item/<slug:slug>', ItemDetailView.as_view(), name='item-detail'),
 
-
+    path('category/<slug:slug>', CategoryDetailView.as_view(), name='category-detail'),
     # The existing item update view
     path('item/<slug:slug>/update', ItemUpdateView.as_view(), name='item-update'),
     # The existing item delete view
@@ -42,7 +44,6 @@ urlpatterns = [
     path('terms_and_conditions/', views.terms_and_conditions,
          name='terms-and-conditions'),
 
-
-    path('ajax/load_subcategory/', views.load_subCat,
+    path('ajax/load_subcategory/', category_views.load_subCat,
          name='ajax-load-subcategory'),
 ]

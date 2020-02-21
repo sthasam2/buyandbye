@@ -1,4 +1,4 @@
-"""MODEL for product ie. item"""
+"""MODEL for the Products including Category and Subcategory"""
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
@@ -13,7 +13,7 @@ from .options import CATEGORY_CHOICES, CONDITION_CHOICES, SUB_CATEGORY_CHOICES
 
 
 class Category(models.Model):
-    """ Category class"""
+    """ Item Category Class"""
     name = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     slug = AutoSlugField(populate_from=['name'])
 
@@ -25,6 +25,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.get_name_display()
+
+    def get_absolute_url(self):
+        return reverse('category-detail', kwargs={'slug': self.slug})
 
 
 class SubCategory(models.Model):
