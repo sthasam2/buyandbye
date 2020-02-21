@@ -1,27 +1,24 @@
-""" VIEWS for product """
+""" ITEM VIEWS """
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
-from django.db.models import Q
+# from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView)
 # local
 from hitcount.views import HitCountDetailView
+from homepage.forms import ItemCreateForm
+from homepage.models import Item
 
-from .forms import ItemCreateForm
-from .models import Category, Item, SubCategory
 
-
-def home(request):
-    return render(request, 'homepage/home.html')
+# PRODUCT CRUD
+""" CREATE"""
 
 
 class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    """ Django's create view for creating Item"""
+    """ Product Item Creation using Django View: CreateView"""
     model = Item
     form_class = ItemCreateForm
     template_name = 'homepage/items/items_form.html'
@@ -36,7 +33,13 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+""" / CREATE """
+
+""" READ """
+
+
 class RecentItemListView(ListView):
+    """ Recent Product List using Django View: ListView"""
     model = Item
     template_name = 'homepage/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
@@ -52,6 +55,7 @@ class RecentItemListView(ListView):
 
 
 class PopularItemListView(ListView):
+    """ Popular Product List using Django View: ListView """
     model = Item
     template_name = 'homepage/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
@@ -66,7 +70,21 @@ class PopularItemListView(ListView):
         return context
 
 
+
+class UserItemListView(ListView):
+    """ Particular User's Posted Product List using Django View: ListView """
+    model = Item
+    template_name = 'homepage/items/user_item.html'  # app/model_viewtype.html
+    context_object_name = 'user_item'
+    paginate_by = 6
+
+    def get_queryset(self):  # filtering based on username
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Item.objects.filter(author=user).order_by('-date_posted')
+
+
 class ItemDetailView(HitCountDetailView):
+    """ Individual Product Deatil using Django View: DetailView """
     model = Item
     template_name = 'homepage/items/items_detail.html'
     # hit count when set to true
@@ -81,7 +99,13 @@ class ItemDetailView(HitCountDetailView):
         return context
 
 
+""" / READ """
+
+""" UPDATE """
+
+
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """ Individual Product Update using Django View: UpdateView """
     model = Item
     form_class = ItemCreateForm
     template_name = 'homepage/items/items_form.html'
@@ -99,7 +123,13 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
+""" / UPDATE """
+
+""" DELETE """
+
+
 class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """ Individual Product Delete using Django View: DeleteView """
     model = Item
     template_name = 'homepage/items/items_confirm_delete.html'
     success_url = '/'
@@ -110,69 +140,5 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
-# / Item CRUD
 
-
-# views for posts from  an individual user
-class UserItemListView(ListView):
-    model = Item
-    template_name = 'homepage/items/user_item.html'  # app/model_viewtype.html
-    context_object_name = 'user_item'
-    paginate_by = 6
-
-    def get_queryset(self):  # filtering based on username
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Item.objects.filter(author=user).order_by('-date_posted')
-
-
-# CATEGORY R
-class CategoryListView(ListView):
-    """ Listing for Category """
-    model = Category
-    template_name = 'homepage/category/category_page.html'  # app/model_viewtype.html
-    context_object_name = 'categorylist'
-    ordering = ['name']
-
-
-class SearchItemListView(ListView):
-    """ LIst view for listing search item"""
-    model = Item
-    template_name = 'homepage/search/search_results.html'  # app/model_viewtype.html
-    context_object_name = 'search_item'
-    paginate_by = 5
-
-    def get_queryset(self):  # queryset using Q object
-        query = self.request.GET.get('q')
-        object_list = Item.objects.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(author__first_name__icontains=query) |
-            Q(author__last_name__icontains=query) |
-            Q(author__username__icontains=query)
-        ).distinct()
-        return object_list.order_by('-date_posted')
-
-
-def load_subCat(request):
-    """views for loading subcategory depending on the category in itemcreate form"""
-    category_id = request.GET.get('category')
-    sub_categories = SubCategory.objects.filter(
-        parent_category_id=category_id).order_by('subname')
-    return render(request, 'homepage/category/subCat_dropdown_list_options.html', {
-        'sub_categories': sub_categories
-    })
-
-
-def aboutus(request):
-    """ About page """
-    return render(request, 'homepage/about.html', {'title': 'About'})
-
-
-def privacy_policy(request):
-    """ PRIVACY POLICY page """
-    return render(request, 'homepage/privacypolicy.html', {'title': 'Privacy Policy'})
-
-
-def terms_and_conditions(request):
-    """ TERMS AND CONDITION page """
-    return render(request, 'homepage/terms_conditions.html', {'title': 'Terms and Conditions'})
+""" / DELETE """
