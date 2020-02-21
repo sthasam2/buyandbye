@@ -1,40 +1,50 @@
-{% extends "homepage/home.html" %}
+{% load static %}
 
 {% block navbar %}
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="/">
-        <!-- <i class="material-icons">laptop_windows</i> -->
-        <strong>
-            BuyandBye
-        </strong>
-    </a>
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse">
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    Home
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">
-                    About
-                </a>
-            </li>
+    <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">
+            <!-- <i class="material-icons">laptop_windows</i> -->
+            <strong>
+                BuyandBye
+            </strong>
+        </a>
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse">
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        Home
+                    </a>
+                </li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <h6 class="dropdown-header"><a href={% url 'category' %}>Explore our Categories</a></h6>
+                        <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
+                            <div class="row">
+                                {% for categorylist in category %}
+                                <a href="#">{{ categorylist.get_name_display }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- / Dropdown -->
+            </ul>
+        </div>
 
-        </ul>
-    </div>
-
-    <div class="collapsenavbar-collapse">
-        <!-- search form -->
-        <li>
+        <div class="collapsenavbar-collapse">
+            <!-- search form -->
             <form class="form-inline" action="{% url 'search_results'%}" method="get">
                 <div class="md-form my-0">
                     <div class="form-group">
@@ -47,56 +57,48 @@
                     </div>
                 </div>
             </form>
-        </li>
-        <!-- / search form -->
-    </div>
-    
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'item-create' %}">
-                    Post Item
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile' %}">
-                    Profile
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">
-                    Logout
-                </a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
-            {% endif %}
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Categories</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <h6 class="dropdown-header">Explore our Categories</h6>
-                    <div class="d-inline-flex p-2 bd-highlight align-items-center bg-danger">
-                        <div class="row">
-                            {% for categorylist in category %}
-                            <div class="col2">
-                                <a href="#">{{ categorylist.get_name_display }}</a>
-                            </div>{% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </li>
+            <!-- / search form -->
+        </div>
 
-        </ul>
-    </div>
-    <!-- / Links -->
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'item-create' %}">
+                        Post Item
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><img class="account-img-sm"
+                            src="{{ user.profile.image.url }}">
+                        {{ user.first_name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a href="{% url 'profile' %}">
+                            <img src="{% static 'index/img/default.png' %}" class="icon-sm" alt=""> View Profile
+                        </a>
+                        <a href="{% url 'logout' %}">
+                            <img src="{% static 'index/img/logout.png' %}" class="icon-sm" alt=""> Logout
+                        </a>
+                    </div>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">
+                        <img src="{% static 'index/img/login-light.png' %}" class="icon-sm" alt=""> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">
+                        <img src="{% static 'index/img/register-light.png' %}" class="icon-sm" alt=""> Register
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- / Links -->
 </nav>
 <div class="view intro-2">
     <div class="full-bg-img">
@@ -107,5 +109,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock navbar %}

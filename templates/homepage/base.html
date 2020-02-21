@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- CDN -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Place your kit's code here -->
@@ -40,7 +39,6 @@
         <!--Navbar-->
 
         {% block navbar %}
-
         <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
             <div class="container">
                 <!-- Navbar brand -->
@@ -73,7 +71,7 @@
                                 <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
                                     <div class="row">
                                         {% for categorylist in category %}
-                                            <a href="#">{{ categorylist.get_name_display }}</a>
+                                        <a href="#">{{ categorylist.get_name_display }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -116,7 +114,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                 <a href="{% url 'profile' %}">
-                                   <img src="{% static 'index/img/default.png' %}" class="icon-sm" alt=""> View Profile
+                                    <img src="{% static 'index/img/default.png' %}" class="icon-sm" alt=""> View Profile
                                 </a>
                                 <a href="{% url 'logout' %}">
                                     <img src="{% static 'index/img/logout.png' %}" class="icon-sm" alt=""> Logout
