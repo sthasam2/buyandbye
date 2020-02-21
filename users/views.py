@@ -37,7 +37,7 @@ def register(request):
             # email info and content generater
             current_site = get_current_site(request)  # site getter
             mail_subject = 'Account activation.'  # subject
-            message = render_to_string('users/account_activation_email.html', {  # message content
+            message = render_to_string('users/register/account_activation_email.html', {  # message content
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),

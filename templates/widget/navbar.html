@@ -1,6 +1,4 @@
 {% load static %}
-
-{% block navbar %}
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark scrolling-navbar">
     <div class="container">
         <!-- Navbar brand -->
@@ -20,7 +18,7 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link {% if section == "home" %}selected{% endif %}"  href="/">
                         Home
                     </a>
                 </li>
@@ -110,5 +108,3 @@
         </div>
     </div>
 </div>
-</div>
-{% endblock navbar %}
