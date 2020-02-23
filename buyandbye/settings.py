@@ -27,9 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # custom
-    'homepage.apps.HomepageConfig',
+    'product.apps.ProductConfig',
     'users.apps.UsersConfig',
     'newsletters.apps.NewslettersConfig',
+    'activity.apps.ActivityConfig',
     # pypi
     'django_extensions',
     'phonenumber_field',
@@ -152,7 +153,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Login
-LOGIN_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_URL = 'product'
 LOGIN_URL = 'login'
 
 

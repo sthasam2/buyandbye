@@ -7,8 +7,8 @@ from django.urls import include, path
 urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
-    # homepage
-    path('', include('homepage.urls')),
+    # product
+    path('', include('product.urls')),
     # users
     path('', include('users.urls')),
     # newsletter

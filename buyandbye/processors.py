@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from homepage.models import Category, SubCategory, Item
+from product.models import Category, SubCategory, Item
 
 
 def category_template(request):

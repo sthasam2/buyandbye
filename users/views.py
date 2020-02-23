@@ -14,7 +14,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import (ProfileUpdateForm, UserRegisterForm,  # profile forms
                     UserUpdateForm)
-from .tokens import account_activation_token  # token variable
+from .utils import account_activation_token  # token variable
 
 
 def register(request):
@@ -59,8 +59,8 @@ def register(request):
     return render(request, 'users/register/register.html', {'form': form})
 
 
-def activation_message_sent_view(request):
-    return render(request, 'users/register/account_activate_message.html', {'title': 'Activate email'})
+# def activation_message_sent(request):
+#     return render(request, 'users/register/account_activate_message.html', {'title': 'Activate email'})
 
 
 def activate(request, uidb64, token):
