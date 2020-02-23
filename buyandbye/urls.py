@@ -7,6 +7,8 @@ from django.urls import include, path
 urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
+    #base
+    path('', include('base.urls')),
     # product
     path('', include('product.urls')),
     # users

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # custom
+    'base.apps.BaseConfig',
     'product.apps.ProductConfig',
     'users.apps.UsersConfig',
     'newsletters.apps.NewslettersConfig',
