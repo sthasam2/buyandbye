@@ -5,7 +5,7 @@ with open('.json/category.json') as f:
     template = json.load(f)
 
 for newCategory in template:
-    newCategory = Category(name=newCategory['name'], slug=newCategory['slug'])
+    newCategory = Category(name=newCategory['name'])
     newCategory.save()
 
 with open('.json/subcat.json') as f:
