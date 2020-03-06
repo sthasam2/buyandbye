@@ -9,7 +9,7 @@ from djmoney.models.fields import MoneyField
 from hitcount.models import HitCount
 from PIL import Image
 
-from .options import CATEGORY_CHOICES, CONDITION_CHOICES, SUB_CATEGORY_CHOICES
+from .options import CATEGORY_CHOICES, CONDITION_CHOICES, SUB_CATEGORY_CHOICES, ITEM_CONTRACT_CHOICES
 
 
 class Category(models.Model):
@@ -57,12 +57,15 @@ class Item(models.Model):
     image = models.ImageField(upload_to='item_pics/')  # setting image
     condition = models.CharField(
         max_length=100, null=True, blank=True, choices=CONDITION_CHOICES)
+    price_negotiability =  models.BooleanField(unique=True, default=False, blank=False)
+    item_available_for = models.CharField(max_length=100, default='Sale', choices=ITEM_CONTRACT_CHOICES)
+    sold = models.BooleanField(default=False, unique=True)
 
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
                                         related_query_name='hit_count_generic_relation')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
-    slug = AutoSlugField(populate_from=['title', 'author'])
+    slug = AutoSlugField(populate_from=['title'])
 
     if image:
         def save(self, *args, **kwargs):

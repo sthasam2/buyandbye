@@ -7,6 +7,7 @@ from django.views.generic import (DetailView, ListView)
 from django.db.models import Q
 # local
 from product.models import Category, SubCategory, Item
+from activity.utils import create_action
 
 
 """ CATEGORY READ (R) """
@@ -26,10 +27,15 @@ class CategoryDetailView(DetailView):
     template_name = 'product/category/category_detail.html'
     context_object_name = 'category_item'
 
+    def create_activity(self):
+        category_id = self.object
+        create_action(self.request.user, 'Browsed category', category_id)
+
     def get_context_data(self, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(**kwargs)
         cat_name = self.object.name
-        # print(cat_name)
+        if self.request.user:
+            self.create_activity()
         context.update({
             'cat_item': Item.objects.filter(Q(category__name=cat_name))
         })

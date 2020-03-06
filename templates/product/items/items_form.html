@@ -11,23 +11,18 @@
                     <legend class="border-bottom mb-4">
                          Post Item
                     </legend>
-                    {{form|crispy}}
+                   {{form|crispy}}
 
-                    <!-- <div>
-                    {{ form.title| as_crispy_field}}
-               </div>
-               <div>
-                    {{ form.category| as_crispy_field}}
-               </div>
-               <div>
-                    {{ form.price| as_crispy_field}}
-               </div>
-               <div>
-                    {{ form.content| as_crispy_field}}
-               </div>
-               <div>
-                    {{ form.image| as_crispy_field}}
-               </div> -->
+                    {% comment %} <div>
+                         {{ form.category| as_crispy_field}}
+                         {{ form.sub_category| as_crispy_field}}
+                         {{ form.title| as_crispy_field}}
+                         {{ form.price| as_crispy_field}}
+                         {{ form.price_negotiability| as_crispy_field}}
+                         {{ form.item_available_for| as_crispy_field}}
+                         {{ form.content| as_crispy_field}}
+                         {{ form.image| as_crispy_field}}
+                    </div> {% endcomment %}
 
 
                     <div class="form-group">
@@ -53,7 +48,8 @@
                },
                success: function (data) { // `data` is the return of the `load_cities` view function
                     $("#id_sub_category").html(
-                    data); // replace the contents of the city input with the data that came from the server
+                         data
+                    ); // replace the contents of the city input with the data that came from the server
                }
           });
 

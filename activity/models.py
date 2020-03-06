@@ -20,4 +20,5 @@ class Activity(models.Model):
     date_created = models.DateTimeField(default=timezone.now, db_index=True)
 
     class Meta:
+        verbose_name_plural = 'Activities'
         ordering = ('-date_created',)

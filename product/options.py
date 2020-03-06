@@ -1,5 +1,12 @@
 """ Options tuple file ('',''), """
 
+ITEM_CONTRACT_CHOICES = (
+    ('Sale', 'Sale'),
+    ('Rent', 'Rent'),
+    ('Exchange', 'Exchange'),
+    ('Sale/Exchange', 'Sale / Exchange',)
+)
+
 CONDITION_CHOICES = (
     ('Brand New', 'Brand New'),
     ('Used (Like New)', 'Used (Like New)'),
@@ -73,8 +80,7 @@ SUB_CATEGORY_CHOICES = (
     ('---------', '---------'),
 
     ('**Books', '**Books'),
-    ('Fiction', 'Fiction'),
-    (' ', ' '),
+
     ('Action-and-adventure', 'Action and adventure'),
     ('Alternate-history', 'Alternate history'),
     ('Anthology', 'Anthology'),
@@ -101,8 +107,7 @@ SUB_CATEGORY_CHOICES = (
     ('Thriller', 'Thriller'),
     ('Young', 'Young'),
 
-    ('Non-fiction', 'Non-fiction'),
-    (' ', ' '),
+
     ('Art', 'Art'),
     ('Autobiography', 'Autobiography'),
     ('Biography', 'Biography'),

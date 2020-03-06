@@ -7,8 +7,17 @@ from activity.utils import create_action
 class ItemCreateForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['title', 'category', 'sub_category',
-                  'price', 'condition', 'content', 'image', ]
+        fields = [
+            'category',
+            'sub_category',
+            'title',
+            'price',
+            'price_negotiability',
+            'item_available_for',
+            'condition',
+            'content',
+            'image',
+        ]
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)

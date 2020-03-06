@@ -191,6 +191,198 @@
 		"parent_name": "Business and Industry",
 		"subname": "Others"
 	},
+	{
+		"parent_name": "Books",
+		"subname": "Action-and-adventure"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Alternate-history"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Anthology"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Chick-lit"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Childrens"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Comic-book"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Coming-of-age"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Crime"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Drama"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Fairytale"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Fantasy"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Graphic-novel"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Historical-fiction"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Horror"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Paranormal-romance"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Picture-book"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Poetry-review"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Political-thriller"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Romance"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Satire"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Science-fiction"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Short-story"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Suspense"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Thriller"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Young"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Art"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Autobiography"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Biography"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Book-review"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Cookbook"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Diary"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Dictionary"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Encyclopedia"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Guide"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Health"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "History"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Journal"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Math"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Memoir"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Prayer"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Religion-spirituality-new-age"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Textbook"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Review"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Science"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Self-help"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Travel"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "True-crime"
+	},
+	{
+		"parent_name": "Books",
+		"subname": "Others"
+	},
 
 	{
 		"parent_name": "Computers and Peripherals",

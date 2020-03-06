@@ -30,7 +30,8 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
 
     def create_activity(self):
         print("item history created")
-        activity = create_action(self.object.author, 'Posted item', self.object)
+        activity = create_action(
+            self.object.author, 'Posted item', self.object)
         return activity
 
     def form_valid(self, form):
@@ -97,8 +98,14 @@ class ItemDetailView(HitCountDetailView):
     context_object_name = 'item_detail'
     count_hit = True
 
+    def create_activity(self):
+        item_id = self.object
+        if self.request.user:
+            create_action(self.request.user, 'Viewed item', item_id)
+
     def get_context_data(self, **kwargs):
         context = super(ItemDetailView, self).get_context_data(**kwargs)
+        self.create_activity()
         context.update({
             'popular_items': Item.objects.order_by('-hit_count_generic__hits')[:5],
         })
@@ -118,8 +125,16 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     # fields = ['title', 'category', 'sub_category',
     #           'price', 'condition', 'content', 'image', ]
 
+    def create_activity(self):
+        item_id = self.object
+        activity = create_action(
+            self.object.author, 'Updated item', item_id)
+        return activity
+
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.save()
+        self.create_activity()
         return super().form_valid(form)
 
     def test_func(self):
@@ -145,6 +160,15 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == item.author:
             return True
         return False
+
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        # history creation
+        item_id = self.object
+        create_action(
+            self.request.user, 'Deleted item', item_id)
+        print("item deleted")
+        return super(ItemDeleteView, self).delete(*args, **kwargs)
 
 
 """ / DELETE """
