@@ -30,7 +30,7 @@ urlpatterns = [
     path('newsletter/', include(('newsletters.urls','newsletters'), namespace='newsletter')),
 
     # contro panel
-    path('control/', include(('control_panel.urls','control_panel'), namespace='control_panel')),
+    path('control/', include(('controlPanel.urls','controlPanel'), namespace='controlPanel')),
 ]
 
 

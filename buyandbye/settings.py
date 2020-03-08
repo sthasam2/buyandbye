@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # custom
     'homepage.apps.HomepageConfig',
+    'controlPanel',
     'users.apps.UsersConfig',
     'phonenumber_field',
     'crispy_forms',
