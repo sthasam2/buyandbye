@@ -57,14 +57,16 @@ class Item(models.Model):
     image = models.ImageField(upload_to='item_pics/')  # setting image
     condition = models.CharField(
         max_length=100, null=True, blank=True, choices=CONDITION_CHOICES)
-    price_negotiability =  models.BooleanField(unique=True, default=False, blank=False)
-    item_available_for = models.CharField(max_length=100, default='Sale', choices=ITEM_CONTRACT_CHOICES)
-    sold = models.BooleanField(default=False, unique=True)
+    price_negotiability = models.BooleanField(default=False, blank=False)
+    item_available_for = models.CharField(
+        max_length=100, default='Sale', choices=ITEM_CONTRACT_CHOICES)
+    sold = models.BooleanField(default=False)
 
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
                                         related_query_name='hit_count_generic_relation')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_posted = models.DateTimeField(default=timezone.now)
+    date_posted = models.DateTimeField(
+        default=timezone.now)
     slug = AutoSlugField(populate_from=['title'])
 
     if image:
@@ -72,11 +74,10 @@ class Item(models.Model):
             # accessing parent class save function
             super(Item, self).save(*args, **kwargs)
             img = Image.open(self.image.path)
-            if img.height > 300 or img.width > 300:
+            if img.height > 3000 or img.width > 3000:
                 output_size = (300, 300)
                 img.thumbnail(output_size)
                 img.save(self.image.path)  # overriding previous image
-
 
     def __str__(self):
         return self.title

@@ -1,5 +1,12 @@
 """ Options tuple file ('',''), """
 
+from datetime import date
+
+current_date = date.today()
+YEARS = [
+    x for x in range(1920, current_date.year + 1)
+]
+
 ITEM_CONTRACT_CHOICES = (
     ('Sale', 'Sale'),
     ('Rent', 'Rent'),

@@ -1,5 +1,6 @@
 """ VIEWS for product """
 
+from django.contrib.auth.models import User, AnonymousUser
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
@@ -34,8 +35,10 @@ class CategoryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(**kwargs)
         cat_name = self.object.name
-        if self.request.user:
+
+        if self.request.user.id is not None:
             self.create_activity()
+        
         context.update({
             'cat_item': Item.objects.filter(Q(category__name=cat_name))
         })

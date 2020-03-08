@@ -6,7 +6,7 @@ from .views.category_views import CategoryListView, CategoryDetailView, load_sub
 from .views.item_views import(ItemCreateView, ItemDeleteView,
                               ItemDetailView, RecentItemListView, PopularItemListView, ItemUpdateView,
                               UserItemListView)
-from .views.search_views import SearchItemListView
+from .views.search_views import SearchItemListView, AdvancedSearchListView
 
 # NOTE: only one views per url
 
@@ -33,6 +33,7 @@ urlpatterns = [
 
     # The search results view
     path('search/', SearchItemListView.as_view(), name='search_results'),
+    path('search/advanced', AdvancedSearchListView.as_view(), name='advanced_search_results'),
 
     path('ajax/load_subcategory/', category_views.load_subCat,
          name='ajax-load-subcategory'),

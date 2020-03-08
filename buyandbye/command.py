@@ -18,7 +18,7 @@ for new in template2:
     new.save()
 
 
-error opening 
+# NOTE: error opening 
 # with open('.json/items.json') as f:
 #     template3 = json.load(f)
 

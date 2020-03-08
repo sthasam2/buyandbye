@@ -1,4 +1,11 @@
 # Users option choices
+from datetime import date
+
+current_date = date.today()
+
+YEARS = [
+    x for x in range(1920, current_date.year + 1)
+]
 
 STATE_CHOICES = (
     ('Province 1', 'Province 1'),

@@ -15,6 +15,7 @@ class Activity(models.Model):
         ContentType, blank=True, null=True, related_name='target_obj', on_delete=models.CASCADE)
     target_id = models.PositiveIntegerField(
         null=True, blank=True, db_index=True)
+    # target_name = models.CharField(max_length=200, null=True, blank=True)
     target = GenericForeignKey('target_ct', 'target_id')
 
     date_created = models.DateTimeField(default=timezone.now, db_index=True)
@@ -22,3 +23,7 @@ class Activity(models.Model):
     class Meta:
         verbose_name_plural = 'Activities'
         ordering = ('-date_created',)
+
+    def __str__(self):
+        # return self.subname returns the non human readable tuple
+        return f'Activity: {self.user} {self.verb} {self.target} ({self.id})'

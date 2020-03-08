@@ -1,7 +1,7 @@
 """ ITEM VIEWS """
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.messages.views import SuccessMessageMixin
 # from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
@@ -39,6 +39,10 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         self.object = form.save()
         self.create_activity()
         return super(ItemCreateView, self).form_valid(form)
+
+    # def save(self):
+    #     super().save()
+    #     self.create_activity()
 
 
 """ / CREATE """
@@ -100,12 +104,16 @@ class ItemDetailView(HitCountDetailView):
 
     def create_activity(self):
         item_id = self.object
+        print(item_id.title)
         if self.request.user:
             create_action(self.request.user, 'Viewed item', item_id)
 
     def get_context_data(self, **kwargs):
         context = super(ItemDetailView, self).get_context_data(**kwargs)
-        self.create_activity()
+
+        if self.request.user.id is not None:
+            self.create_activity()
+
         context.update({
             'popular_items': Item.objects.order_by('-hit_count_generic__hits')[:5],
         })
