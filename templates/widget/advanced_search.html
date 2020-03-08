@@ -1,0 +1,42 @@
+{% block advanced_search %}
+{% load crispy_forms_tags %}<div class="card">
+    <div class="cardcard-title">
+        <legend>
+            <h2>Advanced Filter</h2>
+        </legend>
+    </div>
+    <form action="{% url 'advanced_search_results' %}" class="form-inline" id="search" id="advSearch" method="get">
+        <label for="title_as">Title</label>
+        <input class="form-control" type="search" name="title_as" id="title_as" placeholder="Title...">
+
+        <label for="price_as">Price Range</label>
+        <input class="form-control" type="number" name="price_low_as" id="price_low_as"
+            placeholder="Price more than...">
+        <input class="form-control" type="number" name="price_high_as" id="price_high_as"
+            placeholder="Price less than...">
+
+        <label for="category_as">Category</label>
+        <select class="form-control" type="search" name="category_as" id="category_as" placeholder="Category...">
+            {% include 'product/category/category_dropdown.html'%}
+        </select>
+
+        <label for="date_posted_as">Ad Date</label>
+        <input class="form-control" type="date" name="date_posted_as" id="datepicker">
+
+        <button class="btn btn-success bg-dark" type="submit">
+            Search
+            <span>
+                <i class="fa fa-search"></i>
+            </span>
+        </button>
+    </form>
+</div>
+{% endblock advanced_search %}
+
+<script>
+    $(function () {
+        $("#date_published_as").datepicker({
+            format: 'dd/mm/yyyy',
+        });
+    });
+</script>

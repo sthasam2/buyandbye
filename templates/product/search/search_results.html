@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% include 'widget/advanced_search.html' %}
+
 <!-- Check search results is empty or not -->
 {% if page_obj.paginator.count != null %}
 <div class="row justify-content-center bg-light">
@@ -18,8 +20,10 @@
           <div class="card">
                <!-- border-radius: 10px; border-radius: 10px 10px 0px 0px;-->
                <!-- {% if items.image.url is not NULL%} -->
-               <img src="{{items.image.url}}" alt="" class="card-img-top" style="object-fit: cover; object-position: 50% 50%; height: 40%; position: relative;">
-               <span class="badge badge-danger" style="position: absolute;  right: 10px; top: 10px">{{items.category}}</span>
+               <img src="{{items.image.url}}" alt="" class="card-img-top"
+                    style="object-fit: cover; object-position: 50% 50%; height: 40%; position: relative;">
+               <span class="badge badge-danger"
+                    style="position: absolute;  right: 10px; top: 10px">{{items.category}}</span>
                <!-- {% endif %} -->
                <div class="card-body">
                     <a href="{% url 'item-detail' items.id %}">
@@ -27,12 +31,14 @@
                               {{ items.title }}
                          </p>
                     </a>
-                    <p class="card-subtitle text-success text-center text-truncate" style="font-size: 11px"> <b>{{items.price}}</b></p>
+                    <p class="card-subtitle text-success text-center text-truncate" style="font-size: 11px">
+                         <b>{{items.price}}</b></p>
                </div>
                <div class="text-muted">
                     <hr>
                     <img class="circle" style="width:16px; height:16px;" src="{{ items.author.profile.image.url }}">
-                    <a href="{% url 'user-item' items.author.username %}" class="mr-2 text-muted" style="font-size: 10px">
+                    <a href="{% url 'user-item' items.author.username %}" class="mr-2 text-muted"
+                         style="font-size: 10px">
                          {{ items.author }}
                     </a><br>
                     <small class="text-muted" style="font-size: 10px">{{items.date_posted|date:"F d, Y"}}</small>
@@ -73,7 +79,8 @@
                <li class="page-item"><a class="page-link" href="?page=1">
                          First
                     </a></li>
-               <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="material-icons md-18">
+               <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i
+                              class="material-icons md-18">
                               navigate_before</i>
                     </a></li>
 
