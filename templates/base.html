@@ -52,10 +52,6 @@
 
         <!-- Content section -->
         {% block content %}
-        <div class="my-5" id="featured">
-            {% block featured %}
-            {% endblock featured %}
-        </div>
         <div class="my-5" id="popular">
             {% block popular%}
             {% endblock popular %}
@@ -63,6 +59,10 @@
         <div class="my-5" id="recent">
             {% block recent %}
             {% endblock recent %}
+        </div>
+        <div class="my-5" id="recommended">
+            {% block recommended %}
+            {% endblock recommended %}
         </div>
         {% endblock content %}
         <!-- / content section -->
