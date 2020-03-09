@@ -27,11 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # custom
-    'base.apps.BaseConfig',
-    'product.apps.ProductConfig',
-    'users.apps.UsersConfig',
-    'newsletters.apps.NewslettersConfig',
     'activity.apps.ActivityConfig',
+    'base.apps.BaseConfig',
+    'newsletters.apps.NewslettersConfig',
+    'product.apps.ProductConfig',
+    'recommender.apps.RecommenderConfig',
+    'users.apps.UsersConfig',
     # pypi
     'django_extensions',
     'phonenumber_field',

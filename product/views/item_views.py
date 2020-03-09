@@ -11,6 +11,7 @@ from django.views.generic import (
 from hitcount.views import HitCountDetailView
 from product.forms import ItemCreateForm
 from product.models import Item
+from recommender.utils import recommend, user_recommend
 from activity.utils import create_action
 
 
@@ -82,6 +83,26 @@ class PopularItemListView(ListView):
         return context
 
 
+class RecommendedItemListView(ListView):
+    """ Popular Product List using Django View: ListView """
+    model = Item
+    template_name = 'product/items/item_list.html'  # app/model_viewtype.html
+    context_object_name = 'item'
+    ordering = ['-date_posted']
+
+    def get_context_data(self, **kwargs):
+        context = super(RecommendedItemListView,
+                        self).get_context_data(**kwargs)
+        user = self.request.user
+        if user.id is not None:
+            rec_item = user_recommend(user)
+        context.update({
+            'title': 'Recommended Items',
+            'item': Item.objects.filter(id__in=rec_item)
+        })
+        return context
+
+
 class UserItemListView(ListView):
     """ Particular User's Posted Product List using Django View: ListView """
     model = Item
@@ -114,8 +135,11 @@ class ItemDetailView(HitCountDetailView):
         if self.request.user.id is not None:
             self.create_activity()
 
+        reco_item_id = recommend(self.object.id, 5)
+
         context.update({
             'popular_items': Item.objects.order_by('-hit_count_generic__hits')[:5],
+            'recommended_items': Item.objects.filter(id__in=reco_item_id)
         })
         return context
 
