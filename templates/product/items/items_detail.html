@@ -24,26 +24,11 @@
             <div class="d-flex justify-content-center">
                 {% if object.author == user %}
                 <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.slug %}">Update Post</a>
-                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a>
-                {% endif %}
+                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a> {% endif %}
             </div>
         </div>
     </div>
 </article>
-
-<div>
-    <legend class="border-bottom">Popular items</legend>
-
-    {% for pop_item in popular_items %}
-    <div class="card px-2 my-2">
-        <div class="card-body">
-            <h2 class="card-title"><a>{{ pop_item.title }}</a></h2>
-            <p class="card-text">Ad views: {% get_hit_count for pop_item %}</p>
-        </div>
-    </div>
-    {% endfor %}
-
-</div>
 
 <div>
     <legend class="border-bottom">Recommended items based on {{object.title}}</legend>
@@ -52,7 +37,28 @@
     <div class="card px-2 my-2">
         <div class="card-body">
             <h2 class="card-title"><a>{{ rec_item.title }}</a></h2>
+            <p class="card-content">{{ rec_item.content }}</p>
             <p class="card-text">Ad views: {% get_hit_count for rec_item %}</p>
+            <img src="{{rec_item.image.url}}" alt="" class="card-img-overlay img-placement">
+            <span class="badge badge-danger badge-header-category-search">{{rec_item.category}}</span>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+<div>
+    <legend class="border-bottom">Popular items</legend>
+
+    {% for pop_item in popular_items %}
+    <div class="card px-2 my-2">
+        <div class="card-body">
+            <img src="{{pop_item.image.url}}" alt="default.img" class="card-img-overlay img-placement">
+            <span class="badge badge-danger badge-header-category-search">{{pop_item.category}}</span>
+            <h2 class="card-title"><a>{{ pop_item.title }}</a></h2>
+            <p class="card-content">{{ pop_item.content }}</p>
+            <p class="card-text">Ad views: {% get_hit_count for pop_item %}</p>
         </div>
     </div>
     {% endfor %}
@@ -73,7 +79,7 @@
                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
             */
-            (function () { // DON'T EDIT BELOW THIS LINE
+            (function() { // DON'T EDIT BELOW THIS LINE
                 var d = document,
                     s = d.createElement('script');
 

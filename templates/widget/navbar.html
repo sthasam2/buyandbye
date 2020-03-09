@@ -9,8 +9,7 @@
             </strong>
         </a>
         <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Collapsible content -->
@@ -18,21 +17,19 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if section == "home" %}selected{% endif %}"  href="/">
+                    <a class="nav-link {% if section == " home " %}selected{% endif %}" href="/">
                         Home
                     </a>
                 </li>
                 <!-- Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <h6 class="dropdown-header"><a href={% url 'category' %}>Explore our Categories</a></h6>
-                        <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
+                        <div class=" p-2 bd-highlight align-items-center bg-">
                             <div class="row">
                                 {% for categorylist in category %}
-                                <a href="#">{{ categorylist.get_name_display }}</a>
-                                {% endfor %}
+                                <a href="#">{{ categorylist.get_name_display }}</a> {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -46,8 +43,7 @@
             <form class="form-inline" action="{% url 'search_results'%}" method="get">
                 <div class="md-form my-0">
                     <div class="form-group">
-                        <input class="text-light" type="search" placeholder="Search" name="q"
-                            value="{{ request.GET.q }}">
+                        <input class="text-light" type="search" placeholder="Search" name="q" value="{{ request.GET.q }}">
                         <!-- <button class="btn btn-success bg-dark" type="submit" >
                                              Search
                                              <i class="material-icons md-9">search</i>
@@ -67,10 +63,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img class="account-img-sm"
-                            src="{{ user.profile.image.url }}">
-                        {{ user.first_name }}
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="account-img-sm" src="{{ user.profile.image.url }}"> {{ user.first_name }}
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <a href="{% url 'profile' %}">
