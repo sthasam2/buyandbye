@@ -6,12 +6,8 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # one user one profile
-    # first_name = models.CharField(max_length=30)
-    # middle_name = models.CharField(max_length=30, blank=True, null=True)
-    # last_name = models.CharField(max_length=30)
-    # email = models.EmailField(max_length=150)
-    # address = models.CharField(max_length=100)
     bio = models.TextField(max_length=200)
+    # date_of_birth  = models.DateField()
     account_activation = models.BooleanField(default=False)
     image = models.ImageField(default='default.png',
                               upload_to='profile_pics/')  # setting image

@@ -1,0 +1,97 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Place your kit's code here -->
+    <script src="https://kit.fontawesome.com/70eb7c5131.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+    <!--fengyuanchen date picker-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <!-- main.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
+
+    {% if title %}
+    <title>BuyandBye - {{title}}
+    </title>
+    {% else %}
+    <title>BuyandBye</title>
+    {% endif %}
+
+</head>
+
+<style>
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+</style>
+
+<body>
+
+    <header class="site-header">
+        {% block navbar %}
+        {% include 'widget/navbar.html' %}
+        {% endblock navbar %}
+    </header>
+
+    {% block info_messages %}
+    {% include 'widget/alert_message.html' %}
+    {% endblock info_messages %}
+
+    <main role="main" class="container">
+        {% block sidebar %}
+        {% endblock %}
+
+        <!-- Content section -->
+        {% block content %}
+        <div class="my-5" id="featured">
+            {% block featured %}
+            {% endblock featured %}
+        </div>
+        <div class="my-5" id="popular">
+            {% block popular%}
+            {% endblock popular %}
+        </div>
+        <div class="my-5" id="recent">
+            {% block recent %}
+            {% endblock recent %}
+        </div>
+        {% endblock content %}
+        <!-- / content section -->
+
+    </main>
+
+    <!-- Site Navigation / Breadcrumb -->
+    {% block sitenav %}
+    {% include 'widget/sitenav.html' %}
+    {% endblock sitenav %}
+    <!-- / Site Navigation / Breadcrumb -->
+
+
+    {% block footer %}
+    {% include 'widget/footer.html' %}
+    {% endblock footer %}
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js">
+    </script>
+
+</body>
+
+</html>

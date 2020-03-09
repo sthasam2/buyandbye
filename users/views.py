@@ -14,7 +14,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import (ProfileUpdateForm, UserRegisterForm,  # profile forms
                     UserUpdateForm)
-from .tokens import account_activation_token  # token variable
+from .utils import account_activation_token  # token variable
+from activity.utils import create_action
 
 
 def register(request):
@@ -37,7 +38,7 @@ def register(request):
             # email info and content generater
             current_site = get_current_site(request)  # site getter
             mail_subject = 'Account activation.'  # subject
-            message = render_to_string('users/account_activation_email.html', {  # message content
+            message = render_to_string('users/register/account_activation_email.html', {  # message content
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -51,6 +52,8 @@ def register(request):
 
             # return redirect('activation_message_sent')
             # email send success info message
+            # create account registered history
+            create_action(user, 'Registered account', user.profile)
             messages.info(
                 request, f'Your account has been created! An email has been sent with instructions, Please verify your email to login.')
             return redirect('login')
@@ -59,8 +62,8 @@ def register(request):
     return render(request, 'users/register/register.html', {'form': form})
 
 
-def activation_message_sent_view(request):
-    return render(request, 'users/register/account_activate_message.html', {'title': 'Activate email'})
+# def activation_message_sent(request):
+#     return render(request, 'users/register/account_activate_message.html', {'title': 'Activate email'})
 
 
 def activate(request, uidb64, token):
@@ -74,6 +77,8 @@ def activate(request, uidb64, token):
         user.save()
         username = user.username
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        # create account activated history
+        create_action(user, 'Activated account', user.profile)
         messages.success(
             request, f'{username}, Your email has been validated! Now you can login.')
         return redirect('login')
@@ -98,6 +103,8 @@ def profile_update(request):
             u_form.save()
             p_form.save()
             username = u_form.cleaned_data.get('username')
+            # create account updated history
+            create_action(user, 'Activated account', user.profile)
             messages.success(
                 request, f'Your account has been updated, {username}!')
             return redirect('profile')

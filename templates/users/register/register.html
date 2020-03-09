@@ -1,4 +1,4 @@
-{% extends "homepage/base.html" %}{% load socialaccount %} {% load crispy_forms_tags %} {% block content %}
+{% extends "base.html" %}{% load socialaccount %} {% load crispy_forms_tags %} {% block content %}
 <div class="card px-5 py-3">
     <form method="POST">
         {% csrf_token %}
@@ -20,6 +20,7 @@
             </div>
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-6">
+                    {{form.date_of_birth|as_crispy_field}}
                     {{form.username|as_crispy_field}}
                     {{form.password1|as_crispy_field}}
                     {{form.password2|as_crispy_field}}
@@ -90,4 +91,4 @@
     </div>
 
 </div>
-    {% endblock content %}
+{% endblock content %}

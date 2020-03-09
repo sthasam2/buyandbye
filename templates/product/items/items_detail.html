@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% load hitcount_tags %} {% block content %}
+
+<article>
+    <div class="card px-2 pt-2">
+        <div class="card-body">
+            <h2 class="card-title"><a>{{ object.title }}</a></h2>
+            <p class="card-text">Ad views: {% get_hit_count for item_detail %}</p>
+            <p class="card-text">{{ object.content }}</p>
+        </div>
+        <div class="card-footer justify-content-center">
+            <div class="d-flex justify-content-center">
+                <table>
+                    <tr>
+                        <th>
+                            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+                        </th>
+                        <th>
+                            <a class="mr-2" href="{% url 'user-item' object.author.username %}">{{ object.author }}</a>
+                            <small class="text-muted">{{object.date_posted|date:"F d, Y"}}</small>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                {% if object.author == user %}
+                <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.slug %}">Update Post</a>
+                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>
+
+<div>
+    <legend class="border-bottom">Popular items</legend>
+
+    {% for pop_item in popular_items %}
+    <div class="card px-2 my-2">
+        <div class="card-body">
+            <h2 class="card-title"><a>{{ pop_item.title }}</a></h2>
+            <p class="card-text">Ad views: {% get_hit_count for pop_item %}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+<div class="card">
+    <div class="container px-5 py-2">
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+             */
+            /*
+            var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function () {  // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = 'https://buyandbye-com-np.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                rel="nofollow">comments
+                powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+{% endblock content %}
