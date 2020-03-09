@@ -15,9 +15,7 @@ h6 {
     color: #2c2c2c;
 }
 
-
 div {
-
     #popular,
     #recent {
         background: rgba(0, 0, 0, 0.185);
@@ -55,6 +53,7 @@ div {
     width: 18px;
 }
 
+
 /* material card */
 
 .sticky {
@@ -65,9 +64,10 @@ div {
 }
 
 .card {
-    background-color: #EEEEEE;
-    box-shadow: -2px -2px 8px 2px rgba(255, 255, 255, 1),
-        2px 2px 8px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #E1F5FE;
+    -webkit-box-shadow: -2px -2px 8px 2px rgba(41, 38, 38, 0.082), 2px 2px 8px 2px rgba(41, 38, 38, 0.082);
+    box-shadow: -2px -2px 8px 2px rgba(41, 38, 38, 0.082), 2px 2px -8px 2px rgba(41, 38, 38, 0.082);
 }
 
 .card-item-grid {
@@ -78,7 +78,6 @@ div {
     height: 250px;
     width: 185px;
     color: #5f788a;
-
     &:hover {
         transform: scale(1.05);
         transition: all 0.25s ease-out;
@@ -88,14 +87,12 @@ div {
     }
 }
 
-
 .img-item-grid-cover {
     object-fit: cover;
     object-position: 50% 50%;
     height: 50%;
     position: relative;
 }
-
 
 .card-subtitle-price {
     color: green;
@@ -104,15 +101,17 @@ div {
 }
 
 .card-subtitle-condition {
-    color: #e6ff05;
+    color: #5D4037;
     font-size: 12px;
     text-transform: uppercase;
 }
+
 
 /* .card-image-top:hover img{
      transform: scale(5);
      transition: all .25s ease-out;
 } */
+
 
 /* material card end */
 
@@ -122,7 +121,9 @@ div {
     border-radius: 50%;
 }
 
+
 /* sticky footer css */
+
 
 /* body {
      display: flex;
@@ -138,14 +139,15 @@ main {
     font-size: 18px !important;
 }
 
+
 /* / sticky footer css */
+
 
 /* nav bar */
 
 .intro-2 {
-    background:
-        /* url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg") */
-        no-repeat center center;
+    background: /* url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg") */
+    no-repeat center center;
     background-size: cover;
 }
 
@@ -167,25 +169,22 @@ main {
     height: 45%;
 }
 
+
 /* / nav bar */
 
 .btn {
     border-radius: 20px 20px 20px 20px;
-    box-shadow: -2px -2px 8px 6px rgba(255, 255, 255, 1),
-        2px 2px 8px 6px rgba(0, 0, 0, 0.05);
-
+    box-shadow: -2px -2px 8px 6px rgba(255, 255, 255, 1), 2px 2px 8px 6px rgba(0, 0, 0, 0.05);
     &:hover {
         opacity: 90%;
     }
 }
-
 
 .btn-social {
     width: 300px;
     color: #ffffff;
     font-weight: bold;
     font-size: 18px;
-
 }
 
 .badge-header-category {

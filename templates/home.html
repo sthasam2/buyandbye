@@ -1,14 +1,47 @@
-{% extends "base.html" %}
-{% load hitcount_tags %}
+{% extends "base.html" %} {% load hitcount_tags %}
 <!-- Home content block -->
-{% block content %}
-
-{% block featured %}
-{% endblock featured%}
+{% block content %} {% block featured %} {% endblock featured%}
 
 
 <!-- popular items  -->
-{% block popular %}
+{% block recommended %} {% comment %} {% if user is not None %} {% endcomment %}
+<div class="container bg-" id="Recommended_Item">
+    <div class="row justify-content-center">
+        <legend>
+            <a href="#Recommended_Item">
+                Recommended Items For You
+            </a>
+        </legend>
+    </div>
+
+    {% for items in rec_item %}
+    <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
+        <div class="card card-item-grid text-center">
+            <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
+            <span class="badge badge-danger badge-header-category">{{items.category}}</span>
+            <div class="card-body">
+                <a href="{% url 'item-detail' items.slug %}" title="{{ items.title }}" class="card-title text-primary">
+                    {{ items.title }}
+                </a>
+                <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
+                    <b>{{items.price}}</b>
+                </p>
+                <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
+                    {{items.condition}}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row justify-content-center">
+        <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
+    </div>
+
+</div>
+
+{% comment %} {% elif%} {% endcomment %} {% comment %}
+<h2>Login to get recommendations</h2> {% endcomment %} {% comment %} {% endif %} {% endcomment %} {% endblock recommended %} {% block popular %}
 <div class="container mt-5" id="Popular_Items">
     <div class="row justify-content-center">
         <legend>
@@ -24,8 +57,7 @@
             <img src="{{pop_item.image.url}}" alt="default.img" class="card-img-top img-item-grid-cover">
             <span class="badge badge-danger badge-header-category">{{pop_item.category}}</span>
             <div class="card-body">
-                <a href="{% url 'item-detail' pop_item.slug %}" title="{{ pop_item.title }}"
-                    class="card-title text-primary">
+                <a href="{% url 'item-detail' pop_item.slug %}" title="{{ pop_item.title }}" class="card-title text-primary">
                     {{ pop_item.title }}
                 </a>
                 <p class="card-subtitle-price" title="{{ pop_item.price }}">
@@ -62,7 +94,7 @@
     </div>
 
     {% for items in item %}
-    <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
+    <div height=1vh class="d-inline-flex p-2 bd-highlight align-items-center bg-">
         <div class="card card-item-grid text-center">
             <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
             <span class="badge badge-danger badge-header-category">{{items.category}}</span>
@@ -88,47 +120,6 @@
 </div>
 {% endblock recent %}
 <!--/ Recent Items -->
-
-{% block recommended %}
-{% comment %} {% if user is not None %} {% endcomment %}
-<div class="container bg-" id="Recommended_Item">
-    <div class="row justify-content-center">
-        <legend>
-            <a href="#Recommended_Item">
-                Recommended Items For You
-            </a>
-        </legend>
-    </div>
-
-    {% for items in rec_item %}
-    <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
-        <div class="card card-item-grid text-center">
-            <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
-            <span class="badge badge-danger badge-header-category">{{items.category}}</span>
-            <div class="card-body">
-                <a href="{% url 'item-detail' items.slug %}" title="{{ items.title }}" class="card-title text-primary">
-                    {{ items.title }}
-                </a>
-                <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
-                    <b>{{items.price}}</b>
-                </p>
-                <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
-                    {{items.condition}}
-                </p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
-    <div class="row justify-content-center">
-        <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
-    </div>
-
-</div>
-{% comment %} {% elif%} {% endcomment %}
-{% comment %} <h2>Login to get recommendations</h2> {% endcomment %}
-{% comment %} {% endif %} {% endcomment %}
-{% endblock recommended %}
 
 {% endblock content %}
 <!-- / Home content block -->

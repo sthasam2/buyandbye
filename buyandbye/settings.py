@@ -165,8 +165,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # loads saved variable from environment variables
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = 'yogeshpant293@gmail.com'
+EMAIL_HOST_PASSWORD = 'Precious@0712'
 
 
 SITE_ID = 1
