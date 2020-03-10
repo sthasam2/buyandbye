@@ -24,8 +24,7 @@
             <div class="d-flex justify-content-center">
                 {% if object.author == user %}
                 <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.slug %}">Update Post</a>
-                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a>
-                {% endif %}
+                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a> {% endif %}
             </div>
         </div>
     </div>
@@ -87,7 +86,7 @@
                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
             */
-            (function () { // DON'T EDIT BELOW THIS LINE
+            (function() { // DON'T EDIT BELOW THIS LINE
                 var d = document,
                     s = d.createElement('script');
 

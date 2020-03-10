@@ -52,6 +52,35 @@ div #recent {
 	width: 18px;
 }
 
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
+
+.account-img-sm {
+    border-radius: 100%;
+    height: 24px;
+    width: 24px;
+}
+
+.icon-sm {
+    height: 18px;
+    width: 18px;
+}
+
+
 /* material card */
 
 .sticky {
@@ -122,6 +151,7 @@ div #recent {
 	right: 10px;
 	top: 10px;
 }
+
 /* .card-image-top:hover img{
     transform: scale(5);
     transition: all .25s ease-out;
@@ -135,7 +165,9 @@ div #recent {
 	border-radius: 50%;
 }
 
+
 /* sticky footer css */
+
 
 /* body {
      display: flex;
@@ -150,6 +182,7 @@ main {
 .page-link {
 	font-size: 18px !important;
 }
+
 
 /* / sticky footer css */
 
@@ -176,7 +209,9 @@ main {
 
 .view {
 	height: 45%;
+
 }
+
 
 /* / nav bar */
 
@@ -274,4 +309,3 @@ main {
 	/* resize: horizontal; */
 }
 
-/*# sourceMappingURL=index.css.map */
