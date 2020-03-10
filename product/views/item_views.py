@@ -86,7 +86,7 @@ class PopularItemListView(ListView):
 class RecommendedItemListView(ListView):
     """ Popular Product List using Django View: ListView """
     model = Item
-    template_name = 'product/items/item_list.html'  # app/model_viewtype.html
+    template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
 
@@ -96,6 +96,8 @@ class RecommendedItemListView(ListView):
         user = self.request.user
         if user.id is not None:
             rec_item = user_recommend(user)
+        else:
+            rec_item = user_recommend(1)
         context.update({
             'title': 'Recommended Items',
             'item': Item.objects.filter(id__in=rec_item)

@@ -41,15 +41,14 @@
 </div>
 
 {% comment %} {% elif%} {% endcomment %} {% comment %}
-<h2>Login to get recommendations</h2> {% endcomment %} {% comment %} {% endif %} {% endcomment %} {% endblock recommended %} {% block popular %}
+<h2>Login to get recommendations</h2> {% endcomment %} {% comment %} {% endif %} {% endcomment %}
+{% endblock recommended %} {% block popular %}
 <div class="container mt-5" id="Popular_Items">
-    <div class="row justify-content-center">
-        <legend>
-            <a href="#Popular_Items">
-                Popular Items
-            </a>
-        </legend>
-    </div>
+    <legend>
+        <a href="#Popular_Items">
+            Popular Items
+        </a>
+    </legend>
 
     {% for pop_item in popular_items %}
     <div class="d-inline-flex p-2 bd-highlight align">
@@ -57,7 +56,8 @@
             <img src="{{pop_item.image.url}}" alt="default.img" class="card-img-top img-item-grid-cover">
             <span class="badge badge-danger badge-header-category">{{pop_item.category}}</span>
             <div class="card-body">
-                <a href="{% url 'item-detail' pop_item.slug %}" title="{{ pop_item.title }}" class="card-title text-primary">
+                <a href="{% url 'item-detail' pop_item.slug %}" title="{{ pop_item.title }}"
+                    class="card-title text-primary">
                     {{ pop_item.title }}
                 </a>
                 <p class="card-subtitle-price" title="{{ pop_item.price }}">
@@ -72,11 +72,12 @@
             </div>
         </div>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 
-    <div class="row justify-content-center">
-        <a href="{% url 'popular-items' %}" class="btn btn-primary">View More</a>
-    </div>
+<div class="row justify-content-center">
+    <a href="{% url 'popular-items' %}" class="btn btn-primary">View More</a>
+</div>
 
 </div>
 {% endblock popular %}
@@ -99,15 +100,23 @@
             <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
             <span class="badge badge-danger badge-header-category">{{items.category}}</span>
             <div class="card-body">
-                <a href="{% url 'item-detail' items.slug %}" title="{{ items.title }}" class="card-title text-primary">
-                    {{ items.title }}
-                </a>
-                <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
-                    <b>{{items.price}}</b>
-                </p>
-                <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
-                    {{items.condition}}
-                </p>
+                <table>
+                    <tr><a href="{% url 'item-detail' items.slug %}" title="{{ items.title }}"
+                            class="card-title text-primary">
+                            {{ items.title }}
+                        </a>
+                    </tr>
+                    <tr>
+                        <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
+                            <b>{{items.price}}</b>
+                        </p>
+                    </tr>
+                    <tr>
+                        <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
+                            {{items.condition}}
+                        </p>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
