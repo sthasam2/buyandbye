@@ -1,6 +1,7 @@
 """ ITEM VIEWS """
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.messages.views import SuccessMessageMixin
 # from django.core.paginator import Paginator
@@ -57,7 +58,7 @@ class RecentItemListView(ListView):
     template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
-    paginate_by = 20
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(RecentItemListView, self).get_context_data(**kwargs)
@@ -73,7 +74,7 @@ class PopularItemListView(ListView):
     template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-hit_count_generic__hits']
-    paginate_by = 20
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(PopularItemListView, self).get_context_data(**kwargs)
@@ -89,6 +90,7 @@ class RecommendedItemListView(ListView):
     template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(RecommendedItemListView,

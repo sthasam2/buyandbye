@@ -45,9 +45,10 @@ class AdvancedSearchListView(ListView):
     # model = Item
     template_name = 'product/search/advanced_search_results.html'
     context_object_name = 'advanced_search_item'
-    paginate_by = 1
+    paginate_by = 20
 
     def get_queryset(self):
+        print("adv")
         object_list = Item.objects.all()
 
         title_asq = self.request.GET.get('title_as')
@@ -57,6 +58,7 @@ class AdvancedSearchListView(ListView):
         date_posted_asq = self.request.GET.get('date_posted_as')
 
         if is_valid_queryparam(title_asq):
+
             object_list = object_list.filter(
                 Q(title__icontains=title_asq)).distinct()
 
@@ -75,8 +77,5 @@ class AdvancedSearchListView(ListView):
         if is_valid_queryparam(date_posted_asq):
             object_list = object_list.filter(
                 Q(date_posted__gte=date_posted_asq)).distinct()
-
-        if not (is_valid_queryparam(title_asq) and is_valid_queryparam(price_high_asq) and is_valid_queryparam(price_low_asq) and is_valid_queryparam(category_asq) and is_valid_queryparam(date_posted_asq)):
-            object_list = object_list.none()
 
         return object_list.order_by('-date_posted')
