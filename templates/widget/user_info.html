@@ -1,0 +1,44 @@
+ <div class="card">
+     <div class="card-title mt-4">
+         <h5>User Info
+         </h5>
+     </div>
+     <div class="card-body">
+         <table>
+             <tr>
+                 <th><strong>Username</strong>
+                 </th>
+                 <td><strong> : </strong></td>
+                 <td>
+                     <a href="{% url 'user-item' user %}">{{user}}</a>
+                     <span><img class="account-img-sm" src="{{ user.profile.image.url }}" alt="default.png"></span>
+                 </td>
+                 
+             </tr>
+             <tr>
+                 <th><strong>Name</strong></th>
+                 <td><strong> : </strong></td>
+                 <td>{{user.profile.first_name}} {{user.profile.last_name}}</td>
+                 
+             </tr>
+             <tr>
+                 <th><strong>Phone</strong></th>
+                 <td><strong> : </strong></td>
+                 <td>{{user.profile.phone}}</td>
+                 
+             </tr>
+             <tr>
+                 <th><strong>Email</strong></th>
+                 <td><strong> : </strong></td>
+                 <td>{{user.profile.email}}</td>
+                 
+             </tr>
+             <tr>
+                 <th><strong>Address</strong></th>
+                 <td><strong> : </strong></td>
+                 <td>{{user.profile.address1}}, {{user.profile.address2}}</td>
+                 
+             </tr>
+         </table>
+     </div>
+ </div>

@@ -14,8 +14,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- main.css -->
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
 
@@ -32,6 +32,15 @@
     body {
         font-family: 'Varela Round', sans-serif;
     }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Cabin', sans-serif;
+    }
 </style>
 
 <body>
@@ -42,19 +51,25 @@
         {% endblock navbar %}
     </header>
 
-    {% block info_messages %}
-    {% include 'widget/alert_message.html' %}
-    {% endblock info_messages %}
+    <main>
+        {% block info_messages %}
+        {% include 'widget/alert_message.html' %}
+        {% endblock info_messages %}
 
-    <main role="main" class="container">
-        <div class="whitespace"></div>
+        {% block wrapper %}
+
         {% block sidebar %}
-        {% endblock %}
+        {% endblock sidebar %}
 
-        <!-- Content section -->
         {% block content %}
         {% endblock content %}
-        <!-- / content section -->
+
+        <div class="container">
+            {% block mainbody %}
+            {% endblock mainbody %}
+        </div>
+
+        {% endblock wrapper %}
 
     </main>
 

@@ -5,10 +5,17 @@ from PIL import Image
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # one user one profile
-    bio = models.TextField(max_length=200)
-    # date_of_birth  = models.DateField()
-    account_activation = models.BooleanField(default=False)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE)  # one user one profile
+    bio = models.TextField(max_length=200, blank=True, null=True)
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    middle_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    email = models.EmailField(max_length=150, blank=True, null=True)
+    address1 = models.CharField(max_length=100, blank=True, null=True)
+    address2 = models.CharField(max_length=100, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
     image = models.ImageField(default='default.png',
                               upload_to='profile_pics/')  # setting image
 

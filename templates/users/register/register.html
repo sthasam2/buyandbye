@@ -1,4 +1,8 @@
-{% extends "base.html" %}{% load socialaccount %} {% load crispy_forms_tags %} {% block content %}
+{% extends "base.html" %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block mainbody %}
 <div class="card px-5 py-3">
     <form method="POST">
         {% csrf_token %}
@@ -91,4 +95,4 @@
     </div>
 
 </div>
-{% endblock content %}
+{% endblock mainbody %}

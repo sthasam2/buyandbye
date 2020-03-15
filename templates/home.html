@@ -1,14 +1,26 @@
 {% extends "base.html" %}
 {% load hitcount_tags %}
 <!-- Home content block -->
+{% block wrapper %}
+<div class="view intro-2">
+    <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+            <div class="container text-center white-text wow fadeInUp">
+                <h2 style="color: rgba(255,255,255,0.8);">BuyandBye, your online shopping portal</h2>
+                <br>
+                <p>Find Products that suit your needs, contact the seller and buy them.</p>
+                <br>
+                <p>OR, You can register and post ads to put your products up for sale</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="whitespace"></div>
+
 {% block content %}
 
 
-{% block header %}
-{% endblock header %}
-
-
-<!-- popular items  -->
 {% block recommended %} {% comment %} {% if user is not None %} {% endcomment %}
 <div class="container" id="Recommended_Item">
     <div class="row justify-content-center">
@@ -35,7 +47,7 @@
 <div class="whitespace"></div>
 
 {% block popular %}
-<div class="container mt-5" id="Popular_Items">
+<div class="container" id="Popular_Items">
     <div class="row justify-content-center">
         <h3>
             <a href="#Popular_Items">
@@ -43,6 +55,7 @@
             </a>
         </h3>
     </div>
+
     {% for item in popular_items %}
     {% include 'widget/item_card_grid.html' %}
     {% endfor %}
@@ -58,7 +71,7 @@
 </div>
 <!-- Recent Items -->
 {% block recent %}
-<div class="container bg-" id="Recent_Item">
+<div class="container" id="Recent_Item">
 
     <div class="row justify-content-center">
         <h3>
@@ -67,7 +80,6 @@
             </a>
         </h3>
     </div>
-
 
     {% for item in item %}
     {% include 'widget/item_card_grid.html' %}
@@ -80,5 +92,7 @@
 </div>
 {% endblock recent %}
 <!--/ Recent Items -->
+</div>
 {% endblock content %}
 <!-- / Home content block -->
+{% endblock wrapper %}

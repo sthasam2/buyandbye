@@ -28,11 +28,18 @@ def register(request):
             user.save()
 
             # save different form data
-            # username = form.cleaned_data.get('username')
-            # first_name = form.cleaned_data.get('first_name')
-            # middle_name = form.cleaned_data.get('middle_name')
-            # last_name = form.cleaned_data.get('last_name')
-            # phone = form.cleaned_data.get('phone')
+            user.profile.first_name = form.cleaned_data.get('first_name')
+            user.profile.middle_name = form.cleaned_data.get('middle_name')
+            user.profile.last_name = form.cleaned_data.get('last_name')
+            user.profile.phone = form.cleaned_data.get('phone')
+            user.profile.date_of_birth = form.cleaned_data.get('date_of_birth')
+            user.profile.email = form.cleaned_data.get('email')
+            user.profile.address1 = form.cleaned_data.get('address1')
+            user.profile.address2 = form.cleaned_data.get('address2')
+            user.profile.phone = form.cleaned_data.get('phone')
+            print(form.cleaned_data.phone)
+            user.profile.save()
+
             to_email = form.cleaned_data.get('email')
 
             # email info and content generater
@@ -93,6 +100,7 @@ def profile(request):
 
 @login_required
 def profile_update(request):
+    user = request.user
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -100,14 +108,25 @@ def profile_update(request):
                                    instance=request.user.profile)
 
         if u_form.is_valid() and p_form.is_valid():
+            username = u_form.cleaned_data.get('username')
+            user.profile.first_name = p_form.cleaned_data.get('first_name')
+            user.profile.middle_name = p_form.cleaned_data.get('middle_name')
+            user.profile.last_name = p_form.cleaned_data.get('last_name')
+            user.profile.phone = p_form.cleaned_data.get('phone')
+            user.profile.email = p_form.cleaned_data.get('email')
+            user.profile.address1 = p_form.cleaned_data.get('address1')
+            user.profile.address2 = p_form.cleaned_data.get('address2')
+            user.profile.phone = p_form.cleaned_data.get('phone')
+            # print(p_form.cleaned_data.get('phone'))
             u_form.save()
             p_form.save()
-            username = u_form.cleaned_data.get('username')
+
             # create account updated history
-            create_action(user, 'Activated account', user.profile)
+            create_action(user, 'Updated account', user.profile)
             messages.success(
                 request, f'Your account has been updated, {username}!')
             return redirect('profile')
+
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)

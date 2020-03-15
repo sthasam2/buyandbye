@@ -17,7 +17,6 @@
             <ul class="list-group list-group-flush">
                 <!-- category element -->
                 {% for categories in category %}
-                <li class="list-group-item">
                     <a href="{% url 'category-detail' categories.slug %}">
                         {{ categories.get_name_display }}
                     </a>

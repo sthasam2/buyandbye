@@ -1,98 +1,33 @@
 {% extends "base.html" %}
-{% block content %}
 
-<div>
-  <h3 class="account-heading" style="align-items: center;">
-    <img class="rounded-circle account-img" style="width: 60px; height: 60px;"
-      src="{{ user_item.author.profile.image.url }}">
-    {{ view.kwargs.username }}
-  </h3>
+{% block wrapper %}
+<div class="wrapper">
+
+	<div class="grid1">
+		{% block sidebar %}
+		<div class="sticky" style="top: 15vh">
+			{% include 'widget/user_info.html' %}
+		</div>
+		{% endblock sidebar %}
+	</div>
+
+	<div class="grid2">
+		{% block content %}
+		<h4 style="align-content:center; " class="mb-5">Items ({{ page_obj.paginator.count }})</h4>
+
+
+		{% for item in user_items %}
+		{% include 'widget/item_card_list.html' %}
+		{% endfor %}
+
+		<!-- Checks if pages available -->
+		{% if is_paginated %}
+		{% include 'widget/item_pagination.html' %}
+		{% endif %}
+		<!-- /Checks if pages available -->
+
+		{% endblock content %}
+	</div>
+
 </div>
-<h4 style="align-content:center; " class="mb-5">Items ({{ page_obj.paginator.count }})</h4>
-
-
-{% for items in user_item %}
-<article class="media content-section" style="width: auto;">
-  <div class="article-metadata" style="width: auto;">
-    <!-- <img src="#" style=" border-radius:10px 10px 0px 0px; " height="45%" width="100%" class="card-img-top" alt="..."> -->
-    <div class="article-metadata">
-      <h6><a class="article-title" href="{% url 'item-detail' items.id %}"><b>{{ items.title }}</b></a></h6>
-      <p>{{ items.content }}</p>
-    </div>
-    <div>
-      <img class="header-img" src="{{ items.author.profile.image.url }}">
-      <a class="mr-2" href="{% url 'user-item' items.author.username %}">{{ items.author }}</a><br>
-      <small class="text-muted">{{items.date_posted|date:"F d, Y"}}</small>
-    </div>
-</article>
-{% endfor %}
-
-<!-- Checks if pages available -->
-{% if is_paginated %}
-<div class="my-3 mx-auto">
-
-  <nav aria-label="Page navigation example">
-    <ul class="pagination pg-blue justify-content-center ">
-
-      <!-- Paginator check for previous pages availability, eg. if current page = 3, Previous = 2 and First is always = 1 -->
-      {% if page_obj.has_previous %}
-      <li class="page-item"><a class="page-link" href="?page=1">
-          First
-        </a></li>
-      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i
-            class="material-icons md-18">
-            navigate_before</i>
-        </a></li>
-
-      {% else %}
-      <li class="page-item disabled"><a class="page-link" href="#">
-          First
-        </a></li>
-      <li class="page-item disabled">
-        <a class="page-link" href="#">
-          <i class="material-icons md-18">navigate_before</i>
-        </a>
-      </li>
-      {% endif %}
-
-
-      <!-- Paginator check for neighbouring pages availability, eg. if current page = 3, neighbour (-, prev)= 1,2 and (+, next) = 4,5 -->
-      {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
-      <li class="page-item active"><a class="page-link" href="?page={{num}}">
-          {{num}}<span class="sr-only">(current)</span>
-        </a></li>
-      {% elif num > page_obj.number|add:'-3' and num
-            < page_obj.number|add: '3' %} <li class="page-item"><a class="page-link" href="?page={{num}}">
-          {{num}}
-        </a></li>
-      {% endif %} {% endfor %}
-
-      <!-- Paginator check for previous pages availability, eg. if current page = 3, Next = 4 and Last is always = Total pages -->
-      {% if page_obj.has_next %}
-      <li class="page-item ">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-          <i class="material-icons md-18">navigate_next</i>
-        </a>
-      </li>
-      <li class="page-item "><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
-          Last
-        </a></li>
-
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">
-          <i class="material-icons md-18">navigate_next</i>
-        </a>
-      </li>
-      <li class="page-item disabled"><a class="page-link" href="#">
-          Last
-        </a></li>
-      {% endif %}
-
-    </ul>
-  </nav>
-</div>
-{% endif %}
-<!-- /Checks if pages available -->
-
-{% endblock content %}
+{% endblock wrapper %}

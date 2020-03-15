@@ -12,24 +12,9 @@
         </legend>
     </div>
     <div>
-        {% for items in cat_item %}
+        {% for item in cat_item %}
         <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
-            <div class="card card-item-grid text-center">
-                <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
-                <span class="badge badge-danger badge-header-category">{{items.category}}</span>
-                <div class="card-body">
-                    <a href="{% url 'item-detail' items.slug %}" title="{{ items.title }}"
-                        class="card-title text-primary">
-                        {{ items.title }}
-                    </a>
-                    <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
-                        <b>{{items.price}}</b>
-                    </p>
-                    <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
-                        {{items.condition}}
-                    </p>
-                </div>
-            </div>
+            {% include 'widget/item_card_grid.html' %}
         </div>
     </div>
     {% endfor %}
