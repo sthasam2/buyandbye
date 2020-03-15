@@ -3,11 +3,13 @@
 {% block item_card_grid %}
 <div class="d-inline-flex p-2 align-content-center">
     <div class="card card-item-grid">
+        <a href="{% url 'item-detail' item.slug %}" title="{{ item.title }}" class="stretched-link"></a>
         <img src="{{item.image.url}}" alt="default.img" class="card-img-top img-item-grid-cover">
         <span class="badge badge-danger badge-header-category-grid">{{item.category}}</span>
         <div class="card-body card-body-grid">
             <div class="row">
-                <a href="{% url 'item-detail' item.slug %}" title="{{ item.title }}" class="card-title card-title-grid">
+                <a href="{% url 'item-detail' item.slug %}" title="{{ item.title }}"
+                    class="stretched-link card-title card-title-grid">
                     {{ item.title }}
                 </a>
             </div>

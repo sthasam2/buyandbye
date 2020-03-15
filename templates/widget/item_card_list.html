@@ -2,6 +2,7 @@
 
 {% block item_card_list %}
 <div class="card card-item-list my-4">
+    <a href="{% url 'item-detail' item.slug %}" title="{{ item.title }}" class="stretched-link"></a>
     <div class="row">
         <div class="col-4">
             <img src="{{item.image.url}}" alt="default.img" class="img-item-list-cover">
@@ -11,7 +12,7 @@
                 <span class="badge badge-danger badge-header-categor-list">{{item.category}}</span>
                 <div class="row">
                     <a href="{% url 'item-detail' item.slug %}" title="{{ item.title }}"
-                        class="card-title text-primary stretched-link">
+                        class="stretched-link card-title text-primary">
                         {{ item.title }}
                     </a>
                 </div>
