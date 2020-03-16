@@ -1,5 +1,5 @@
 body {
-  background-color: #dadada;
+  background-color: #ececec;
   color: #333333;
   -webkit-box-sizing: border-box;
   margin-top: 10vh;
@@ -438,5 +438,49 @@ div.whitespace {
 
 #id_price_1 {
   max-width: 10rem;
+}
+
+.form_sizer {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 90vh;
+}
+
+.card-item-category {
+  display: block;
+  font-weight: bold;
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+}
+
+.card-img-category {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 10px;
+  -webkit-filter: brightness(40%);
+          filter: brightness(40%);
+  z-index: 0;
+}
+
+.category-header {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #e6e6e6;
+  z-index: 3;
 }
 /*# sourceMappingURL=index.css.map */

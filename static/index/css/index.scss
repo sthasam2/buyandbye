@@ -1,6 +1,6 @@
 body {
     // text-align: center;
-    background-color: #dadada;
+    background-color: #ececec;
     color: #333333;
     -webkit-box-sizing: border-box;
     margin-top: 10vh;
@@ -448,3 +448,35 @@ div.whitespace {
 .form_sizer {
     flex-direction: column;
     min-height: 90vh;
+}
+
+// -----------------------------------------------CATEGORY CARD----------------------------------------------------------------
+.card-item-category {
+    display: block;
+    font-weight: bold;
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.card-img-category {
+    display: flex;
+    object-fit: cover;
+    object-position: 50% 50%;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 10px;
+    filter: brightness(40%);
+    z-index: 0;
+}
+
+.category-header {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(230, 230, 230);
+    z-index: 3;
+}
