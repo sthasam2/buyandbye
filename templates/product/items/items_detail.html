@@ -2,100 +2,11 @@
 {% load hitcount_tags %}
 
 {% block content %}
-<div class="wrapper" style="height: 130vh">
+<div class="wrapper">
     <div class="grid1">
         <div class="sidecard-specifications">
-            <div class="card item-specifications">
-                <div class="card-title">
-                    <h5>
-                        Item Specifications
-                    </h5>
-                </div>
-                <table>
-                    <tr>
-                        <th><strong>Title</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.title}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Price</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.price}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Negotiable</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>
-                            {% if object.price_negotiabilty %}Yes
-                            {% elif object.price_negotiability %}No
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><strong>Condition</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.condition}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Ad views</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{% get_hit_count for item_detail %}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Category</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.category}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Sub-category</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.sub_category}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Date Posted</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.date_posted}}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="card seller-specifications">
-                <div class="card-title">
-                    <h5>Seller Info
-                    </h5>
-                </div>
-                <table>
-                    <tr>
-                        <th><strong>Username</strong>
-                        </th>
-                        <td><strong> : </strong></td>
-                        <td>
-                            <a href="{% url 'user-item' object.author.username %}">{{object.author}}</a>
-                            <span><img class="account-img-sm" src="{{ object.author.profile.image.url }}"
-                                    alt="default.png"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><strong>Name</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.author.profile.first_name}} {{object.author.profile.last_name}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Phone</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.author.profile.phone}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Email</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.author.profile.email}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>Address</strong></th>
-                        <td><strong> : </strong></td>
-                        <td>{{object.author.profile.address1}}, {{object.author.profile.address2}}</td>
-                    </tr>
-                </table>
-            </div>
+            {% include 'widget/item_specification.html' %}
+            {% include 'widget/seller_card.html' %}
         </div>
     </div>
 
@@ -120,7 +31,7 @@
 </div>
 
 <div class="wrapper2">
-    <div class="grid2 my-5">
+    <div class="grid2">
         <div class="mb-5">
             <legend>Recommended items based on {{object.title}}</legend>
             {% for item in recommended_items %}
@@ -136,38 +47,40 @@
         </div>
     </div>
 
-    <div class="grid1 my-5">
-        <legend class="mb-4">
-            <h4>Post Comments</h4>
-        </legend>
-        <div class="card sticky" id="disqus_comment" style="top: 15vh">
-            <div class="card-body pt-3">
-                <div id="disqus_thread"></div>
-                <script>
-                    /**
-                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-                     */
-                    /*
-                    var disqus_config = function () {
-                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                    };
-                    */
-                    (function () { // DON'T EDIT BELOW THIS LINE
-                        var d = document,
-                            s = d.createElement('script');
+    <div class="grid1">
+        <div class="sticky top-15vh">
+            <legend class="mb-4">
+                <h4>Post Comments</h4>
+            </legend>
+            <div class="card" id="disqus_comment">
+                <div class="card-body pt-3">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                         */
+                        /*
+                        var disqus_config = function () {
+                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        */
+                        (function () { // DON'T EDIT BELOW THIS LINE
+                            var d = document,
+                                s = d.createElement('script');
 
-                        s.src = 'https://buyandbye-com-np.disqus.com/embed.js';
+                            s.src = 'https://buyandbye-com-np.disqus.com/embed.js';
 
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
-                        rel="nofollow">comments
-                        powered by Disqus.</a>
-                </noscript>
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                            rel="nofollow">comments
+                            powered by Disqus.</a>
+                    </noscript>
+                </div>
             </div>
         </div>
     </div>

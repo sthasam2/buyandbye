@@ -37,7 +37,7 @@ def register(request):
             user.profile.address1 = form.cleaned_data.get('address1')
             user.profile.address2 = form.cleaned_data.get('address2')
             user.profile.phone = form.cleaned_data.get('phone')
-            print(form.cleaned_data.phone)
+            # print(form.cleaned_data.phone)
             user.profile.save()
 
             to_email = form.cleaned_data.get('email')
