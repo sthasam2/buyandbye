@@ -3,7 +3,9 @@
         class="stretched-link"></a>
     <img src="{{category.image.url}}" alt="default.img" class="card-img-category"
         style="background: url({{category.image.url}})">
-    <span class="category-header">
-        <h3>{{category}}</h3>
-    </span>
+    <a href="{% url 'category-detail' category.slug %}" title="{{ category.get_name_display }}">
+        <span class="category-header">
+            <h3>{{category}}</h3>
+        </span>
+    </a>
 </div>

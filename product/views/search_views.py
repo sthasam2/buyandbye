@@ -4,14 +4,17 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
-# local
 
 from product.models import Item
 # from product.forms import AdvancedSearchForm
 
 
 def is_valid_queryparam(param):
+    """Function to check whether the input parameters are valid of not"""
     return param != '' and param is not None
+
+
+"""------------------------------------------------------READ------------------------------------------------------"""
 
 
 class SearchItemListView(ListView):
