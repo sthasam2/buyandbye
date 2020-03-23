@@ -1,3 +1,0 @@
-Babel
-Django
-Pillow
