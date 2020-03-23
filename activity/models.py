@@ -26,4 +26,4 @@ class Activity(models.Model):
 
     def __str__(self):
         # return self.subname returns the non human readable tuple
-        return f'Activity: {self.user} {self.verb} {self.target} ({self.id})'
+        return f'Activity: {self.user} {self.verb} {self.target} target_ct: {self.target_ct_id} ({self.id})'

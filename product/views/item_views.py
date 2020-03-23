@@ -1,6 +1,7 @@
 """ ITEM VIEWS """
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.messages.views import SuccessMessageMixin
 # from django.core.paginator import Paginator
@@ -11,6 +12,7 @@ from django.views.generic import (
 from hitcount.views import HitCountDetailView
 from product.forms import ItemCreateForm
 from product.models import Item
+from recommender.utils import recommend, user_recommend
 from activity.utils import create_action
 
 
@@ -56,7 +58,7 @@ class RecentItemListView(ListView):
     template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
-    paginate_by = 20
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(RecentItemListView, self).get_context_data(**kwargs)
@@ -72,7 +74,7 @@ class PopularItemListView(ListView):
     template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-hit_count_generic__hits']
-    paginate_by = 20
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(PopularItemListView, self).get_context_data(**kwargs)
@@ -82,16 +84,51 @@ class PopularItemListView(ListView):
         return context
 
 
+class RecommendedItemListView(ListView):
+    """ Popular Product List using Django View: ListView """
+    model = Item
+    template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
+    context_object_name = 'item'
+    ordering = ['-date_posted']
+    paginate_by = 15
+
+    def get_context_data(self, **kwargs):
+        context = super(RecommendedItemListView,
+                        self).get_context_data(**kwargs)
+        user = self.request.user
+        if user.id is not None:
+            rec_item = user_recommend(user)
+        else:
+            rec_item = user_recommend(1)
+        context.update({
+            'title': 'Recommended Items',
+            'item': Item.objects.filter(id__in=rec_item)
+        })
+        return context
+
+
 class UserItemListView(ListView):
     """ Particular User's Posted Product List using Django View: ListView """
     model = Item
     template_name = 'product/items/user_item.html'  # app/model_viewtype.html
-    context_object_name = 'user_item'
-    paginate_by = 6
+    context_object_name = 'user_items'
+    paginate_by = 10
 
     def get_queryset(self):  # filtering based on username
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Item.objects.filter(author=user).order_by('-date_posted')
+
+    def get_context_data(self, **kwargs):
+        context = super(UserItemListView,
+                        self).get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+
+        context.update({
+            'title': f'Items by {user}',
+            'user': user,
+            'user_items': Item.objects.filter(author=user).order_by('-date_posted')
+        })
+        return context
 
 
 class ItemDetailView(HitCountDetailView):
@@ -104,7 +141,7 @@ class ItemDetailView(HitCountDetailView):
 
     def create_activity(self):
         item_id = self.object
-        print(item_id.title)
+        # print(item_id.title)
         if self.request.user:
             create_action(self.request.user, 'Viewed item', item_id)
 
@@ -114,8 +151,11 @@ class ItemDetailView(HitCountDetailView):
         if self.request.user.id is not None:
             self.create_activity()
 
+        reco_item_id = recommend(self.object.id, 5)
+
         context.update({
             'popular_items': Item.objects.order_by('-hit_count_generic__hits')[:5],
+            'recommended_items': Item.objects.filter(id__in=reco_item_id)
         })
         return context
 

@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 django-allauth = "*"
 django = "*"
+pandas = "*"
+sklearn = "*"
 
 [requires]
 python_version = "3.8"

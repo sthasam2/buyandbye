@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="card seller-specifications">
+	<div class="card-title">
+		<h3>Seller Info
+		</h3>
+		<hr>
+	</div>
+	<div class="row justify-content-center">
+		<span><img class="account-img" src="{{ object.author.profile.image.url }}" alt="default.png"></span>
+	</div>
+	<div class="row justify-content-center">
+		<p>
+			<h4>{{object.author.profile.first_name}} {{object.author.profile.last_name}}
+			</h4>
+		</p>
+	</div>
+	<div class="row justify-content-center">
+		<p>
+			<a href="{% url 'user-item' object.author.username %}" class="username">@{{object.author}}</a>
+		</p>
+	</div>
+	<div class="row justify-content-center">
+			<span>
+				<img src="{% static 'index/img/call-black-24dp.svg' %}" alt="" style="position: absolute; left: 15px; margin-right: 5px;">
+			</span>
+		<p class="info">
+			{{object.author.profile.phone}}
+		</p>
+
+	</div>
+	<div class="row justify-content-center">
+			<span>
+				<img src="{% static 'index/img/mail-24px.svg' %}" alt="" style="position: absolute; left: 15px; margin-right: 5px;">
+			</span>
+		<p class="info">
+			{{object.author.profile.email}}
+		</p>
+
+	</div>
+	<div class="row justify-content-center">
+			<span>
+				<img src="{% static 'index/img/location_on-24px.svg' %}" alt="" style="position: absolute; left: 15px; margin-right: 5px;">
+			</span>
+		<p class="info">
+			{{object.author.profile.address1}}, {{object.author.profile.address2}}
+		</p>
+	</div>
+
+</div>

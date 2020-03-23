@@ -7,6 +7,19 @@ from activity.utils import create_action
 
 
 class ItemCreateForm(forms.ModelForm):
+    image = forms.ImageField(label='Item Image 1', required=True,
+                             help_text="Choose images to upload")
+    image2 = forms.ImageField(label='Item Image 2',  required=False,
+                              help_text="Choose images to upload")
+    image3 = forms.ImageField(label='Item Image 3', required=False,
+                              help_text="Choose images to upload")
+    image4 = forms.ImageField(label='Item Image 4', required=False,
+                              help_text="Choose images to upload")
+    image5 = forms.ImageField(label='Item Image 5', required=False,
+                              help_text="Choose images to upload")
+    image6 = forms.ImageField(label='Item Image 6', required=False,
+                              help_text="Choose images to upload")
+
     class Meta:
         model = Item
         fields = [
@@ -19,6 +32,11 @@ class ItemCreateForm(forms.ModelForm):
             'condition',
             'content',
             'image',
+            'image2',
+            'image3',
+            'image4',
+            'image5',
+            'image6',
         ]
 
         def __init__(self, *args, **kwargs):

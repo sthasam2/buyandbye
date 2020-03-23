@@ -35,12 +35,12 @@ class CategoryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(**kwargs)
         cat_name = self.object.name
-
         if self.request.user.id is not None:
             self.create_activity()
         
         context.update({
             'cat_item': Item.objects.filter(Q(category__name=cat_name))
+
         })
         return context
 

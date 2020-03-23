@@ -1,0 +1,39 @@
+
+{% block user_recommended %}
+{% comment %} {% if user is not None %} {% endcomment %}
+<div class="container bg-" id="Recent_Item">
+    <div class="row justify-content-center">
+        <legend>
+            <a href="#Recommended_Item">
+                Recommended Items For You
+            </a>
+        </legend>
+    </div>
+
+    {% for items in rec_item %}
+    <div class="d-inline-flex p-2 bd-highlight align-items-center bg-">
+        <div class="card card-item-grid text-center">
+            <img src="{{items.image.url}}" alt="" class="card-img-top img-item-grid-cover">
+            <span class="badge badge-danger badge-header-category">{{items.category}}</span>
+            <div class="card-body">
+                <a href="{% url 'item-detail' items.slug %}" title="{{ items.title }}" class="card-title text-primary">
+                    {{ items.title }}
+                </a>
+                <p class="card-subtitle card-subtitle-price" title="{{ items.price }}">
+                    <b>{{items.price}}</b>
+                </p>
+                <p class="card-subtitle card-subtitle-condition" title="{{ items.condition }}">
+                    {{items.condition}}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row justify-content-center">
+        <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
+    </div>
+
+</div>
+
+{% endblock user_recommended %}

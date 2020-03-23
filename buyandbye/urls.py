@@ -14,7 +14,7 @@ urlpatterns = [
     # users
     path('', include('users.urls')),
     # newsletter
-    path('newsletter/', include(('newsletters.urls',
+    path('newsletters/', include(('newsletters.urls',
                                  'newsletters'), namespace='newsletter')),
     # hitcount
     # django 3.0 doesnt support python_2_unicode so remove import and decorator from hitcount source file model

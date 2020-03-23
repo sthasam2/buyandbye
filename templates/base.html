@@ -12,10 +12,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
-    <!--fengyuanchen date picker-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- main.css -->
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
 
@@ -32,6 +32,15 @@
     body {
         font-family: 'Varela Round', sans-serif;
     }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Cabin', sans-serif;
+    }
 </style>
 
 <body>
@@ -42,37 +51,33 @@
         {% endblock navbar %}
     </header>
 
-    {% block info_messages %}
-    {% include 'widget/alert_message.html' %}
-    {% endblock info_messages %}
+    <main>
+        {% block info_messages %}
+        {% include 'widget/alert_message.html' %}
+        {% endblock info_messages %}
 
-    <main role="main" class="container">
+        {% block wrapper %}
+
         {% block sidebar %}
-        {% endblock %}
+        {% endblock sidebar %}
 
-        <!-- Content section -->
         {% block content %}
-        <div class="my-5" id="featured">
-            {% block featured %}
-            {% endblock featured %}
-        </div>
-        <div class="my-5" id="popular">
-            {% block popular%}
-            {% endblock popular %}
-        </div>
-        <div class="my-5" id="recent">
-            {% block recent %}
-            {% endblock recent %}
-        </div>
         {% endblock content %}
-        <!-- / content section -->
+
+        <div class="container">
+            <div class="whitespace"></div>
+            {% block mainbody %}
+            {% endblock mainbody %}
+        </div>
+
+        {% endblock wrapper %}
 
     </main>
 
     <!-- Site Navigation / Breadcrumb -->
-    {% block sitenav %}
+    {% comment %} {% block sitenav %}
     {% include 'widget/sitenav.html' %}
-    {% endblock sitenav %}
+    {% endblock sitenav %} {% endcomment %}
     <!-- / Site Navigation / Breadcrumb -->
 
 

@@ -1,0 +1,55 @@
+ {% load hitcount_tags %}
+ <div class="card item-specifications">
+     <div class="card-title">
+         <h3>
+             Item Specifications
+         </h3>
+         <hr>
+     </div>
+     <table>
+         <tr>
+             <th><strong>Title</strong></th>
+             <td><strong> : </strong></td>
+             <td>{{object.title}}</td>
+         </tr>
+         <tr>
+             <th><strong>Price</strong></th>
+             <td><strong> : </strong></td>
+             <td>{{object.price}}</td>
+         </tr>
+         <tr>
+             <th><strong>Negotiable</strong></th>
+             <td><strong> : </strong></td>
+             <td>
+                 {% if object.price_negotiabilty %}Yes
+                 {% elif object.price_negotiability %}No
+                 {% endif %}
+             </td>
+         </tr>
+         <tr>
+             <th><strong>Condition</strong></th>
+             <td><strong> : </strong></td>
+             <td>{{object.condition}}</td>
+         </tr>
+         <tr>
+             <th><strong>Ad views</strong></th>
+             <td><strong> : </strong></td>
+             <td>{% get_hit_count for item_detail %}</td>
+         </tr>
+         <tr>
+             <th><strong>Category</strong></th>
+             <td><strong> : </strong></td>
+             <td>{{object.category}}</td>
+         </tr>
+         <tr>
+             <th><strong>Sub-category</strong></th>
+             <td><strong> : </strong></td>
+             <td>{{object.sub_category}}</td>
+         </tr>
+         <tr>
+             <th><strong>Date Posted</strong></th>
+             <td><strong> : </strong></td>
+             <td>{{object.date_posted}}</td>
+         </tr>
+     </table>
+ </div>

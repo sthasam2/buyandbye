@@ -14,7 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug',)
     list_filter = ('name', 'slug',)
     search_fields = ('name',)
-    prepopulated_fields = {"slug": ("name",)}
+    # prepopulated_fields = {"slug": ("name",)}
 
 
 class SubCategoryAdmin(admin.ModelAdmin):

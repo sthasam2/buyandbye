@@ -4,7 +4,7 @@ from hitcount.views import HitCountDetailView
 from .views import category_views
 from .views.category_views import CategoryListView, CategoryDetailView, load_subCat
 from .views.item_views import(ItemCreateView, ItemDeleteView,
-                              ItemDetailView, RecentItemListView, PopularItemListView, ItemUpdateView,
+                              ItemDetailView, RecentItemListView, PopularItemListView, RecommendedItemListView, ItemUpdateView,
                               UserItemListView)
 from .views.search_views import SearchItemListView, AdvancedSearchListView
 
@@ -14,7 +14,8 @@ urlpatterns = [
     # The product item view
     path('recent/', RecentItemListView.as_view(), name='recent-items'),
     path('popular/', PopularItemListView.as_view(), name='popular-items'),
-    path('featured/', PopularItemListView.as_view(), name='featured-items'),
+    path('recommended/', RecommendedItemListView.as_view(),
+         name='recommended-items'),
     # The individual user item view
     path('user/<str:username>', UserItemListView.as_view(), name='user-item'),
     # category page
@@ -33,7 +34,8 @@ urlpatterns = [
 
     # The search results view
     path('search/', SearchItemListView.as_view(), name='search_results'),
-    path('search/advanced', AdvancedSearchListView.as_view(), name='advanced_search_results'),
+    path('search/advanced', AdvancedSearchListView.as_view(),
+         name='advanced_search_results'),
 
     path('ajax/load_subcategory/', category_views.load_subCat,
          name='ajax-load-subcategory'),

@@ -1,77 +1,89 @@
-{% extends "base.html" %} {% load hitcount_tags %} {% block content %}
+{% extends "base.html" %}
+{% load hitcount_tags %}
 
-<article>
-    <div class="card px-2 pt-2">
-        <div class="card-body">
-            <h2 class="card-title"><a>{{ object.title }}</a></h2>
-            <p class="card-text">Ad views: {% get_hit_count for item_detail %}</p>
-            <p class="card-text">{{ object.content }}</p>
+{% block content %}
+<div class="wrapper">
+    <div class="grid1">
+        <div class="sidecard-specifications">
+            {% include 'widget/item_specification.html' %}
+            {% include 'widget/seller_card.html' %}
         </div>
-        <div class="card-footer justify-content-center">
-            <div class="d-flex justify-content-center">
-                <table>
-                    <tr>
-                        <th>
-                            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-                        </th>
-                        <th>
-                            <a class="mr-2" href="{% url 'user-item' object.author.username %}">{{ object.author }}</a>
-                            <small class="text-muted">{{object.date_posted|date:"F d, Y"}}</small>
-                        </th>
-                    </tr>
-                </table>
+    </div>
+
+    <div class="grid2">
+        <div class="card">
+            <div class="card-title px-2 pt-4">
+                <h4>{{object.title}}</h4>
             </div>
-            <div class="d-flex justify-content-center">
-                {% if object.author == user %}
-                <a class="btn btn-primary btn-sm ml-5" href="{% url 'item-update' object.slug %}">Update Post</a>
-                <a class="btn btn-danger btn-sm ml-2" href="{% url 'item-delete' object.slug %}">Delete Post</a>
-                {% endif %}
+            <div class="card-body">
+                <div>
+                    <img src="{{object.image.url}}" alt="">
+                </div>
+                <br>
+                <p>
+                    <h4>Description</h4><br>
+                    {{object.content}}
+                </p>
             </div>
         </div>
     </div>
-</article>
-
-<div>
-    <legend class="border-bottom">Popular items</legend>
-
-    {% for pop_item in popular_items %}
-    <div class="card px-2 my-2">
-        <div class="card-body">
-            <h2 class="card-title"><a>{{ pop_item.title }}</a></h2>
-            <p class="card-text">Ad views: {% get_hit_count for pop_item %}</p>
-        </div>
-    </div>
-    {% endfor %}
 
 </div>
 
-<div class="card">
-    <div class="container px-5 py-2">
-        <div id="disqus_thread"></div>
-        <script>
-            /**
-             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-             */
-            /*
-            var disqus_config = function () {
-                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function () {  // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
+<div class="wrapper2">
+    <div class="grid2">
+        <div class="mb-5">
+            <legend>Recommended items based on {{object.title}}</legend>
+            {% for item in recommended_items %}
+            {% include 'widget/item_card_list.html' %}
+            {% endfor %}
+        </div>
 
-                s.src = 'https://buyandbye-com-np.disqus.com/embed.js';
-
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
-                rel="nofollow">comments
-                powered by Disqus.</a>
-        </noscript>
+        <div>
+            <legend>Popular items</legend>
+            {% for item in popular_items %}
+            {% include 'widget/item_card_list.html' %}
+            {% endfor %}
+        </div>
     </div>
+
+    <div class="grid1">
+        <div class="sticky top-15vh">
+            <legend class="mb-4">
+                <h4>Post Comments</h4>
+            </legend>
+            <div class="card" id="disqus_comment">
+                <div class="card-body pt-3">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                         */
+                        /*
+                        var disqus_config = function () {
+                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        */
+                        (function () { // DON'T EDIT BELOW THIS LINE
+                            var d = document,
+                                s = d.createElement('script');
+
+                            s.src = 'https://buyandbye-com-np.disqus.com/embed.js';
+
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                            rel="nofollow">comments
+                            powered by Disqus.</a>
+                    </noscript>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock content %}

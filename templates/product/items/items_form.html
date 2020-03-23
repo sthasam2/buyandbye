@@ -1,34 +1,77 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block content %}
+
+{% block mainbody %}
+<legend>
+     <h1>
+          Post Item
+     </h1>
+</legend>
 
 <div class="card">
-     <div class="container">
+     <div class="card-body">
           <form method="POST" id="itemForm" data-subcategory-url="{% url 'ajax-load-subcategory' %}" novalidate
                enctype="multipart/form-data">
                {% csrf_token %}
                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">
-                         Post Item
-                    </legend>
-                   {{form|crispy}}
+                    <div class="container px-5 pt-auto form_sizer">
+                         {% comment %} {{form|crispy}} {% endcomment %}
+                         <div>
+                              <div class="row">
+                                   <div class="col-md">
+                                        {{ form.category| as_crispy_field}}
+                                   </div>
+                                   <div class="col-md">
+                                        {{ form.sub_category| as_crispy_field}}
+                                   </div>
+                              </div>
+                              <div class="col-md">
+                                   {{ form.title| as_crispy_field}}
+                              </div>
+                              <div class="row">
+                                   <div class="col-md">
+                                        {{ form.price| as_crispy_field}}
+                                        {{ form.price_negotiability| as_crispy_field}}
+                                   </div>
+                              </div>
+                              <div class="row justify-content-center">
+                                   <div class="col-md-4">
+                                        {{ form.item_available_for| as_crispy_field}}
+                                   </div>
+                              </div>
+                              <div>
+                                   {{ form.content| as_crispy_field}}
+                              </div>
+                              <div class="row">
+                                   <div class="col-md">
+                                        {{ form.image| as_crispy_field}}
+                                   </div>
+                                   <div class="col-md">
+                                        {{ form.image2| as_crispy_field}}
+                                   </div>
+                                   <div class="col-md">
+                                        {{ form.image3| as_crispy_field}}
+                                   </div>
+                              </div>
+                              <div class="row">
+                                   <div class="col-md">
+                                        {{ form.image4| as_crispy_field}}
+                                   </div>
+                                   <div class="col-md">
+                                        {{ form.image5| as_crispy_field}}
+                                   </div>
+                                   <div class="col-md">
+                                        {{ form.image6| as_crispy_field}}
+                                   </div>
+                              </div>
+                         </div>
 
-                    {% comment %} <div>
-                         {{ form.category| as_crispy_field}}
-                         {{ form.sub_category| as_crispy_field}}
-                         {{ form.title| as_crispy_field}}
-                         {{ form.price| as_crispy_field}}
-                         {{ form.price_negotiability| as_crispy_field}}
-                         {{ form.item_available_for| as_crispy_field}}
-                         {{ form.content| as_crispy_field}}
-                         {{ form.image| as_crispy_field}}
-                    </div> {% endcomment %}
 
-
-                    <div class="form-group">
-                         <button class="btn btn-info" type="submit">
-                              Post
-                         </button>
+                         <div class="form-group">
+                              <button class="btn btn-info" type="submit">
+                                   Post
+                              </button>
+                         </div>
                     </div>
                </fieldset>
           </form>
@@ -56,4 +99,4 @@
      });
 </script>
 
-{% endblock content %}
+{% endblock mainbody %}

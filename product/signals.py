@@ -3,8 +3,16 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 from .models import Category, Item, SubCategory
+from recommender.utils import calculate_similarity
 
 
+@receiver(post_save, sender=Item)
+def item_receiver(sender, instance, *args, **kwargs):
+    print("initiate calclationg cosine similarity")
+    calculate_similarity()
+
+
+"""
 # / Item slug generator
 @receiver(pre_save, sender=Item)
 # since method is pre_save it constantly keeps on occuoring for every signal sent by item or something like that
@@ -89,7 +97,6 @@ pre_save.connect(item_receiver, sender=SubCategory)
 # # / SubCategory slug generator
 
 
-"""
 def create_slug(instance, new_slug=None):
     # converts title into slug, e.g. Apple Iphone 7-> apple-iphone-7
     # checking instance class since the slug to be made has different variable
