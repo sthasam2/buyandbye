@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.messages.views import SuccessMessageMixin
-# from django.core.paginator import Paginator
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView)
@@ -16,8 +16,7 @@ from recommender.utils import recommend, user_recommend
 from activity.utils import create_action
 
 
-# PRODUCT CRUD
-""" CREATE"""
+"""------------------------------------------------------CREATE------------------------------------------------------"""
 
 
 class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -47,9 +46,7 @@ class ItemCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     #     self.create_activity()
 
 
-""" / CREATE """
-
-""" READ """
+"""------------------------------------------------------READ------------------------------------------------------"""
 
 
 class RecentItemListView(ListView):
@@ -90,19 +87,21 @@ class RecommendedItemListView(ListView):
     template_name = 'product/list_view/item_list.html'  # app/model_viewtype.html
     context_object_name = 'item'
     ordering = ['-date_posted']
-    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(RecommendedItemListView,
                         self).get_context_data(**kwargs)
         user = self.request.user
-        if user.id is not None:
+
+        try:
+            # if user.id is not None:
             rec_item = user_recommend(user)
-        else:
+        except:
             rec_item = user_recommend(1)
+
         context.update({
             'title': 'Recommended Items',
-            'item': Item.objects.filter(id__in=rec_item)
+            'item': Item.objects.filter(id__in=rec_item),
         })
         return context
 
@@ -160,9 +159,7 @@ class ItemDetailView(HitCountDetailView):
         return context
 
 
-""" / READ """
-
-""" UPDATE """
+"""------------------------------------------------------UPDATE------------------------------------------------------"""
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -192,9 +189,7 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-""" / UPDATE """
-
-""" DELETE """
+"""------------------------------------------------------DELETE------------------------------------------------------"""
 
 
 class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -217,6 +212,3 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             self.request.user, 'Deleted item', item_id)
         print("item deleted")
         return super(ItemDeleteView, self).delete(*args, **kwargs)
-
-
-""" / DELETE """

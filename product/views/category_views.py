@@ -11,7 +11,7 @@ from product.models import Category, SubCategory, Item
 from activity.utils import create_action
 
 
-""" CATEGORY READ (R) """
+"""------------------------------------------------------READ------------------------------------------------------"""
 
 
 class CategoryListView(ListView):
@@ -37,12 +37,14 @@ class CategoryDetailView(DetailView):
         cat_name = self.object.name
         if self.request.user.id is not None:
             self.create_activity()
-        
+
         context.update({
             'cat_item': Item.objects.filter(Q(category__name=cat_name))
-
         })
         return context
+
+
+"""------------------------------------------------------LOAD------------------------------------------------------"""
 
 
 def load_subCat(request):
