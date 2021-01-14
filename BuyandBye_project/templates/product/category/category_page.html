@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load hitcount_tags %}
+
+{% block mainbody %}
+<div class="col-md mx-2">
+    <!-- <div class="card-sticky"> -->
+    <h1>
+        <strong>Categories</strong>
+    </h1>
+</div>
+<!-- Category List -->
+<!-- category element -->
+{% for category in category %}
+<div class="d-inline-flex">
+    {% include 'widget/category_card.html' %}
+</div>
+{% endfor %}
+<!-- / category element -->
+</ul>
+<!-- / Category List -->
+</div>
+</div>
+<!-- </div> -->
+</div>
+
+{% endblock mainbody %}

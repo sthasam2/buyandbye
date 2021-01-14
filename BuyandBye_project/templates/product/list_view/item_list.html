@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load hitcount_tags %}
+
+{% block mainbody %}
+
+<!-- Recent Items -->
+<div class="container bg-light" id="Recent_Item">
+    <div class="row justify-content-center">
+        <legend>
+            {{title}}
+        </legend>
+    </div>
+</div>
+
+{% for item in item %}
+{% include 'widget/item_card_grid.html' %}
+{% endfor %}
+<!-- / Block for loop listing the items  -->
+
+<!-- Bootstrsap Paginator -->
+{% if is_paginated %}
+{% include 'widget/item_pagination.html' %}
+{% endif %}
+<!-- / Bootstrap Paginator -->
+<!--/ Recent Items -->
+
+{% endblock mainbody %}
+<!-- / Home content block -->

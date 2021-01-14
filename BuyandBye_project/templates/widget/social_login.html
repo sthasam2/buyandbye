@@ -1,0 +1,36 @@
+{% load socialaccount %}
+
+<div class=" container col-8 border-top">
+    <div class="py-4">
+        <table>
+            <tr>
+                <div class="d-flex justify-content-center">
+                    <small class="text-muted">
+                        Or signup using socail accounts:
+                    </small>
+                </div>
+            </tr>
+            <tr>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-md btn-social" href="{% provider_login_url "twitter" %}"
+                        style="background: #00acee;"><span><i class="fab fa-twitter fa-lg"
+                                style="margin-right: 25px;"></i></span>Twitter</a>
+                </div>
+            </tr>
+            <tr>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-md btn-social" href="{% provider_login_url "facebook" %}"
+                        style="background: #3b5998;"><span><i class="fab fa-facebook-f fa-lg"
+                                style="margin-right: 25px;"></i></span>Facebook</a>
+                </div>
+            </tr>
+            <tr>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-md btn-social" href="{% provider_login_url "google" %}"
+                        style="background: #DB4437;"><span><i class="fab fa-google fa-lg"
+                                style="margin-right: 25px;"></i></span>Google</a>
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>

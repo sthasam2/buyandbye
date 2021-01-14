@@ -1,0 +1,1 @@
+Welcome to BuyandBye's Newsletter. To unsubcribe visit the following link : <a href = "{% url "newsletter:newsletter_unsubscribe" %}.

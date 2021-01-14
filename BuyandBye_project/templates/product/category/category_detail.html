@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load hitcount_tags %}
+<!-- Home content block -->
+{% block content %}
+
+
+<!-- Recent Items -->
+<div class="container pt-5" id="Recent_Item">
+    <div class="row justify-content-center">
+        <legend>
+            <h1>
+                {{category_item.name}}
+            </h1>
+        </legend>
+    </div>
+    <div>
+        {% for item in cat_item %}
+        <div class="d-inline-flex p-2 align-items-center">
+            {% include 'widget/item_card_grid.html' %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}
+<!-- / Home content block -->
