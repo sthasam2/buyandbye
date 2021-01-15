@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block wrapper %}
+<div class="wrapper">
+     {% comment %} Left Column {% endcomment %}
+     {% block sidebar %}
+     <div class="grid1">
+          {% include 'widget/advanced_search.html' %}
+     </div>
+     {% endblock sidebar %}
+     {% comment %} /Left Column {% endcomment %}
+
+     {% comment %} Right Column {% endcomment %}
+     {% block content %}
+     <div class="grid2">
+
+          {% if page_obj.paginator.count != null %}
+
+          {% if page_obj.paginator.count == 0 %}
+          <div class="search-failure">
+               <p align="center">
+                    <strong>'{{ page_obj.paginator.count }}'</strong> result(s) found for<br>
+                    <table>
+                         <tr>
+                              <th>
+                                   Title
+                              </th>
+                              <td>
+                                   <strong>: {{request.GET.title_as}}</strong>
+                              </td>
+                         </tr>
+                         <tr>
+                              <th>
+                                   Price Range (Low - High)
+                              </th>
+                              <td>
+                                   <strong>: {{request.GET.price_low_as}}</strong> -
+                                   <strong>{{request.GET.price_high_as}}</strong>
+                              </td>
+                         </tr>
+                         <tr>
+                              <th>
+                                   Category
+                              </th>
+                              <td>
+                                   <strong>: {{request.GET.category_as}}</strong>
+                              </td>
+                         </tr>
+                         <tr>
+                              <th>
+                                   Date posted after
+                              </th>
+                              <td>
+                                   <strong>: {{request.GET.date_published_as}}</strong>
+                              </td>
+                         </tr>
+                    </table>
+               </p>
+          </div>
+          {% else %}
+          <div class="search-success">
+               <p align="center">
+                    <strong>'{{ page_obj.paginator.count }}'</strong> result(s) found for<br>
+                    <table>
+                         <tr>
+                              <th>
+                                   Title
+                              </th>
+                              <td> : </td>
+                              <td>
+                                   <strong>{{request.GET.title_as}}</strong>
+                              </td>
+                         </tr>
+                         <tr>
+                              <th>
+                                   Price Range (Low - High)
+                              </th>
+                              <td> : </td>
+                              <td>
+                                   <strong>{{request.GET.price_low_as}}</strong> -
+                                   <strong>{{request.GET.price_high_as}}</strong>
+                              </td>
+                         </tr>
+                         <tr>
+                              <th>
+                                   Category
+                              </th>
+                              <td> : </td>
+                              <td>
+                                   <strong>{{request.GET.category_as}}</strong>
+                              </td>
+                         </tr>
+                         <tr>
+                              <th>
+                                   Date posted after
+                              </th>
+                              <td> : </td>
+                              <td>
+                                   <strong>{{request.GET.date_published_as}}</strong>
+                              </td>
+                         </tr>
+                    </table>
+               </p>
+          </div>
+          {% endif %}
+
+          <!-- Item loop starts -->
+          {% for item in advanced_search_item %}
+          {% include 'widget/item_card_list.html' %}
+          {% endfor %}
+          <!-- Item Loop ends -->
+
+          <!-- Pagination starts-->
+          <!-- Checks if pages available -->
+          {% if is_paginated %}
+          {% include 'widget/advanced_pagination.html' %}
+          {% endif %}
+          <!-- /Checks if pages available -->
+
+          <!-- Pagination ends -->
+
+          {% endif %}
+          <!-- Search Conditional end -->
+     </div>
+     {% endblock content %}
+     {% comment %} Right Column {% endcomment %}
+</div>
+{% endblock wrapper %}

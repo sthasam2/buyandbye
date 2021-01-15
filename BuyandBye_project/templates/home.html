@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load hitcount_tags %}
+<!-- Home content block -->
+{% block wrapper %}
+<div class="view intro-2">
+    <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+            <div class="container text-center white-text wow fadeInUp">
+                <h2 style="color: rgba(255,255,255,0.8);">BuyandBye, your online shopping portal</h2>
+                <br>
+                <p>Find Products that suit your needs, contact the seller and buy them.</p>
+                <br>
+                <p>OR, You can register and post ads to put your products up for sale</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="whitespace"></div>
+
+{% block content %}
+
+
+{% block recommended %} {% comment %} {% if user is not None %} {% endcomment %}
+<div class="container" id="Recommended_Item">
+    <div class="row justify-content-center">
+        <h3>
+            <a href="#Recommended_Item">
+                Recommended Items For You
+            </a>
+        </h3>
+    </div>
+
+    {% for item in rec_item %}
+    {% include 'widget/item_card_grid.html' %}
+    {% endfor %}
+
+    <div class="row justify-content-center mt-3">
+        <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
+    </div>
+
+</div>
+
+{% comment %} {% elif%} {% endcomment %} {% comment %}
+<h2>Login to get recommendations</h2> {% endcomment %} {% comment %} {% endif %} {% endcomment %}
+{% endblock recommended %}
+<div class="whitespace"></div>
+
+{% block popular %}
+<div class="container" id="Popular_Items">
+    <div class="row justify-content-center">
+        <h3>
+            <a href="#Popular_Items">
+                Popular Items
+            </a>
+        </h3>
+    </div>
+
+    {% for item in popular_items %}
+    {% include 'widget/item_card_grid.html' %}
+    {% endfor %}
+
+    <div class="row justify-content-center mt-3">
+        <a href="{% url 'popular-items' %}" class="btn btn-primary">View More</a>
+    </div>
+
+</div>
+{% endblock popular %}
+<!-- / popular items  -->
+<div class="whitespace">
+</div>
+<!-- Recent Items -->
+{% block recent %}
+<div class="container" id="Recent_Item">
+
+    <div class="row justify-content-center">
+        <h3>
+            <a href="#Recent_Item">
+                Recent Items
+            </a>
+        </h3>
+    </div>
+
+    {% for item in item %}
+    {% include 'widget/item_card_grid.html' %}
+    {% endfor %}
+
+    <div class="row justify-content-center mt-3">
+        <a href="{% url 'recent-items' %}" class="btn btn-primary">View More</a>
+    </div>
+
+</div>
+{% endblock recent %}
+<!--/ Recent Items -->
+</div>
+{% endblock content %}
+<!-- / Home content block -->
+{% endblock wrapper %}

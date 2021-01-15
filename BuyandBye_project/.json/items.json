@@ -1,0 +1,24 @@
+[
+	{
+		"category": "Books",
+		"sub_category": "Comic-book",
+		"title": "One Piece",
+		"price": "<Money: 500.00 NPR>",
+		"content": "One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 22, 1997, and has been collected into 95 tankōbon volumes.",
+		"image": "sample/OP.jpg",
+		"condition": "Brand New",
+		"item_available_for": "Sale",
+		"author": "django-admin"
+	},
+	{
+		"category": "Books",
+		"sub_category": "Comic-book",
+		"title": "One Piece 2",
+		"price": "<Money: 500.00 NPR>",
+		"content": "One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 22, 1997, and has been collected into 95 tankōbon volumes.",
+		"image": "sample/OP.jpg",
+		"condition": "Brand New",
+		"item_available_for": "Sale",
+		"author": "django-admin"
+	},
+]

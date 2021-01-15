@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block mainbody %}
+
+<div class="card d-inline-flex justify-content-center py-4 w-50">
+    <div class="container justify-content-center">
+        <legend>
+            <h2>Log In</h2>
+            <hr />
+        </legend>
+    </div>
+
+    <div class="container justify-content-center">
+        <form method=" POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <div class="container col-10">
+                    <div class="row justify-content-center">
+                        {{form.username|as_crispy_field}}
+                    </div>
+                    <div class="row justify-content-center">
+                        {{form.password|as_crispy_field}}
+                    </div>
+                    <div class="row justify-content-center">
+                        <small>Forgot Password?
+                            <a href="{% url 'password_reset' %}">Reset</a>
+                        </small>
+                    </div>
+                    <div class="row justify-content-center">
+                        <button class="btn btn-success " type="submit">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    {% block social_login %}
+    <!--newline -->
+    {% include 'widget/social_login.html' %}
+    <!--newline -->
+    {% endblock social_login %}
+
+
+
+    <div>
+        <img src="" alt="" />
+        <div class="border-top">
+            <div class="d-flex justify-content-center mt-3">
+                <small class="text-muted">
+                    Need an Account?
+                    <a href="{% url 'register' %}" class="ml-2">Sign Up Now</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock mainbody %}

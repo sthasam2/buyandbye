@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block wrapper %}
+<div class="wrapper">
+
+	<div class="grid1">
+		{% block sidebar %}
+		<div class="sticky" style="top: 15vh">
+			{% include 'widget/user_info.html' %}
+		</div>
+		{% endblock sidebar %}
+	</div>
+
+	<div class="grid2">
+		{% block content %}
+		<h4 style="align-content:center; " class="mb-5">Items ({{ page_obj.paginator.count }})</h4>
+
+
+		{% for item in user_items %}
+		{% include 'widget/item_card_list.html' %}
+		{% endfor %}
+
+		<!-- Checks if pages available -->
+		{% if is_paginated %}
+		{% include 'widget/item_pagination.html' %}
+		{% endif %}
+		<!-- /Checks if pages available -->
+
+		{% endblock content %}
+	</div>
+
+</div>
+{% endblock wrapper %}

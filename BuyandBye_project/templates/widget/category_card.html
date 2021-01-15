@@ -1,0 +1,11 @@
+<div class="card card-item-category mx-2 my-2">
+    <a href="{% url 'category-detail' category.slug %}" title="{{ category.get_name_display }}"
+        class="stretched-link"></a>
+    <img src="{{category.image.url}}" alt="default.img" class="card-img-category"
+        style="background: url({{category.image.url}})">
+    <a href="{% url 'category-detail' category.slug %}" title="{{ category.get_name_display }}">
+        <span class="category-header">
+            <h3>{{category}}</h3>
+        </span>
+    </a>
+</div>

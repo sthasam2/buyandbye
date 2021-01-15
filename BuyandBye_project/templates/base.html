@@ -1,0 +1,104 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Place your kit's code here -->
+    <script src="https://kit.fontawesome.com/70eb7c5131.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- main.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
+
+    {% if title %}
+    <title>BuyandBye - {{title}}
+    </title>
+    {% else %}
+    <title>BuyandBye</title>
+    {% endif %}
+
+</head>
+
+<style>
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Cabin', sans-serif;
+    }
+</style>
+
+<body>
+
+    <header class="site-header">
+        {% block navbar %}
+        {% include 'widget/navbar.html' %}
+        {% endblock navbar %}
+    </header>
+
+    <main>
+        {% block info_messages %}
+        {% include 'widget/alert_message.html' %}
+        {% endblock info_messages %}
+
+        {% block wrapper %}
+
+        {% block sidebar %}
+        {% endblock sidebar %}
+
+        {% block content %}
+        {% endblock content %}
+
+        <div class="container">
+            <div class="whitespace"></div>
+
+            {% block mainbody %}
+            {% endblock mainbody %}
+
+        </div>
+
+        {% endblock wrapper %}
+
+    </main>
+
+    <!-- Site Navigation / Breadcrumb -->
+    {% comment %} {% block sitenav %}
+    {% include 'widget/sitenav.html' %}
+    {% endblock sitenav %} {% endcomment %}
+    <!-- / Site Navigation / Breadcrumb -->
+
+
+    {% block footer %}
+    {% include 'widget/footer.html' %}
+    {% endblock footer %}
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js">
+    </script>
+
+</body>
+
+</html>
