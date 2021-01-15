@@ -1,9 +1,10 @@
-import pandas as pd
 import sqlite3 as sq
-from sklearn.metrics.pairwise import linear_kernel
-from sklearn.feature_extraction.text import TfidfVectorizer
 from os import system
 from sys import platform
+
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
 
 try:
     # global conn, df, tf, tfidf_matrix, cosine_similarities, results
@@ -15,13 +16,13 @@ try:
     df = pd.read_sql_query("select * from product_item;", conn)
     user_df = pd.read_sql_query("select * from activity_activity;", conn)
 
-
     """creating a tfid vector"""
-    tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3),
-                        min_df=0, stop_words='english')
+    tf = TfidfVectorizer(
+        analyzer="word", ngram_range=(1, 3), min_df=0, stop_words="english"
+    )
 
     """creating a matrix from the tfidf vector"""
-    tfidf_matrix = tf.fit_transform(df['content'])
+    tfidf_matrix = tf.fit_transform(df["content"])
 
     """finding the cosine similarities for all products with other products"""
     cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
@@ -31,12 +32,13 @@ try:
 
     for idx, row in df.iterrows():
         similar_indices = cosine_similarities[idx].argsort()[:-100:-1]
-        similar_items = [(cosine_similarities[idx][i], df['id'][i])
-                        for i in similar_indices]
-        results[row['id']] = similar_items[1:]
+        similar_items = [
+            (cosine_similarities[idx][i], df["id"][i]) for i in similar_indices
+        ]
+        results[row["id"]] = similar_items[1:]
 
 except:
-    
+
     if platform == "linux" or platform == "linux2":
         # linux
         system("echo '\e[1;31mError creating similarity index!\e[0m'")
@@ -46,9 +48,6 @@ except:
     elif platform == "win32":
         # Windows...
         print("Error creating similarity index!")
-
-
-    
 
 
 def calculate_similarity():
@@ -61,11 +60,12 @@ def calculate_similarity():
     df = pd.read_sql_query("select * from product_item;", conn)
 
     """creating a tfid vector"""
-    tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3),
-                         min_df=0, stop_words='english')
+    tf = TfidfVectorizer(
+        analyzer="word", ngram_range=(1, 3), min_df=0, stop_words="english"
+    )
 
     """creating a matrix from the tfidf vector"""
-    tfidf_matrix = tf.fit_transform(df['content'])
+    tfidf_matrix = tf.fit_transform(df["content"])
 
     """finding the cosine similarities for all products with other products"""
     cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
@@ -76,15 +76,16 @@ def calculate_similarity():
 
     for idx, row in df.iterrows():
         similar_indices = cosine_similarities[idx].argsort()[:-100:-1]
-        similar_items = [(cosine_similarities[idx][i], df['id'][i])
-                         for i in similar_indices]
-        results[row['id']] = similar_items[1:]
+        similar_items = [
+            (cosine_similarities[idx][i], df["id"][i]) for i in similar_indices
+        ]
+        results[row["id"]] = similar_items[1:]
 
     print("calculation ended")
 
 
 def item(id):
-    return df.loc[df['id'] == id]['title'].tolist()[0].split(' - ')[0]
+    return df.loc[df["id"] == id]["title"].tolist()[0].split(" - ")[0]
 
 
 def recommend(item_id, num):
@@ -100,7 +101,7 @@ def recommend(item_id, num):
 
 def user_recommend(req_user_id):
     user_df.user_id = req_user_id  # filtering based on the user id
-    user_df.verb = "Viewed item"    # filtering to 'viewed item' only
+    user_df.verb = "Viewed item"  # filtering to 'viewed item' only
     mode = user_df.target_id.mode()  # getting the most repeated item
     mode_id = mode[0]  # extracting the id of mode from the mode table
     return recommend(mode_id, 20)

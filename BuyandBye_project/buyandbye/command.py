@@ -1,24 +1,27 @@
 import json
-from product.models import Category, SubCategory, Item
+
+from product.models import Category, Item, SubCategory
+
 # from djnago.contrib.auth.models import User
 
-with open('.json/category.json') as f:
+with open(".json/category.json") as f:
     template = json.load(f)
 
 for newCategory in template:
-    newCategory = Category(name=newCategory['name'])
+    newCategory = Category(name=newCategory["name"])
     newCategory.save()
 
-with open('.json/subcat.json') as f:
+with open(".json/subcat.json") as f:
     template2 = json.load(f)
 
 for new in template2:
-    new = SubCategory(parent_category=Category.objects.get(
-        name=new['parent_name']), subname=new['subname'])
+    new = SubCategory(
+        parent_category=Category.objects.get(name=new["parent_name"]),
+        subname=new["subname"],
+    )
     new.save()
 
-
-# NOTE: error opening 
+# NOTE: error opening
 # with open('.json/items.json') as f:
 #     template3 = json.load(f)
 
