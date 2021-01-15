@@ -4,6 +4,7 @@ xsrc/
 .venv/
 # db.sqlite3
 demo.zip
+migrations/
 
 # Created by https://www.gitignore.io/api/django
 # Edit at https://www.gitignore.io/?templates=django
