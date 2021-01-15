@@ -2,33 +2,53 @@ import pandas as pd
 import sqlite3 as sq
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
+from os import system
+from sys import platform
 
-# global conn, df, tf, tfidf_matrix, cosine_similarities, results
-"""connecting the database with connect"""
-conn = sq.connect("db.sqlite3")
+try:
+    # global conn, df, tf, tfidf_matrix, cosine_similarities, results
+    """connecting the database with connect"""
+    conn = sq.connect("db.sqlite3")
 
-"""creating a pandas data frame"""
-df = pd.read_sql_query("select * from product_item;", conn)
-user_df = pd.read_sql_query("select * from activity_activity;", conn)
+    """creating a pandas data frame"""
 
-"""creating a tfid vector"""
-tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3),
-                     min_df=0, stop_words='english')
+    df = pd.read_sql_query("select * from product_item;", conn)
+    user_df = pd.read_sql_query("select * from activity_activity;", conn)
 
-"""creating a matrix from the tfidf vector"""
-tfidf_matrix = tf.fit_transform(df['content'])
 
-"""finding the cosine similarities for all products with other products"""
-cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
+    """creating a tfid vector"""
+    tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3),
+                        min_df=0, stop_words='english')
 
-"""declaring results"""
-results = {}
+    """creating a matrix from the tfidf vector"""
+    tfidf_matrix = tf.fit_transform(df['content'])
 
-for idx, row in df.iterrows():
-    similar_indices = cosine_similarities[idx].argsort()[:-100:-1]
-    similar_items = [(cosine_similarities[idx][i], df['id'][i])
-                     for i in similar_indices]
-    results[row['id']] = similar_items[1:]
+    """finding the cosine similarities for all products with other products"""
+    cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
+
+    """declaring results"""
+    results = {}
+
+    for idx, row in df.iterrows():
+        similar_indices = cosine_similarities[idx].argsort()[:-100:-1]
+        similar_items = [(cosine_similarities[idx][i], df['id'][i])
+                        for i in similar_indices]
+        results[row['id']] = similar_items[1:]
+
+except:
+    
+    if platform == "linux" or platform == "linux2":
+        # linux
+        system("echo '\e[1;31mError creating similarity index!\e[0m'")
+    elif platform == "darwin":
+        # OS X
+        print("Error creating similarity index!")
+    elif platform == "win32":
+        # Windows...
+        print("Error creating similarity index!")
+
+
+    
 
 
 def calculate_similarity():

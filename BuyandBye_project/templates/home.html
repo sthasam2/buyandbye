@@ -30,20 +30,30 @@
             </a>
         </h3>
     </div>
+    
+    {% if rec_items is not None %}
+        {% for item in rec_items %}
+            {% include 'widget/item_card_grid.html' %}
+        {% endfor %}
 
-    {% for item in rec_item %}
-    {% include 'widget/item_card_grid.html' %}
-    {% endfor %}
-
-    <div class="row justify-content-center mt-3">
-        <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
-    </div>
+        <div class="row justify-content-center mt-3">
+            <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
+        </div>
+    {% elif rec_items is None %}
+        <div>
+            <h4>No item available!</h2>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <a href="{% url 'recommended-items' %}" class="btn btn-primary">View More</a>
+        </div>
+    {% endif %}
 
 </div>
 
-{% comment %} {% elif%} {% endcomment %} {% comment %}
-<h2>Login to get recommendations</h2> {% endcomment %} {% comment %} {% endif %} {% endcomment %}
-{% endblock recommended %}
+    {% comment %} {% elif%} {% endcomment %} {% comment %}
+    <h2>Login to get recommendations</h2> {% endcomment %} {% comment %} {% endif %} {% endcomment %}
+    {% endblock recommended %}
+
 <div class="whitespace"></div>
 
 {% block popular %}
@@ -56,13 +66,23 @@
         </h3>
     </div>
 
-    {% for item in popular_items %}
-    {% include 'widget/item_card_grid.html' %}
-    {% endfor %}
+    {% if popular_items is not None %}
+        {% for item in popular_items %}
+            {% include 'widget/item_card_grid.html' %}
+        {% endfor %}
 
-    <div class="row justify-content-center mt-3">
-        <a href="{% url 'popular-items' %}" class="btn btn-primary">View More</a>
-    </div>
+        <div class="row justify-content-center mt-3">
+            <a href="{% url 'popular-items' %}" class="btn btn-primary">View More</a>
+        </div>
+    {% elif popular_items is None %}
+        <div>
+            <h4>No item available!</h2>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <a href="{% url 'popular-items' %}" class="btn btn-primary">View More</a>
+        </div>
+    
+    {% endif %}
 
 </div>
 {% endblock popular %}
@@ -81,14 +101,25 @@
         </h3>
     </div>
 
-    {% for item in item %}
-    {% include 'widget/item_card_grid.html' %}
-    {% endfor %}
+    {% if items is not None %}
+        {% for item in items %}
+            {% include 'widget/item_card_grid.html' %}
+        {% endfor %}
 
-    <div class="row justify-content-center mt-3">
-        <a href="{% url 'recent-items' %}" class="btn btn-primary">View More</a>
-    </div>
+        <div class="row justify-content-center mt-3">
+            <a href="{% url 'recent-items' %}" class="btn btn-primary">View More</a>
+        </div>
+        
+    {% elif items is None %}
+        <div>
+            <h4>No item available!</h2>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <a href="{% url 'recent-items' %}" class="btn btn-primary">View More</a>
+        </div>
 
+    {% endif %}
+    
 </div>
 {% endblock recent %}
 <!--/ Recent Items -->
