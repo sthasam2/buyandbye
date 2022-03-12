@@ -31,7 +31,7 @@ oauthlib==3.1.0
 pandas==1.2.0
 pathspec==0.8.1
 phonenumbers==8.12.16
-Pillow==8.1.0
+Pillow==9.0.1
 pipenv==2020.11.15
 py-moneyed==0.8.0
 pycodestyle==2.6.0
